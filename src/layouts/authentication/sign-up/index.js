@@ -64,7 +64,7 @@ function SignUp() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(Object.keys(formData));
-    if (Object.keys(formData).length !== 3 && formData.constructor === Object) {
+    if (Object.keys(formData).length !== 5 && formData.constructor === Object) {
       console.log("Empty object");
       setError("Please fill in all fields");
       return;
@@ -86,6 +86,7 @@ function SignUp() {
       navigate("/dashboard");
     } else {
       console.log(data);
+      setError(data.message);
     }
     // AuthApi.Register(formData)
     //   .then((response) => {
@@ -143,6 +144,24 @@ function SignUp() {
           <Separator />
           <SoftBox pt={2} pb={3} px={3}>
             <SoftBox component="form" role="form">
+              <SoftBox mb={2}>
+                <SoftInput
+                  type="text"
+                  name="firstname"
+                  placeholder="First Name"
+                  onChange={handleFormData}
+                  required
+                />
+              </SoftBox>
+              <SoftBox mb={2}>
+                <SoftInput
+                  type="text"
+                  name="lastname"
+                  placeholder="Last Name"
+                  onChange={handleFormData}
+                  required
+                />
+              </SoftBox>
               <SoftBox mb={2}>
                 <SoftInput
                   type="text"
