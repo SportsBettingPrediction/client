@@ -9,7 +9,7 @@ export const ProtectedRoute = () => {
   console.log(user);
   return (
     <>
-      {!user || !user.token || user.token === "" ? (
+      {/* {!user ? (
         <SweetAlert
           title="You must be signed in!"
           onCancel={() => navigate("/authentication/sign-in")}
@@ -18,7 +18,9 @@ export const ProtectedRoute = () => {
         />
       ) : (
         <Outlet />
-      )}
+      )} */}
     </>
   );
 };
+
+// || !user.token || user.token === ""

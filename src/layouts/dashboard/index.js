@@ -42,64 +42,68 @@ import OrderOverview from "layouts/dashboard/components/OrderOverview";
 import reportsBarChartData from "layouts/dashboard/data/reportsBarChartData";
 import gradientLineChartData from "layouts/dashboard/data/gradientLineChartData";
 
-function Dashboard() {
+import Sidenav from "examples/Sidenav";
+
+function Dashboard({ brand, routes }) {
   const { size } = typography;
   const { chart, items } = reportsBarChartData;
 
   return (
     <DashboardLayout>
+      <Sidenav brand={brand} brandName="Soft UI Dashboard" routes={routes} />
       <DashboardNavbar />
       <SoftBox py={3}>
         <SoftBox mb={3}>
           <Grid container spacing={3}>
-            <Grid item xs={12} sm={6} xl={3}>
+            <Grid item xs={12} sm={6} xl={4}>
               <MiniStatisticsCard
-                title={{ text: "today's money" }}
-                count="$53,000"
-                percentage={{ color: "success", text: "+55%" }}
+                title={{ text: "Amount Of Opportunities" }}
+                count="20"
+                // percentage={{ color: "success", text: "+55%" }}
                 icon={{ color: "info", component: "paid" }}
               />
             </Grid>
-            <Grid item xs={12} sm={6} xl={3}>
+            <Grid item xs={12} sm={6} xl={4}>
               <MiniStatisticsCard
-                title={{ text: "today's users" }}
-                count="2,300"
-                percentage={{ color: "success", text: "+3%" }}
+                title={{ text: "Total Percentage(%)" }}
+                count="60%"
+                // percentage={{ color: "success", text: "+3%" }}
                 icon={{ color: "info", component: "public" }}
               />
             </Grid>
-            <Grid item xs={12} sm={6} xl={3}>
+            <Grid item xs={12} sm={6} xl={4}>
               <MiniStatisticsCard
-                title={{ text: "new clients" }}
-                count="+3,462"
-                percentage={{ color: "error", text: "-2%" }}
+                title={{ text: "Average % per Opportunity" }}
+                count="30%"
+                // percentage={{ color: "error", text: "-2%" }}
                 icon={{ color: "info", component: "emoji_events" }}
               />
             </Grid>
-            <Grid item xs={12} sm={6} xl={3}>
-              <MiniStatisticsCard
-                title={{ text: "sales" }}
-                count="$103,430"
-                percentage={{ color: "success", text: "+5%" }}
-                icon={{
-                  color: "info",
-                  component: "shopping_cart",
-                }}
-              />
-            </Grid>
           </Grid>
         </SoftBox>
+
         <SoftBox mb={3}>
           <Grid container spacing={3}>
             <Grid item xs={12} lg={7}>
-              <BuildByDevelopers />
+              <select name="languages" id="bet_company">
+                <option>--Select Bet Company--</option>
+                <option value="javascript">Bet 9ja</option>
+                <option value="php">Sporty Bet</option>
+                <option value="java">King Bet</option>
+              </select>
             </Grid>
             <Grid item xs={12} lg={5}>
-              <WorkWithTheRockets />
+              <select name="languages" id="percentFilter">
+                <option value="golang">-- Select Betting % Plan --</option>
+                <option value="javascript">10%</option>
+                <option value="php">20%</option>
+                <option value="java">30%</option>
+              </select>
             </Grid>
           </Grid>
         </SoftBox>
-        <SoftBox mb={3}>
+
+        {/* <SoftBox mb={3}>
           <Grid container spacing={3}>
             <Grid item xs={12} lg={5}>
               <ReportsBarChart
@@ -134,7 +138,7 @@ function Dashboard() {
               />
             </Grid>
           </Grid>
-        </SoftBox>
+        </SoftBox> */}
         <Grid container spacing={3}>
           <Grid item xs={12} md={6} lg={8}>
             <Projects />

@@ -74,7 +74,6 @@ function DashboardNavbar({ absolute, light, isMini }) {
   const { user } = useAuth();
   const { setUser } = useAuth();
 
-
   useEffect(() => {
     // Setting the navbar type
     if (fixedNavbar) {
@@ -162,7 +161,10 @@ function DashboardNavbar({ absolute, light, isMini }) {
         <SoftBox color="inherit" mb={{ xs: 1, md: 0 }} sx={(theme) => navbarRow(theme, { isMini })}>
           <Breadcrumbs icon="home" title={route[route.length - 1]} route={route} light={light} />
         </SoftBox>
-        {isMini ? null : (
+        <SoftBox color="inherit" mb={{ xs: 1, md: 0 }} sx={(theme) => navbarRow(theme, { isMini })}>
+          <p style={{ fontFamily: "Roboto" }}>Welcome back, Sam</p>
+        </SoftBox>
+        {/* {isMini ? null : (
           <SoftBox sx={(theme) => navbarRow(theme, { isMini })}>
             <SoftBox pr={1}>
               <SoftInput
@@ -240,7 +242,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
               {renderMenu()}
             </SoftBox>
           </SoftBox>
-        )}
+        )} */}
       </Toolbar>
     </AppBar>
   );

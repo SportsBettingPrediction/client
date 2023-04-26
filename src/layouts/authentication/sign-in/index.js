@@ -84,9 +84,9 @@ function SignIn() {
     }
   };
 
-  const handleRedirect = () => {
-    return navigate("/dashboard");
-  };
+  // const handleRedirect = () => {
+  //   return navigate("/dashboard");
+  // };
 
   return (
     <CoverLayout
