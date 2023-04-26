@@ -33,11 +33,16 @@ import PaymentMethod from "layouts/billing/components/PaymentMethod";
 import Invoices from "layouts/billing/components/Invoices";
 import BillingInformation from "layouts/billing/components/BillingInformation";
 import Transactions from "layouts/billing/components/Transactions";
+import Sidenav from "examples/Sidenav";
 
-function Billing() {
+// Soft UI Dashboard React routes
+// import routes from "routes";
+
+function Payment({ brand, routes }) {
   return (
     <DashboardLayout>
       <DashboardNavbar />
+      <Sidenav brand={brand} brandName="Soft UI Dashboard" routes={routes} />
       <SoftBox mt={4}>
         <SoftBox mb={1.5}>
           <Grid container spacing={3}>
@@ -75,7 +80,7 @@ function Billing() {
         <SoftBox my={3}>
           <Grid container spacing={3}>
             <Grid item xs={12} md={7}>
-              <BillingInformation />
+              {/* <BillingInformation /> */}
             </Grid>
             <Grid item xs={12} md={5}>
               <Transactions />
@@ -88,4 +93,4 @@ function Billing() {
   );
 }
 
-export default Billing;
+export default Payment;

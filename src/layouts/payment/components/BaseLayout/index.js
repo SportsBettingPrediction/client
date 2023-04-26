@@ -41,7 +41,7 @@ import {
   baseLayout,
   baseLayoutBackground,
   baseLayoutContent,
-} from "layouts/virtual-reality/components/BaseLayout/styles";
+} from "layouts/payment/components/BaseLayout/styles";
 
 // Images
 import brand from "assets/images/logo-ct.png";

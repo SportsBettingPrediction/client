@@ -28,14 +28,14 @@ import SoftButton from "components/SoftButton";
 import typography from "assets/theme/base/typography";
 
 // VR dashboards components
-import BaseLayout from "layouts/virtual-reality/components/BaseLayout";
+import BaseLayout from "layouts/payment/components/BaseLayout";
 
 // VRInfo dashboards components
-import TodoList from "layouts/virtual-reality/components/TodoList";
-import TodoCard from "layouts/virtual-reality/components/TodoCard";
-import Emails from "layouts/virtual-reality/components/Emails";
-import MediaPlayer from "layouts/virtual-reality/components/MediaPlayer";
-import Messages from "layouts/virtual-reality/components/Messages";
+import TodoList from "layouts/payment/components/TodoList";
+import TodoCard from "layouts/payment/components/TodoCard";
+import Emails from "layouts/payment/components/Emails";
+import MediaPlayer from "layouts/payment/components/MediaPlayer";
+import Messages from "layouts/payment/components/Messages";
 
 // Images
 import team1 from "assets/images/team-1.jpg";
@@ -46,6 +46,7 @@ function VRInfo() {
 
   return (
     <BaseLayout>
+      <Sidenav brand={brand} brandName="Soft UI Dashboard" routes={routes} />
       <SoftBox
         minHeight="100vh"
         ml={{ xs: 0, md: 10 }}
