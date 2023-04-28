@@ -122,7 +122,7 @@ const routes = [
     type: "collapse",
     name: "Logout",
     key: "sign-out",
-    route: "/authentication/sign-out",
+    route: "/authentication/sign-in",
     icon: <SpaceShip size="12px" />,
     component: <SignOut />,
     noCollapse: true,

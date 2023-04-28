@@ -47,6 +47,7 @@ export default function App() {
         <Route path="/authentication/sign-up" element={<SignUp />} />
         <Route path="/payments" element={<Billing brand={brand} routes={routes} />} />
         <Route path="/dashboard" element={<Dashboard brand={brand} routes={routes} />} />
+        <Route path="/" element={<Dashboard brand={brand} routes={routes} />} />
       </Routes>
     </ThemeProvider>
   );

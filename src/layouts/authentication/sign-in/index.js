@@ -44,8 +44,8 @@ function SignIn() {
 
   const [rememberMe, setRememberMe] = useState(true);
   const [formData, setFormData] = useState({
-    username: "test1",
-    password: "123456789",
+    username: "Franklin",
+    password: "12345678",
   });
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -104,15 +104,6 @@ function SignIn() {
             visible={true}
           />
         </SoftBox>
-      ) : user && user.token ? (
-        <div>
-          <h3 style={{ textAlign: "center" }}>You are already signed in.</h3>
-          <SoftBox mt={4} mb={1}>
-            <SoftButton variant="gradient" buttonColor="info" fullWidth onClick={handleRedirect}>
-              {`Let's go`}
-            </SoftButton>
-          </SoftBox>
-        </div>
       ) : (
         <>
           <SoftBox display="flex" flexDirection="column" alignItems="center" mb={2}>
