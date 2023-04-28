@@ -40,10 +40,10 @@ function PaymentMethod() {
         <SoftTypography variant="h6" fontWeight="medium">
           Payment Method
         </SoftTypography>
-        <SoftButton variant="gradient" color="dark">
+        {/* <SoftButton variant="gradient" color="dark">
           <Icon sx={{ fontWeight: "bold" }}>add</Icon>
           &nbsp;add new card
-        </SoftButton>
+        </SoftButton> */}
       </SoftBox>
       <SoftBox p={2}>
         <Grid container spacing={3}>

@@ -18,3 +18,38 @@ select {
     padding: 10px 3px;
     outline: none;
 }
+
+.subscription{
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-family: "Roboto";
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0rem 1.25rem 1.6875rem 0rem rgba(0, 0, 0, 0.05);
+}
+
+.subscription img{
+  width: 50px !important;
+}
+
+.addressAndIcon{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid #344767;
+  padding-right: 5px;
+}
+
+.addressAndIcon input{
+  outline: none;
+  padding: 7px;
+  border-top: none;
+  border-bottom: none;
+  border-left: none;
+  border-right: 1px solid #344767;
+}
+
+.addressAndIcon i{
+  cursor: pointer;
+}

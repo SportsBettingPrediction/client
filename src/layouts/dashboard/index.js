@@ -94,7 +94,7 @@ function Dashboard({ brand, routes }) {
             </Grid>
             <Grid item xs={12} lg={5}>
               <select name="languages" id="percentFilter">
-                <option value="golang">-- Select Betting % Plan --</option>
+                <option value="golang">-- Percentage Profit --</option>
                 <option value="javascript">10%</option>
                 <option value="php">20%</option>
                 <option value="java">30%</option>
