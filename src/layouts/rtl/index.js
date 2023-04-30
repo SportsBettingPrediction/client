@@ -45,23 +45,48 @@ import gradientLineChartData from "layouts/rtl/data/gradientLineChartData";
 
 // Soft UI Dashboard React contexts
 import { useSoftUIController, setDirection } from "context";
+import Sidenav from "examples/Sidenav";
 
-function RTL() {
+function RTL({ brand, routes }) {
   const [, dispatch] = useSoftUIController();
   const { size } = typography;
   const { chart, items } = reportsBarChartData;
 
   // Changing the direction to rtl
-  useEffect(() => {
-    setDirection(dispatch, "rtl");
+  // useEffect(() => {
+  //   setDirection(dispatch, "rtl");
 
-    return () => setDirection(dispatch, "ltr");
-  }, []);
+  //   return () => setDirection(dispatch, "ltr");
+  // }, []);
 
   return (
     <DashboardLayout>
       <DashboardNavbar />
-      <SoftBox py={3}>
+      <Sidenav brand={brand} brandName="Soft UI Dashboard" routes={routes} />
+      <div className="abitragePart">
+        <h2>ARBITRAGE CALCULATOR | SUREBET CALCULATOR</h2>
+        <p>
+          Use this calculator to determine stakes and profits for 2-5 way arbitrage opportunities!
+          Auto-round surebet stakes to avoid suspicion with the bookmakers! Instructions written
+          below the calculator.
+        </p>
+        <div className="topInputsAbitrage">
+          <div>
+            <p>How many bets will you place?</p>
+            <select name="languages" id="percentFilter">
+              <option value="golang">2</option>
+              <option value="javascript">3</option>
+              <option value="php">4</option>
+              <option value="java">5</option>
+            </select>
+          </div>
+          <div>
+            <p>Estimate Total Stake</p>
+            <input type="number" className="" />
+          </div>
+        </div>
+      </div>
+      {/* <SoftBox py={3}>
         <SoftBox mb={3}>
           <Grid container spacing={3}>
             <Grid item xs={12} sm={6} xl={3}>
@@ -155,7 +180,7 @@ function RTL() {
             <OrderOverview />
           </Grid>
         </Grid>
-      </SoftBox>
+      </SoftBox> */}
       <Footer />
     </DashboardLayout>
   );

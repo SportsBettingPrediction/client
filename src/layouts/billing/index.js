@@ -1,18 +1,3 @@
-/**
-=========================================================
-* Soft UI Dashboard React - v4.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-react
-* Copyright 2022 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
 // @mui material components
 import Grid from "@mui/material/Grid";
 
@@ -37,11 +22,17 @@ import Sidenav from "examples/Sidenav";
 import shieldImage from "../../images/secure-shield.png";
 import grid from "../../images/grid.png";
 import qrcode from "../../images/qr-code.png";
+import { useState } from "react";
 
 // Soft UI Dashboard React routes
 // import routes from "routes";
 
 function Payment({ brand, routes }) {
+  const [subScriptionModalOpen, setSubScriptionModalOpen] = useState("");
+  function openModal() {
+    setSubScriptionModalOpen(!subScriptionModalOpen);
+  }
+
   return (
     <DashboardLayout>
       <DashboardNavbar />
@@ -91,18 +82,20 @@ function Payment({ brand, routes }) {
           </Grid>
         </SoftBox>
 
-        <SoftBox my={3}>
-          <div className="subscription">
-            <img src={qrcode} />
-            <div className="subscriptionText">
-              <h2>USDC - BSC Chain</h2>
-              <div className="addressAndIcon">
-                <input type="text" />
-                <i class="fa-regular fa-copy"></i>
+        {subScriptionModalOpen && (
+          <SoftBox>
+            <div className="subscription">
+              <img src={qrcode} />
+              <div className="subscriptionText">
+                <h2>USDC - BSC Chain</h2>
+                <div className="addressAndIcon">
+                  <input type="text" />
+                  <i class="fa-regular fa-copy"></i>
+                </div>
               </div>
             </div>
-          </div>
-        </SoftBox>
+          </SoftBox>
+        )}
 
         <SoftBox mb={1.5}>
           <Grid container spacing={3}>
@@ -112,6 +105,7 @@ function Payment({ brand, routes }) {
                   <div className="subscriptionText">
                     <h2>$10</h2>
                     <p>Lorem....</p>
+                    <button onClick={openModal}>Verify</button>
                   </div>
                 </div>
               </Grid>
@@ -121,6 +115,7 @@ function Payment({ brand, routes }) {
                 <div className="subscriptionText">
                   <h2>$55</h2>
                   <p>Lorem....</p>
+                  <button onClick={openModal}>Verify</button>
                 </div>
               </div>
             </Grid>
@@ -129,13 +124,14 @@ function Payment({ brand, routes }) {
                 <div className="subscriptionText">
                   <h2>$100</h2>
                   <p>Lorem....</p>
+                  <button onClick={openModal}>Verify</button>
                 </div>
               </div>
             </Grid>
           </Grid>
         </SoftBox>
       </SoftBox>
-      <Footer />
+      {/* <Footer /> */}
     </DashboardLayout>
   );
 }

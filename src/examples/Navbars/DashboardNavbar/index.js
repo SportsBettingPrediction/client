@@ -100,6 +100,9 @@ function DashboardNavbar({ absolute, light, isMini }) {
     return () => window.removeEventListener("scroll", handleTransparentNavbar);
   }, [dispatch, fixedNavbar]);
 
+  const loggedInUser = JSON.parse(localStorage.getItem("user"));
+  console.log(loggedInUser.userDetails);
+
   const handleMiniSidenav = () => setMiniSidenav(dispatch, !miniSidenav);
   const handleConfiguratorOpen = () => setOpenConfigurator(dispatch, !openConfigurator);
   const handleOpenMenu = (event) => setOpenMenu(event.currentTarget);
@@ -168,7 +171,9 @@ function DashboardNavbar({ absolute, light, isMini }) {
               mb={{ xs: 1, md: 0 }}
               sx={(theme) => navbarRow(theme, { isMini })}
             >
-              <p style={{ fontFamily: "Roboto" }}>Welcome back, Sam</p>
+              <p style={{ fontFamily: "Roboto" }}>
+                Welcome back, {loggedInUser && loggedInUser.userDetails.username}
+              </p>
             </SoftBox>
             {/* <SoftBox pr={1}>
               <SoftInput

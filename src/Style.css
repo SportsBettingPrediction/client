@@ -1,6 +1,7 @@
 html,
 body {
   overflow-x: hidden;
+  font-family: "Roboto";
 }
 a {
   text-decoration: none;
@@ -23,7 +24,6 @@ select {
   display: flex;
   align-items: center;
   gap: 20px;
-  font-family: "Roboto";
   padding: 20px;
   border-radius: 20px;
   box-shadow: 0rem 1.25rem 1.6875rem 0rem rgba(0, 0, 0, 0.05);
@@ -52,4 +52,26 @@ select {
 
 .addressAndIcon i{
   cursor: pointer;
+}
+
+.paymentPage{
+  width: 100%;
+  height: 100vh;
+  position: relative;
+}
+
+.subscription button{
+  all: unset;
+  width: 100%;
+  background: linear-gradient(to right, #21BBFE, #217EFE);
+  color: #fff;
+  padding: 7px 10px;
+  border-radius: 7px;
+  cursor: pointer;
+}
+
+.topInputsAbitrage{
+  width: 100%;
+  display: flex;
+  align-items: center;
 }

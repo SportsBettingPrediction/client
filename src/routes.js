@@ -101,7 +101,7 @@ const routes = [
     type: "collapse",
     name: "Arbitrage Calculator",
     key: "rtl",
-    route: "/rtl",
+    route: "/arbitragecalculator",
     icon: <Settings size="12px" />,
     component: <RTL />,
     noCollapse: true,

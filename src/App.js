@@ -38,6 +38,7 @@ import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
 import Dashboard from "layouts/dashboard";
 import Billing from "layouts/billing";
+import RTL from "layouts/rtl";
 
 export default function App() {
   return (
@@ -46,8 +47,9 @@ export default function App() {
         <Route path="/authentication/sign-in" element={<SignIn />} />
         <Route path="/authentication/sign-up" element={<SignUp />} />
         <Route path="/payments" element={<Billing brand={brand} routes={routes} />} />
-        <Route path="/dashboard" element={<Dashboard brand={brand} routes={routes} />} />
         <Route path="/" element={<Dashboard brand={brand} routes={routes} />} />
+        <Route path="/dashboard" element={<Dashboard brand={brand} routes={routes} />} />
+        <Route path="/arbitragecalculator" element={<RTL brand={brand} routes={routes} />} />
       </Routes>
     </ThemeProvider>
   );
