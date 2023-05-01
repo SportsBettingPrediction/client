@@ -74,7 +74,14 @@ function DashboardNavbar({ absolute, light, isMini }) {
   const { user } = useAuth();
   const { setUser } = useAuth();
 
+  const loggedInUser = JSON.parse(localStorage.getItem("user"));
+  // console.log(loggedInUser.userDetails);
+
   useEffect(() => {
+    if (!loggedInUser) {
+      navigate("/authentication/sign-in");
+    }
+
     // Setting the navbar type
     if (fixedNavbar) {
       setNavbarType("sticky");
@@ -99,9 +106,6 @@ function DashboardNavbar({ absolute, light, isMini }) {
     // Remove event listener on cleanup
     return () => window.removeEventListener("scroll", handleTransparentNavbar);
   }, [dispatch, fixedNavbar]);
-
-  const loggedInUser = JSON.parse(localStorage.getItem("user"));
-  console.log(loggedInUser.userDetails);
 
   const handleMiniSidenav = () => setMiniSidenav(dispatch, !miniSidenav);
   const handleConfiguratorOpen = () => setOpenConfigurator(dispatch, !openConfigurator);
