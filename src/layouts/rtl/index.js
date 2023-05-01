@@ -85,6 +85,48 @@ function RTL({ brand, routes }) {
             <input type="number" className="" />
           </div>
         </div>
+
+        <div className="bottomInputAbitrage">
+          <div className="abitrageOdds">
+            <p>Bet 1</p>
+            <div>
+              <p>Odds (decimal)</p>
+              <input type="number" />
+            </div>
+            <div>
+              <p>Stake</p>
+              <input type="number" />
+            </div>
+            <div>
+              <p>Payout</p>
+              <input type="number" />
+            </div>
+            <div>
+              <p>Profit</p>
+              <input type="number" />
+            </div>
+          </div>
+
+          <div className="abitrageOdds">
+            <p>Bet 2</p>
+            <div>
+              <p>Odds (decimal)</p>
+              <input type="number" />
+            </div>
+            <div>
+              <p>Stake</p>
+              <input type="number" />
+            </div>
+            <div>
+              <p>Payout</p>
+              <input type="number" />
+            </div>
+            <div>
+              <p>Profit</p>
+              <input type="number" />
+            </div>
+          </div>
+        </div>
       </div>
       {/* <SoftBox py={3}>
         <SoftBox mb={3}>
@@ -181,7 +223,7 @@ function RTL({ brand, routes }) {
           </Grid>
         </Grid>
       </SoftBox> */}
-      <Footer />
+      {/* <Footer /> */}
     </DashboardLayout>
   );
 }
