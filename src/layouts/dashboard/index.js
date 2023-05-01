@@ -44,6 +44,8 @@ import gradientLineChartData from "layouts/dashboard/data/gradientLineChartData"
 
 import Sidenav from "examples/Sidenav";
 
+import Index from "layouts/dashboard/components/Matchcard/Index";
+
 function Dashboard({ brand, routes }) {
   const { size } = typography;
   const { chart, items } = reportsBarChartData;
@@ -82,7 +84,7 @@ function Dashboard({ brand, routes }) {
           </Grid>
         </SoftBox>
 
-        <SoftBox mb={3}>
+        <SoftBox mb={9}>
           <Grid container spacing={3}>
             <Grid item xs={12} lg={7}>
               <select name="languages" id="bet_company">
@@ -102,6 +104,9 @@ function Dashboard({ brand, routes }) {
             </Grid>
           </Grid>
         </SoftBox>
+
+        <Index />
+        <Index />
 
         {/* <SoftBox mb={3}>
           <Grid container spacing={3}>
@@ -139,14 +144,14 @@ function Dashboard({ brand, routes }) {
             </Grid>
           </Grid>
         </SoftBox> */}
-        <Grid container spacing={3}>
+        {/* <Grid container spacing={3}>
           <Grid item xs={12} md={6} lg={8}>
             <Projects />
           </Grid>
           <Grid item xs={12} md={6} lg={4}>
             <OrderOverview />
           </Grid>
-        </Grid>
+        </Grid> */}
       </SoftBox>
       <Footer />
     </DashboardLayout>
