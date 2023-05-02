@@ -41,25 +41,6 @@ function Payment({ brand, routes }) {
         <SoftBox mb={1.5}>
           <Grid container spacing={3}>
             <Grid item xs={12} lg={6}>
-              {/* <Grid item xs={12} xl={6}>
-                  <MasterCard number={4562112245947852} holder="jack peterson" expires="11/22" />
-                </Grid>
-                <Grid item xs={12} md={6} xl={3}>
-                  <DefaultInfoCard
-                    icon="account_balance"
-                    title="salary"
-                    description="Belong Interactive"
-                    value="+$2000"
-                  />
-                </Grid>
-                <Grid item xs={12} md={6} xl={3}>
-                  <DefaultInfoCard
-                    icon="paypal"
-                    title="paypal"
-                    description="Freelance Payment"
-                    value="$455.00"
-                  />
-                </Grid> */}
               <Grid item xs={12}>
                 <div className="subscription">
                   <img src={shieldImage} />

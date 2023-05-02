@@ -1,19 +1,3 @@
-/**
-=========================================================
-* Soft UI Dashboard React - v4.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-react
-* Copyright 2022 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-// @mui material components
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 
@@ -41,144 +25,159 @@ import PlatformSettings from "layouts/profile/components/PlatformSettings";
 // Data
 import profilesListData from "layouts/profile/data/profilesListData";
 
-// Images
-import homeDecor1 from "assets/images/home-decor-1.jpg";
-import homeDecor2 from "assets/images/home-decor-2.jpg";
-import homeDecor3 from "assets/images/home-decor-3.jpg";
-import team1 from "assets/images/team-1.jpg";
-import team2 from "assets/images/team-2.jpg";
-import team3 from "assets/images/team-3.jpg";
-import team4 from "assets/images/team-4.jpg";
+import { useEffect, useState } from "react";
 
-function Overview() {
+// Images
+// import homeDecor1 from "assets/images/home-decor-1.jpg";
+// import homeDecor2 from "assets/images/home-decor-2.jpg";
+// import homeDecor3 from "assets/images/home-decor-3.jpg";
+// import team1 from "assets/images/team-1.jpg";
+// import team2 from "assets/images/team-2.jpg";
+// import team3 from "assets/images/team-3.jpg";
+// import team4 from "assets/images/team-4.jpg";
+import Sidenav from "examples/Sidenav";
+
+function Overview({ brand, routes }) {
+  const loggedInUser = JSON.parse(localStorage.getItem("user"));
+  const [showPasswordTab, setShowPasswordTab] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const [oldPassword, setOldPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [msg, setMsg] = useState("");
+
+  // console.log();
+
+  useEffect(() => {
+    if (!loggedInUser) {
+      navigate("/authentication/sign-in");
+    }
+  }, []);
+
+  async function changePassword() {
+    if (oldPassword.length <= 0 || newPassword.length <= 0) {
+      setMsg("Please the fields can not be left empty");
+      setTimeout(() => {
+        setMsg("");
+      }, 2000);
+      return;
+    }
+    setLoading(true);
+    const resp = await fetch("https://sportbetpredict.onrender.com/api/changepassword", {
+      method: "POST",
+      body: JSON.stringify({ setOldPassword, setNewPassword }),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${loggedInUser.token}`,
+      },
+    });
+    if (resp) {
+      setLoading(false);
+    }
+    const data = await resp.json();
+    if (resp.ok) {
+      console.log(data);
+      setMsg("Password Changed Successfully");
+    }
+    if (!resp.ok) {
+      setMsg("Something went wrong");
+      setTimeout(() => {
+        setMsg("");
+      }, 2000);
+    }
+  }
+
   return (
     <DashboardLayout>
       <Header />
-      <SoftBox mt={5} mb={3}>
-        <Grid container spacing={3}>
-          <Grid item xs={12} md={6} xl={4}>
-            <PlatformSettings />
-          </Grid>
-          <Grid item xs={12} md={6} xl={4}>
-            <ProfileInfoCard
-              title="profile information"
-              description="Hi, I’m Alec Thompson, Decisions: If you can’t decide, the answer is no. If two equally difficult paths, choose the one more painful in the short term (pain avoidance is creating an illusion of equality)."
-              info={{
-                fullName: "Alec M. Thompson",
-                mobile: "(44) 123 1234 123",
-                email: "alecthompson@mail.com",
-                location: "USA",
-              }}
-              social={[
-                {
-                  link: "https://www.facebook.com/CreativeTim/",
-                  icon: <FacebookIcon />,
-                  color: "facebook",
-                },
-                {
-                  link: "https://twitter.com/creativetim",
-                  icon: <TwitterIcon />,
-                  color: "twitter",
-                },
-                {
-                  link: "https://www.instagram.com/creativetimofficial/",
-                  icon: <InstagramIcon />,
-                  color: "instagram",
-                },
-              ]}
-              action={{ route: "", tooltip: "Edit Profile" }}
-            />
-          </Grid>
-          <Grid item xs={12} xl={4}>
-            <ProfilesList title="conversations" profiles={profilesListData} />
-          </Grid>
-        </Grid>
-      </SoftBox>
-      <SoftBox mb={3}>
-        <Card>
-          <SoftBox pt={2} px={2}>
-            <SoftBox mb={0.5}>
-              <SoftTypography variant="h6" fontWeight="medium">
-                Projects
-              </SoftTypography>
-            </SoftBox>
-            <SoftBox mb={1}>
-              <SoftTypography variant="button" fontWeight="regular" color="text">
-                Architects design houses
-              </SoftTypography>
-            </SoftBox>
-          </SoftBox>
-          <SoftBox p={2}>
-            <Grid container spacing={3}>
-              <Grid item xs={12} md={6} xl={3}>
-                <DefaultProjectCard
-                  image={homeDecor1}
-                  label="project #2"
-                  title="modern"
-                  description="As Uber works through a huge amount of internal management turmoil."
-                  action={{
-                    type: "internal",
-                    route: "/pages/profile/profile-overview",
-                    color: "info",
-                    label: "view project",
-                  }}
-                  authors={[
-                    { image: team1, name: "Elena Morison" },
-                    { image: team2, name: "Ryan Milly" },
-                    { image: team3, name: "Nick Daniel" },
-                    { image: team4, name: "Peterson" },
-                  ]}
-                />
-              </Grid>
-              <Grid item xs={12} md={6} xl={3}>
-                <DefaultProjectCard
-                  image={homeDecor2}
-                  label="project #1"
-                  title="scandinavian"
-                  description="Music is something that every person has his or her own specific opinion about."
-                  action={{
-                    type: "internal",
-                    route: "/pages/profile/profile-overview",
-                    color: "info",
-                    label: "view project",
-                  }}
-                  authors={[
-                    { image: team3, name: "Nick Daniel" },
-                    { image: team4, name: "Peterson" },
-                    { image: team1, name: "Elena Morison" },
-                    { image: team2, name: "Ryan Milly" },
-                  ]}
-                />
-              </Grid>
-              <Grid item xs={12} md={6} xl={3}>
-                <DefaultProjectCard
-                  image={homeDecor3}
-                  label="project #3"
-                  title="minimalist"
-                  description="Different people have different taste, and various types of music."
-                  action={{
-                    type: "internal",
-                    route: "/pages/profile/profile-overview",
-                    color: "info",
-                    label: "view project",
-                  }}
-                  authors={[
-                    { image: team4, name: "Peterson" },
-                    { image: team3, name: "Nick Daniel" },
-                    { image: team2, name: "Ryan Milly" },
-                    { image: team1, name: "Elena Morison" },
-                  ]}
-                />
-              </Grid>
-              <Grid item xs={12} md={6} xl={3}>
-                <PlaceholderCard title={{ variant: "h5", text: "New project" }} outlined />
-              </Grid>
-            </Grid>
-          </SoftBox>
-        </Card>
-      </SoftBox>
+      <Sidenav brand={brand} brandName="Soft UI Dashboard" routes={routes} />
+      <div className="userDoubleInfo">
+        <div className="userSingleInfo">
+          <p>First Name</p>
+          <div className="iconAndDetail">
+            <i className="fa-solid fa-user"></i>
+            <p>{loggedInUser && loggedInUser.userDetails.firstname}</p>
+          </div>
+        </div>
+        <div className="userSingleInfo">
+          <p>Last Name</p>
+          <div className="iconAndDetail">
+            <i className="fa-solid fa-user"></i>
+            <p>{loggedInUser && loggedInUser.userDetails.lastname}</p>
+          </div>
+        </div>
+      </div>
 
-      <Footer />
+      <div className="userDoubleInfo">
+        <div className="userSingleInfo">
+          <p>Email</p>
+          <div className="iconAndDetail">
+            <i className="fa-solid fa-envelope"></i>
+            <p>{loggedInUser && loggedInUser.userDetails.email}</p>
+          </div>
+        </div>
+        <div className="userSingleInfo">
+          <p>Payment Address</p>
+          <div className="iconAndDetail">
+            <i className="fa-solid fa-wallet"></i>
+            <p>{loggedInUser && loggedInUser.userDetails.paymentAddress}</p>
+          </div>
+        </div>
+      </div>
+
+      <div className="userSingleInfo">
+        <p>Password</p>
+        <div className="iconAndDetail">
+          <i className="fa-solid fa-key"></i>
+          <p>**********</p>
+        </div>
+        <div className="changePasswordTab">
+          <button
+            onClick={() => setShowPasswordTab(!showPasswordTab)}
+            className="changePasswordButton"
+          >
+            {!showPasswordTab ? (
+              <>Change Password</>
+            ) : (
+              <>
+                <i className="fa-solid fa-xmark"></i>
+              </>
+            )}
+          </button>
+          <div>
+            {msg && <p className="msg">{msg}</p>}
+            {showPasswordTab && (
+              <>
+                <input
+                  type="password"
+                  placeholder="Old password"
+                  value={oldPassword}
+                  onChange={(e) => setOldPassword(e.target.value)}
+                  required
+                />
+                <input
+                  type="password"
+                  placeholder="New password"
+                  value={newPassword}
+                  onChange={(e) => setNewPassword(e.target.value)}
+                  required
+                />
+                <br />
+                {!loading ? (
+                  <button type="button" className="submitButton" onClick={changePassword}>
+                    Submit
+                  </button>
+                ) : (
+                  <button type="button" disabled className="buttonload">
+                    <i className="fa fa-spinner fa-spin"></i>
+                    <p style={{ margin: 0 }}>Submit</p>
+                  </button>
+                )}
+              </>
+            )}
+          </div>
+        </div>
+      </div>
     </DashboardLayout>
   );
 }

@@ -88,7 +88,7 @@ function Header() {
           overflow: "hidden",
         }}
       />
-      <Card
+      {/* <Card
         sx={{
           backdropFilter: `saturate(200%) blur(30px)`,
           backgroundColor: ({ functions: { rgba }, palette: { white } }) => rgba(white.main, 0.8),
@@ -135,7 +135,7 @@ function Header() {
             </AppBar>
           </Grid>
         </Grid>
-      </Card>
+      </Card> */}
     </SoftBox>
   );
 }
