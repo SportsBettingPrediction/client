@@ -22,6 +22,7 @@ import Sidenav from "examples/Sidenav";
 import shieldImage from "../../images/secure-shield.png";
 import grid from "../../images/grid.png";
 import qrcode from "../../images/qr-code.png";
+import QRCode from "react-qr-code";
 import { useState } from "react";
 
 // Soft UI Dashboard React routes
@@ -29,8 +30,18 @@ import { useState } from "react";
 
 function Payment({ brand, routes }) {
   const [subScriptionModalOpen, setSubScriptionModalOpen] = useState("");
+  const [copyICon, setCopyIcon] = useState(true);
+  const loggedInUser = JSON.parse(localStorage.getItem("user"));
   function openModal() {
     setSubScriptionModalOpen(!subScriptionModalOpen);
+  }
+
+  function copyToClipboard() {
+    navigator.clipboard.writeText(loggedInUser.userDetails.paymentAddress);
+    setCopyIcon(!copyICon);
+    setTimeout(() => {
+      setCopyIcon(copyICon);
+    }, 5000);
   }
 
   return (
@@ -66,12 +77,23 @@ function Payment({ brand, routes }) {
         {subScriptionModalOpen && (
           <SoftBox>
             <div className="subscription">
-              <img src={qrcode} />
+              <QRCode value={loggedInUser && loggedInUser.userDetails.paymentAddress} size="100" />
               <div className="subscriptionText">
                 <h2>USDC - BSC Chain</h2>
                 <div className="addressAndIcon">
-                  <input type="text" />
-                  <i class="fa-regular fa-copy"></i>
+                  <input
+                    type="text"
+                    value={loggedInUser && loggedInUser.userDetails.paymentAddress}
+                    disabled
+                  />
+                  {copyICon ? (
+                    <i class="fa-regular fa-copy" onClick={copyToClipboard}></i>
+                  ) : (
+                    <div>
+                      <i class="fa-solid fa-check"></i>
+                      <small>Copied</small>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
@@ -85,8 +107,11 @@ function Payment({ brand, routes }) {
                 <div className="subscription">
                   <div className="subscriptionText">
                     <h2>$10</h2>
-                    <p>Lorem....</p>
-                    <button onClick={openModal}>Verify</button>
+                    <p>Monthly</p>
+                    <div className="depositAndVerify">
+                      <button onClick={openModal}>Deposit</button>
+                      <button onClick={openModal}>Verify</button>
+                    </div>
                   </div>
                 </div>
               </Grid>
@@ -95,17 +120,23 @@ function Payment({ brand, routes }) {
               <div className="subscription">
                 <div className="subscriptionText">
                   <h2>$55</h2>
-                  <p>Lorem....</p>
-                  <button onClick={openModal}>Verify</button>
+                  <p>6 - Months</p>
+                  <div className="depositAndVerify">
+                    <button onClick={openModal}>Deposit</button>
+                    <button onClick={openModal}>Verify</button>
+                  </div>
                 </div>
               </div>
             </Grid>
             <Grid item xs={12} lg={4}>
               <div className="subscription">
                 <div className="subscriptionText">
-                  <h2>$100</h2>
-                  <p>Lorem....</p>
-                  <button onClick={openModal}>Verify</button>
+                  <h2>$110</h2>
+                  <p>Yearly</p>
+                  <div className="depositAndVerify">
+                    <button onClick={openModal}>Deposit</button>
+                    <button onClick={openModal}>Verify</button>
+                  </div>
                 </div>
               </div>
             </Grid>

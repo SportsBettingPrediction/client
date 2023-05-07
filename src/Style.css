@@ -91,7 +91,7 @@ select {
 
 .abitrageOdds{
   display: flex;
-  align-items: center;
+  /* align-items: flex-end; */
   gap: 2rem;
   margin-top: 2rem;
 }
@@ -119,10 +119,14 @@ select {
   margin: 5px 0;
 }
 
-.userDoubleInfo{
+.userDoubleInfo, .depositAndVerify{
   display: flex;
   align-items: center;
   gap: 20px;
+}
+
+.userDoubleInfo p{
+  /* text-transform: uppercase; */
 }
 
 .userSingleInfo{
@@ -137,7 +141,11 @@ select {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-top: -20px;
+  margin-top: -5px;
+}
+
+.iconAndDetail p{
+  margin-bottom: 0;
 }
 
 .changePasswordTab{
@@ -154,6 +162,7 @@ select {
   color: #344767;
   border: 1px solid #344767;
   padding: 3px 10px;
+  margin-top: 10px;
 }
 
 .submitButton{
@@ -164,6 +173,7 @@ select {
   padding: 3px 10px;
   margin-left: 10px;
   cursor: pointer;
+  margin-top: 10px;
 }
 
 .changePasswordTab input{
@@ -180,12 +190,25 @@ select {
   font-size: 12px;
 }
 
+.successMsg{
+  color: rgb(6, 179, 0);
+  margin-bottom: 2px;
+  margin-left: 10px;
+  font-size: 12px;
+}
+
 .buttonload{
   display: flex;
   align-items: center;
   cursor: not-allowed;
   justify-content:center;
   gap: 3px;
+}
+
+.fotter{
+  /* position: fixed;
+  width: 100%;
+  bottom: 0; */
 }
 
 @keyframes button-anim {

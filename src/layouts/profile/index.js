@@ -42,9 +42,10 @@ function Overview({ brand, routes }) {
   const [showPasswordTab, setShowPasswordTab] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const [oldPassword, setOldPassword] = useState("");
-  const [newPassword, setNewPassword] = useState("");
+  const [oldpassword, setOldPassword] = useState("");
+  const [newpassword, setNewPassword] = useState("");
   const [msg, setMsg] = useState("");
+  const [successMsg, setSuccessMsg] = useState("");
 
   // console.log();
 
@@ -55,7 +56,8 @@ function Overview({ brand, routes }) {
   }, []);
 
   async function changePassword() {
-    if (oldPassword.length <= 0 || newPassword.length <= 0) {
+    console.log(loggedInUser.token);
+    if (oldpassword.length <= 0 || newpassword.length <= 0) {
       setMsg("Please the fields can not be left empty");
       setTimeout(() => {
         setMsg("");
@@ -65,7 +67,7 @@ function Overview({ brand, routes }) {
     setLoading(true);
     const resp = await fetch("https://sportbetpredict.onrender.com/api/changepassword", {
       method: "POST",
-      body: JSON.stringify({ setOldPassword, setNewPassword }),
+      body: JSON.stringify({ oldpassword, newpassword }),
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${loggedInUser.token}`,
@@ -77,10 +79,13 @@ function Overview({ brand, routes }) {
     const data = await resp.json();
     if (resp.ok) {
       console.log(data);
-      setMsg("Password Changed Successfully");
+      setSuccessMsg(data.message);
+      setTimeout(() => {
+        setSuccessMsg("");
+      }, 2000);
     }
     if (!resp.ok) {
-      setMsg("Something went wrong");
+      setMsg(data.message);
       setTimeout(() => {
         setMsg("");
       }, 2000);
@@ -89,7 +94,9 @@ function Overview({ brand, routes }) {
 
   return (
     <DashboardLayout>
-      <Header />
+      <div style={{ color: "#fff !important" }}>
+        <Header />
+      </div>
       <Sidenav brand={brand} brandName="Soft UI Dashboard" routes={routes} />
       <div className="userDoubleInfo">
         <div className="userSingleInfo">
@@ -146,19 +153,20 @@ function Overview({ brand, routes }) {
           </button>
           <div>
             {msg && <p className="msg">{msg}</p>}
+            {successMsg && <p className="successMsg">{successMsg}</p>}
             {showPasswordTab && (
               <>
                 <input
                   type="password"
                   placeholder="Old password"
-                  value={oldPassword}
+                  value={oldpassword}
                   onChange={(e) => setOldPassword(e.target.value)}
                   required
                 />
                 <input
                   type="password"
                   placeholder="New password"
-                  value={newPassword}
+                  value={newpassword}
                   onChange={(e) => setNewPassword(e.target.value)}
                   required
                 />

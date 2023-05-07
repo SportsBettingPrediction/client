@@ -45,7 +45,7 @@ function SignIn() {
   const [rememberMe, setRememberMe] = useState(true);
   const [formData, setFormData] = useState({
     username: "Franklin",
-    password: "12345678",
+    password: "123456789",
   });
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -76,6 +76,9 @@ function SignIn() {
       setIsLoading(false);
     }
     const data = await response.json();
+    if (!response.ok) {
+      setError(data.message);
+    }
     if (response.ok) {
       localStorage.setItem("user", JSON.stringify(data));
       navigate("/dashboard");

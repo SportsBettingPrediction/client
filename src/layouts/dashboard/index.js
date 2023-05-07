@@ -46,12 +46,15 @@ import gradientLineChartData from "layouts/dashboard/data/gradientLineChartData"
 import Sidenav from "examples/Sidenav";
 
 import Index from "layouts/dashboard/components/Matchcard/Index";
+import { useNavigate } from "react-router-dom";
 
 function Dashboard({ brand, routes }) {
   const { size } = typography;
   const { chart, items } = reportsBarChartData;
 
   const loggedInUser = JSON.parse(localStorage.getItem("user"));
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!loggedInUser) {
@@ -162,7 +165,9 @@ function Dashboard({ brand, routes }) {
           </Grid>
         </Grid> */}
       </SoftBox>
-      <Footer />
+      <div className="fotter">
+        <Footer />
+      </div>
     </DashboardLayout>
   );
 }

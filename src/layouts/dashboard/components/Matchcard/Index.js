@@ -2,26 +2,35 @@ import React from "react";
 
 const index = () => {
   return (
-    <div className="playingTeamOpportunity">
-      <div className="displayTime">
-        <i className="fa-regular fa-clock"></i>
-        <p>1 hr Ago</p>
-      </div>
-      <div className="teamLogoAndOdd">
-        <p>Man U</p>
-        <p>1.25</p>
-      </div>
-      <div className="teamLogoAndOdd">
-        <p>Chelsea</p>
-        <p>2.56</p>
-      </div>
-      <div className="percentOpportunity">
-        <p>2.5%</p>
-      </div>
-      <div className="abitrageCalculator">
-        <i className="fa-solid fa-calculator"></i>
-      </div>
-    </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">First</th>
+          <th scope="col">Last</th>
+          <th scope="col">Handle</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>Mark</td>
+          <td>Otto</td>
+          <td>@mdo</td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>Jacob</td>
+          <td>Thornton</td>
+          <td>@fat</td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td colspan="2">Larry the Bird</td>
+          <td>@twitter</td>
+        </tr>
+      </tbody>
+    </table>
   );
 };
 
