@@ -74,10 +74,45 @@ function Payment({ brand, routes }) {
           </Grid>
         </SoftBox>
 
-        {subScriptionModalOpen && (
-          <SoftBox>
-            <div className="subscription">
-              <QRCode value={loggedInUser && loggedInUser.userDetails.paymentAddress} size="100" />
+        {/* {subScriptionModalOpen && ( */}
+        <SoftBox>
+          <div className="makePayment">
+            <h2>MAKE PAYMENT</h2>
+            <p>
+              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+              has been the industry's standard dummy text ever since the 1500s.
+            </p>
+
+            <div class="qrCodeAndAddress">
+              <div className="qrCode">
+                <QRCode
+                  value={loggedInUser && loggedInUser.userDetails.paymentAddress}
+                  size="100"
+                />
+              </div>
+              <div class="addressAndCopy">
+                {/* <p>{loggedInUser && loggedInUser.userDetails.paymentAddress}</p> */}
+                <input
+                  type="text"
+                  value={loggedInUser && loggedInUser.userDetails.paymentAddress}
+                  disabled
+                />
+                {copyICon ? (
+                  <i class="fa-regular fa-copy" onClick={copyToClipboard}></i>
+                ) : (
+                  <div>
+                    <i class="fa-solid fa-check"></i>
+                    <small>Copied</small>
+                  </div>
+                )}
+              </div>
+            </div>
+            <p className="makePaymentBottomText">
+              Lorem Ipsum is simply dummy text of the printing and typesetting industry
+            </p>
+          </div>
+
+          {/* <div className="subscription">
               <div className="subscriptionText">
                 <h2>USDC - BSC Chain</h2>
                 <div className="addressAndIcon">
@@ -96,54 +131,48 @@ function Payment({ brand, routes }) {
                   )}
                 </div>
               </div>
-            </div>
-          </SoftBox>
-        )}
+            </div> */}
+        </SoftBox>
+        {/* )} */}
 
         <SoftBox mb={1.5}>
           <Grid container spacing={3}>
             <Grid item xs={12} lg={4}>
               <Grid item xs={12}>
-                <div className="subscription">
-                  <div className="subscriptionText">
+                <div className="subscriptionPlans">
+                  <h3>Basic</h3>
+                  <div className="priceAndDuration">
                     <h2>$10</h2>
                     <p>Monthly</p>
-                    <div className="depositAndVerify">
-                      <button onClick={openModal}>Deposit</button>
-                      <button onClick={openModal}>Verify</button>
-                    </div>
                   </div>
+                  <button onClick={openModal}>Subscribe</button>
                 </div>
               </Grid>
             </Grid>
             <Grid item xs={12} lg={4}>
-              <div className="subscription">
-                <div className="subscriptionText">
+              <div className="subscriptionPlans second">
+                <h3>Standard</h3>
+                <div className="priceAndDuration">
                   <h2>$55</h2>
                   <p>6 - Months</p>
-                  <div className="depositAndVerify">
-                    <button onClick={openModal}>Deposit</button>
-                    <button onClick={openModal}>Verify</button>
-                  </div>
                 </div>
+                <button onClick={openModal}>Subscribe</button>
               </div>
             </Grid>
             <Grid item xs={12} lg={4}>
-              <div className="subscription">
-                <div className="subscriptionText">
+              <div className="subscriptionPlans third">
+                <h3>Premium</h3>
+                <div className="priceAndDuration">
                   <h2>$110</h2>
                   <p>Yearly</p>
-                  <div className="depositAndVerify">
-                    <button onClick={openModal}>Deposit</button>
-                    <button onClick={openModal}>Verify</button>
-                  </div>
                 </div>
+                <button onClick={openModal}>Subscribe</button>
               </div>
             </Grid>
           </Grid>
         </SoftBox>
       </SoftBox>
-      {/* <Footer /> */}
+      <Footer />
     </DashboardLayout>
   );
 }
