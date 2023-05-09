@@ -1,36 +1,37 @@
 import React from "react";
+import mancityLogo from "../../../../images/manu.png";
+import chelseaLogo from "../../../../images/chelsea.png";
 
 const index = () => {
   return (
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">First</th>
-          <th scope="col">Last</th>
-          <th scope="col">Handle</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td colspan="2">Larry the Bird</td>
-          <td>@twitter</td>
-        </tr>
-      </tbody>
-    </table>
+    <>
+      <div className="clubCard">
+        <div className="time">
+          <i className="fa-regular fa-clock"></i>
+          <p>1hr Ago</p>
+        </div>
+        <div className="clubLogoAndBetCompany">
+          <div className="singleClub">
+            <img src={mancityLogo} />
+            <p>Mancity(1.25)</p>
+          </div>
+          <div className="betPatform">
+            <p>Vs</p>
+            <p>Bet 9ja</p>
+          </div>
+          <div className="singleClub">
+            <img src={mancityLogo} />
+            <p>Mancity(1.25)</p>
+          </div>
+        </div>
+        <div>
+          <p>2.5%</p>
+        </div>
+        <div>
+          <i className="fa-solid fa-calculator"></i>
+        </div>
+      </div>
+    </>
   );
 };
 

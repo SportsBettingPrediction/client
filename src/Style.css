@@ -16,14 +16,109 @@ a {
   display: none;
 }
 
+/*Styling Selectbox*/
 select {
-  width: 50%;
+  width: 300px;
+  display: inline-block;
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: 0 0 2px rgb(204, 204, 204);
+  transition: all .5s ease;
+  position: relative;
+  font-size: 14px;
+  color: #474747;
+  height: 100%;
+  text-align: left;
+}
+
+select::after{
+  border: none;
+  outline: none;
+}
+
+.dropDowns{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  padding: 2rem;
+}
+
+#root > div > header > div > div.MuiBox-root.css-1oamlbf > div.MuiBox-root.css-1b1knv > button > span{
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  font-size: 30px !important;
 }
 
 #bet_company, #percentFilter{
     border: 1px solid #808080;
     padding: 10px 3px;
     outline: none;
+}
+
+.userAndBalance{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.userAndBalance p{
+  margin: 0;
+}
+
+.clubCard{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0rem 1.25rem 1.6875rem 0rem rgba(0, 0, 0, 0.05);
+}
+
+.clubCard p{
+  margin: 0;
+}
+
+.clubLogoAndBetCompany{
+  display: flex;
+  align-items: center;
+  /* justify-content: space-between; */
+}
+
+.singleClub{
+  text-align: center;
+}
+
+.singleClub img{
+  width: 15%;
+  margin-bottom: 5px;
+}
+
+.singleClub p{
+  font-size: 14px;
+}
+
+.betPatform{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 14px;
+}
+
+.time{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.time p{
+  font-size: 14px;
+}
+
+.fa-calculator{
+  font-size: 20px;
 }
 
 .subscription{
@@ -313,6 +408,10 @@ select {
 
 @media screen and (max-width: 576px) {
   .userDoubleInfo{
+    flex-direction: column;
+  }
+
+  .dropDowns{
     flex-direction: column;
   }
 }

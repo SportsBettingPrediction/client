@@ -150,7 +150,7 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
             sx={(theme) => sidenavLogoLabel(theme, { miniSidenav })}
           >
             <SoftTypography component="h6" variant="button" fontWeight="medium">
-              {brandName}
+              <h4>Arbking</h4>
             </SoftTypography>
           </SoftBox>
         </SoftBox>

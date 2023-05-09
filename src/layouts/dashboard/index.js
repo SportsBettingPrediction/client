@@ -96,26 +96,30 @@ function Dashboard({ brand, routes }) {
           </Grid>
         </SoftBox>
 
-        <SoftBox mb={9}>
+        <div className="dropDowns">
+          <select name="languages" id="bet_company">
+            <option>--Select Bet Company--</option>
+            <option value="javascript">Bet 9ja</option>
+            <option value="php">Sporty Bet</option>
+            <option value="java">King Bet</option>
+          </select>
+
+          <select name="languages" id="percentFilter">
+            <option value="golang">-- Percentage Profit --</option>
+            <option value="javascript">10%</option>
+            <option value="php">20%</option>
+            <option value="java">30%</option>
+          </select>
+        </div>
+
+        {/* <SoftBox mb={9}>
           <Grid container spacing={3}>
-            <Grid item xs={12} lg={7}>
-              <select name="languages" id="bet_company">
-                <option>--Select Bet Company--</option>
-                <option value="javascript">Bet 9ja</option>
-                <option value="php">Sporty Bet</option>
-                <option value="java">King Bet</option>
-              </select>
-            </Grid>
+            <Grid item xs={12} lg={7}></Grid>
             <Grid item xs={12} lg={5}>
-              <select name="languages" id="percentFilter">
-                <option value="golang">-- Percentage Profit --</option>
-                <option value="javascript">10%</option>
-                <option value="php">20%</option>
-                <option value="java">30%</option>
-              </select>
+              
             </Grid>
           </Grid>
-        </SoftBox>
+        </SoftBox> */}
 
         <Index />
         <Index />

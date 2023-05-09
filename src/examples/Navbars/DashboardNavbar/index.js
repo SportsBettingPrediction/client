@@ -175,9 +175,14 @@ function DashboardNavbar({ absolute, light, isMini }) {
               mb={{ xs: 1, md: 0 }}
               sx={(theme) => navbarRow(theme, { isMini })}
             >
-              <p style={{ fontFamily: "Roboto" }}>
-                Welcome back, {loggedInUser && loggedInUser.userDetails.username}
-              </p>
+              <div className="userAndBalance">
+                <i class="fa-solid fa-user fs-3"></i>
+                <div>
+                  <p>Available Balance</p>
+                  <p>$0.00</p>
+                </div>
+              </div>
+              {/* <p>Welcome back, {loggedInUser && loggedInUser.userDetails.username}</p> */}
             </SoftBox>
             {/* <SoftBox pr={1}>
               <SoftInput
@@ -224,8 +229,9 @@ function DashboardNavbar({ absolute, light, isMini }) {
                   </IconButton>
                 </Link>
               )} */}
+              {/* <div className="navButton"> */}
               <IconButton
-                size="small"
+                size="large"
                 color="inherit"
                 sx={navbarMobileMenu}
                 onClick={handleMiniSidenav}
@@ -234,6 +240,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
                   {miniSidenav ? "menu_open" : "menu"}
                 </Icon>
               </IconButton>
+              {/* </div> */}
               {/* <IconButton
                 size="small"
                 color="inherit"
