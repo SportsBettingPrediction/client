@@ -31,8 +31,19 @@ select {
   text-align: left;
 }
 
-select::after{
-  border: none;
+.dropDowns input{
+  width: 300px;
+  display: inline-block;
+  background-color: #fff;
+  border-radius: 2px;
+  transition: all .5s ease;
+  position: relative;
+  font-size: 14px;
+  color: #474747;
+  height: 100%;
+  text-align: left;
+  padding: 12px 5px;
+  border: 1px solid #474747;
   outline: none;
 }
 
@@ -243,6 +254,10 @@ select::after{
   padding: 10px 3px;
   outline: none;
   width: 180%;
+}
+
+.abitragePart{
+  margin-top: 40px;
 }
 
 .abitrageOdds{

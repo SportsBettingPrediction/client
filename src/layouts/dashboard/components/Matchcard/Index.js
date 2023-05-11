@@ -1,6 +1,7 @@
 import React from "react";
 import mancityLogo from "../../../../images/manu.png";
 import chelseaLogo from "../../../../images/chelsea.png";
+import { Link } from "react-router-dom";
 
 const index = () => {
   return (
@@ -28,7 +29,9 @@ const index = () => {
           <p>2.5%</p>
         </div>
         <div>
-          <i className="fa-solid fa-calculator"></i>
+          <Link to={"/arbitragecalculator"}>
+            <i className="fa-solid fa-calculator"></i>
+          </Link>
         </div>
       </div>
     </>

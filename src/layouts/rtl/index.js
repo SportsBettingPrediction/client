@@ -12,7 +12,7 @@ Coded by www.creative-tim.com
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 // @mui material components
 import Grid from "@mui/material/Grid";
@@ -52,6 +52,20 @@ function RTL({ brand, routes }) {
   const { size } = typography;
   const { chart, items } = reportsBarChartData;
 
+  // const getInitialState = () => {
+  //   const value = 2;
+  //   return value;
+  // };
+
+  // const [value, setValue] = useState(getInitialState);
+
+  // const handleChange = (e) => {
+  //   setValue(e.target.value);
+  //   console.log(value);
+  // };
+
+  // // console.log(arbitrageCalculator.target);
+
   return (
     <DashboardLayout>
       <DashboardNavbar />
@@ -63,14 +77,14 @@ function RTL({ brand, routes }) {
           Auto-round surebet stakes to avoid suspicion with the bookmakers! Instructions written
           below the calculator.
         </p>
-        <div className="topInputsAbitrage">
+        <div className="dropDowns">
           <div>
             <p>How many bets will you place?</p>
             <select name="languages" id="percentFilter">
-              <option value="golang">2</option>
-              <option value="javascript">3</option>
-              <option value="php">4</option>
-              <option value="java">5</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
             </select>
           </div>
           <div>
@@ -119,6 +133,66 @@ function RTL({ brand, routes }) {
               <input type="number" />
             </div>
           </div>
+
+          {/* <div className="abitrageOdds">
+            <p>Bet 2</p>
+            <div>
+              <p>Odds (decimal)</p>
+              <input type="number" />
+            </div>
+            <div>
+              <p>Stake</p>
+              <input type="number" />
+            </div>
+            <div>
+              <p>Payout</p>
+              <input type="number" />
+            </div>
+            <div>
+              <p>Profit</p>
+              <input type="number" />
+            </div>
+          </div>
+
+          <div className="abitrageOdds">
+            <p>Bet 2</p>
+            <div>
+              <p>Odds (decimal)</p>
+              <input type="number" />
+            </div>
+            <div>
+              <p>Stake</p>
+              <input type="number" />
+            </div>
+            <div>
+              <p>Payout</p>
+              <input type="number" />
+            </div>
+            <div>
+              <p>Profit</p>
+              <input type="number" />
+            </div>
+          </div>
+
+          <div className="abitrageOdds">
+            <p>Bet 2</p>
+            <div>
+              <p>Odds (decimal)</p>
+              <input type="number" />
+            </div>
+            <div>
+              <p>Stake</p>
+              <input type="number" />
+            </div>
+            <div>
+              <p>Payout</p>
+              <input type="number" />
+            </div>
+            <div>
+              <p>Profit</p>
+              <input type="number" />
+            </div>
+          </div> */}
         </div>
       </div>
     </DashboardLayout>
