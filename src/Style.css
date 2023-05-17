@@ -76,14 +76,41 @@ select {
   margin: 0;
 }
 
+.matchCard{
+  box-shadow: 0rem 1.25rem 1.6875rem 0rem rgba(0, 0, 0, 0.05);
+
+}
+
 .clubCard{
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 1rem;
   border-radius: 10px;
-  margin-bottom: 20px;
-  box-shadow: 0rem 1.25rem 1.6875rem 0rem rgba(0, 0, 0, 0.05);
+  margin-bottom: 10px;
+}
+
+.bettingPlatformCard{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+  border-radius: 10px;
+  /* margin-bottom: 10px; */
+}
+
+.bettingPlatformCard span{
+  margin-left: 1rem;
+}
+
+.table>:not(caption)>*>*{
+  border-bottom-width: 0;
+  /* padding: 0 0.5rem; */
+}
+
+
+.table>:not(caption)>*>*:hover{
+  background-color: none;
 }
 
 .clubCard p{

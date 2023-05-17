@@ -12,7 +12,7 @@ Coded by www.creative-tim.com
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 // @mui material components
 import Grid from "@mui/material/Grid";
@@ -47,6 +47,8 @@ import Sidenav from "examples/Sidenav";
 
 import Index from "layouts/dashboard/components/Matchcard/Index";
 import { useNavigate } from "react-router-dom";
+import mancityLogo from "../../images/manu.png";
+import { Link } from "react-router-dom";
 
 function Dashboard({ brand, routes }) {
   const { size } = typography;
@@ -61,6 +63,12 @@ function Dashboard({ brand, routes }) {
       navigate("/authentication/sign-in");
     }
   }, []);
+
+  const [selectedCompany, setSelectedCompany] = useState();
+
+  function filterBetCompany(e) {
+    setSelectedCompany(e.target.value);
+  }
 
   return (
     <DashboardLayout>
@@ -97,11 +105,11 @@ function Dashboard({ brand, routes }) {
         </SoftBox>
 
         <div className="dropDowns">
-          <select name="languages" id="bet_company">
+          <select name="languages" id="bet_company" onChange={filterBetCompany}>
             <option>--Select Bet Company--</option>
-            <option value="javascript">Bet 9ja</option>
-            <option value="php">Sporty Bet</option>
-            <option value="java">King Bet</option>
+            <option value="bet9ja">Bet 9ja</option>
+            <option value="sportybet">Sporty Bet</option>
+            <option value="betking">Bet King</option>
           </select>
 
           <select name="languages" id="percentFilter">
@@ -121,53 +129,75 @@ function Dashboard({ brand, routes }) {
           </Grid>
         </SoftBox> */}
 
-        <Index />
-        <Index />
-
-        {/* <SoftBox mb={3}>
-          <Grid container spacing={3}>
-            <Grid item xs={12} lg={5}>
-              <ReportsBarChart
-                title="active users"
-                description={
-                  <>
-                    (<strong>+23%</strong>) than last week
-                  </>
-                }
-                chart={chart}
-                items={items}
-              />
-            </Grid>
-            <Grid item xs={12} lg={7}>
-              <GradientLineChart
-                title="Sales Overview"
-                description={
-                  <SoftBox display="flex" alignItems="center">
-                    <SoftBox fontSize={size.lg} color="success" mb={0.3} mr={0.5} lineHeight={0}>
-                      <Icon className="font-bold">arrow_upward</Icon>
-                    </SoftBox>
-                    <SoftTypography variant="button" color="text" fontWeight="medium">
-                      4% more{" "}
-                      <SoftTypography variant="button" color="text" fontWeight="regular">
-                        in 2021
-                      </SoftTypography>
-                    </SoftTypography>
-                  </SoftBox>
-                }
-                height="20.25rem"
-                chart={gradientLineChartData}
-              />
-            </Grid>
-          </Grid>
-        </SoftBox> */}
-        {/* <Grid container spacing={3}>
-          <Grid item xs={12} md={6} lg={8}>
-            <Projects />
-          </Grid>
-          <Grid item xs={12} md={6} lg={4}>
-            <OrderOverview />
-          </Grid>
-        </Grid> */}
+        <div className="matchCard">
+          <div className="clubCard">
+            <div className="time">
+              <i className="fa-regular fa-clock"></i>
+              <p>1hr Ago</p>
+            </div>
+            <div className="clubLogoAndBetCompany">
+              <div className="singleClub">
+                <img src={mancityLogo} />
+                <p>Mancity(1.25)</p>
+              </div>
+              <div className="betPatform">
+                <p>Vs</p>
+              </div>
+              <div className="singleClub">
+                <img src={mancityLogo} />
+                <p>Mancity(1.25)</p>
+              </div>
+            </div>
+            <div>
+              <p>2.5%</p>
+            </div>
+            <div>
+              <Link to={"/arbitragecalculator"}>
+                <i className="fa-solid fa-calculator"></i>
+              </Link>
+            </div>
+          </div>
+          <table className="table text-dark table-border table-hover">
+            <thead>
+              <tr>
+                <th scope="col">Book Maker</th>
+                <th scope="col">Market</th>
+                <th scope="col">Odds</th>
+              </tr>
+            </thead>
+            <tbody>
+              {/* {allStudents && allStudents.map(student => ( */}
+              <tr className="text-dark" style={{ paddingBottom: "5rem" }}>
+                <td>Bet 9ja</td>
+                <td>
+                  <p className="text-muted">2</p>
+                </td>
+                <td>
+                  <p>1.23</p>
+                </td>
+              </tr>
+              <tr className="text-dark">
+                <td>Bet 9ja</td>
+                <td>
+                  <p className="text-muted">2</p>
+                </td>
+                <td>
+                  <p>1.23</p>
+                </td>
+              </tr>
+              <tr className="text-dark">
+                <td>Bet 9ja</td>
+                <td>
+                  <p className="text-muted">2</p>
+                </td>
+                <td>
+                  <p>1.23</p>
+                </td>
+              </tr>
+              {/* ))} */}
+            </tbody>
+          </table>
+        </div>
       </SoftBox>
       <div className="fotter">
         <Footer />

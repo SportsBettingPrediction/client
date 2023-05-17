@@ -23,18 +23,19 @@ import shieldImage from "../../images/secure-shield.png";
 import grid from "../../images/grid.png";
 import qrcode from "../../images/qr-code.png";
 import QRCode from "react-qr-code";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // Soft UI Dashboard React routes
 // import routes from "routes";
 
 function Payment({ brand, routes }) {
-  const [subScriptionModalOpen, setSubScriptionModalOpen] = useState("");
+  const [subScriptionStatus, setSubScriptionStatus] = useState();
+  const [subScriptionInfo, setSubScriptionInfo] = useState("");
   const [copyICon, setCopyIcon] = useState(true);
   const loggedInUser = JSON.parse(localStorage.getItem("user"));
-  function openModal() {
-    setSubScriptionModalOpen(!subScriptionModalOpen);
-  }
+  // function openModal() {
+  //   setSubScriptionModalOpen(!subScriptionModalOpen);
+  // }
 
   function copyToClipboard() {
     navigator.clipboard.writeText(loggedInUser.userDetails.paymentAddress);
@@ -44,6 +45,28 @@ function Payment({ brand, routes }) {
     }, 5000);
   }
 
+  console.log(loggedInUser);
+
+  useEffect(() => {
+    getUsersSubscriptionStatus();
+  }, []);
+
+  async function getUsersSubscriptionStatus() {
+    const response = await fetch(
+      "https://sportbetpredict.onrender.com/api/account/user/sub-status",
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${loggedInUser.token}`,
+        },
+      }
+    );
+    const data = await response.json();
+    setSubScriptionInfo(data);
+    setSubScriptionStatus(data.subStatus);
+  }
+
   return (
     <DashboardLayout>
       <DashboardNavbar />
@@ -51,26 +74,47 @@ function Payment({ brand, routes }) {
       <SoftBox mt={4}>
         <SoftBox mb={1.5}>
           <Grid container spacing={3}>
-            <Grid item xs={12} lg={6}>
-              <Grid item xs={12}>
-                <div className="subscription">
-                  <img src={shieldImage} />
-                  <div className="subscriptionText">
-                    <h2>Monthly Subscription</h2>
-                    <p>Timeline 5th Oct - 5th Nov</p>
+            {subScriptionStatus && subScriptionStatus ? (
+              <Grid item xs={12} lg={6}>
+                <Grid item xs={12}>
+                  <div className="subscription">
+                    <img src={shieldImage} />
+                    <div className="subscriptionText">
+                      <h2>Active Subscription</h2>
+                      <p>
+                        {new Date(subScriptionInfo.userSub.subACreatedAt).toString().slice(3, 11)} -
+                        {new Date(subScriptionInfo.userSub.expiringDate).toString().slice(3, 11)}
+                        {/* {subScriptionInfo && subScriptionInfo.userSub.expiringDate} */}
+                      </p>
+                    </div>
                   </div>
-                </div>
+                </Grid>
               </Grid>
-            </Grid>
-            <Grid item xs={12} lg={6}>
-              <div className="subscription">
-                <img src={grid} />
-                <div className="subscriptionText">
-                  <h2>No Active Subscription</h2>
-                  <p>Subscribe to continue placing bets</p>
-                </div>
-              </div>
-            </Grid>
+            ) : (
+              <>
+                {subScriptionInfo && subScriptionInfo.userSubStatus === "No Subscription" ? (
+                  <Grid item xs={12} lg={6}>
+                    <div className="subscription">
+                      <img src={grid} />
+                      <div className="subscriptionText">
+                        <h2>Expired</h2>
+                        <p>Subscribe to continue placing bets</p>
+                      </div>
+                    </div>
+                  </Grid>
+                ) : (
+                  <Grid item xs={12} lg={6}>
+                    <div className="subscription">
+                      <img src={grid} />
+                      <div className="subscriptionText">
+                        <h2>No Active Subscription</h2>
+                        <p>Subscribe to continue placing bets</p>
+                      </div>
+                    </div>
+                  </Grid>
+                )}
+              </>
+            )}
           </Grid>
         </SoftBox>
 
@@ -145,7 +189,7 @@ function Payment({ brand, routes }) {
                     <h2>$10</h2>
                     <p>Monthly</p>
                   </div>
-                  <button onClick={openModal}>Subscribe</button>
+                  <button>Subscribe</button>
                 </div>
               </Grid>
             </Grid>
@@ -156,7 +200,7 @@ function Payment({ brand, routes }) {
                   <h2>$55</h2>
                   <p>6 - Months</p>
                 </div>
-                <button onClick={openModal}>Subscribe</button>
+                <button>Subscribe</button>
               </div>
             </Grid>
             <Grid item xs={12} lg={4}>
@@ -166,7 +210,7 @@ function Payment({ brand, routes }) {
                   <h2>$110</h2>
                   <p>Yearly</p>
                 </div>
-                <button onClick={openModal}>Subscribe</button>
+                <button>Subscribe</button>
               </div>
             </Grid>
           </Grid>
