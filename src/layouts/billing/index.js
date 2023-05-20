@@ -206,7 +206,7 @@ function Payment({ brand, routes }) {
                     <p>Monthly</p>
                   </div>
                   {!loading10 ? (
-                    <button onClick={() => payForSub("644c023336224c2d10e20723", "10")}>
+                    <button onClick={() => payForSub("64690b1694617642d7b9ef9f", "10")}>
                       Subscribe
                     </button>
                   ) : (
@@ -225,7 +225,7 @@ function Payment({ brand, routes }) {
                   <p>6 - Months</p>
                 </div>
                 {!loading55 ? (
-                  <button onClick={() => payForSub("644c027c36224c2d10e20724", "55")}>
+                  <button onClick={() => payForSub("64690b1e94617642d7b9efa0", "55")}>
                     Subscribe
                   </button>
                 ) : (
@@ -243,7 +243,7 @@ function Payment({ brand, routes }) {
                   <p>Yearly</p>
                 </div>
                 {!loading110 ? (
-                  <button onClick={() => payForSub("644c029436224c2d10e20725", "110")}>
+                  <button onClick={() => payForSub("64690b0b94617642d7b9ef9e", "110")}>
                     Subscribe
                   </button>
                 ) : (

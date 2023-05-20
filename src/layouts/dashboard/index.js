@@ -51,6 +51,9 @@ import mancityLogo from "../../images/manu.png";
 import { Link } from "react-router-dom";
 
 function Dashboard({ brand, routes }) {
+  const [arbs, setArbs] = useState("");
+  const [arbsTotal, setArbsTotal] = useState("");
+  const [arbsAvg, setArbsAvg] = useState("");
   const { size } = typography;
   const { chart, items } = reportsBarChartData;
 
@@ -62,7 +65,39 @@ function Dashboard({ brand, routes }) {
     if (!loggedInUser) {
       navigate("/authentication/sign-in");
     }
+    getOpportunities();
+    // console.log(loggedInUser.token);
   }, []);
+
+  async function getOpportunities() {
+    const response = await fetch("https://sportbetpredict.onrender.com/api/account/arbs", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${loggedInUser.token}`,
+      },
+    });
+    const data = await response.json();
+    setArbs(data);
+    console.log(data);
+
+    if (response.ok) {
+      // Field to retrieve and sum
+      const field = "profit";
+
+      // Calculate the sum
+      const sum = data.arbs.reduce(
+        (accumulator, currentValue) => accumulator + currentValue[field],
+        0
+      );
+      setArbsTotal(sum);
+
+      setArbsAvg(sum / data.arbs.length);
+      console.log(arbsAvg);
+      console.log(data.arbs.length);
+      console.log(sum);
+      console.log((sum / data.arbs.length) * 100);
+    }
+  }
 
   const [selectedCompany, setSelectedCompany] = useState();
 
@@ -80,7 +115,7 @@ function Dashboard({ brand, routes }) {
             <Grid item xs={12} sm={6} xl={4}>
               <MiniStatisticsCard
                 title={{ text: "Amount Of Opportunities" }}
-                count="20"
+                count={arbs && arbs.arbs.length}
                 // percentage={{ color: "success", text: "+55%" }}
                 icon={{ color: "info", component: "paid" }}
               />
@@ -88,7 +123,7 @@ function Dashboard({ brand, routes }) {
             <Grid item xs={12} sm={6} xl={4}>
               <MiniStatisticsCard
                 title={{ text: "Total Percentage(%)" }}
-                count="60%"
+                count={arbsTotal && arbsTotal}
                 // percentage={{ color: "success", text: "+3%" }}
                 icon={{ color: "info", component: "public" }}
               />
@@ -96,7 +131,7 @@ function Dashboard({ brand, routes }) {
             <Grid item xs={12} sm={6} xl={4}>
               <MiniStatisticsCard
                 title={{ text: "Average % per Opportunity" }}
-                count="30%"
+                count={arbsAvg && arbsAvg.toFixed(2)}
                 // percentage={{ color: "error", text: "-2%" }}
                 icon={{ color: "info", component: "emoji_events" }}
               />

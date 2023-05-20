@@ -70,6 +70,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
   const [openMenu, setOpenMenu] = useState(false);
   const route = useLocation().pathname.split("/").slice(1);
   const navigate = useNavigate();
+  const [userBalance, setUserBalance] = useState("");
 
   const { user } = useAuth();
   const { setUser } = useAuth();
@@ -81,6 +82,8 @@ function DashboardNavbar({ absolute, light, isMini }) {
     if (!loggedInUser) {
       navigate("/authentication/sign-in");
     }
+
+    getUserBalance();
 
     // Setting the navbar type
     if (fixedNavbar) {
@@ -106,6 +109,24 @@ function DashboardNavbar({ absolute, light, isMini }) {
     // Remove event listener on cleanup
     return () => window.removeEventListener("scroll", handleTransparentNavbar);
   }, [dispatch, fixedNavbar]);
+
+  async function getUserBalance() {
+    const response = await fetch(
+      "https://sportbetpredict.onrender.com/api/account/user/sub-status",
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${loggedInUser.token}`,
+        },
+      }
+    );
+    const data = await response.json();
+    console.log(data);
+    setUserBalance(data.userBalance);
+    // setSubScriptionInfo(data);
+    // setSubScriptionStatus(data.subStatus);
+  }
 
   const handleMiniSidenav = () => setMiniSidenav(dispatch, !miniSidenav);
   const handleConfiguratorOpen = () => setOpenConfigurator(dispatch, !openConfigurator);
@@ -176,10 +197,10 @@ function DashboardNavbar({ absolute, light, isMini }) {
               sx={(theme) => navbarRow(theme, { isMini })}
             >
               <div className="userAndBalance">
-                <i class="fa-solid fa-user fs-3"></i>
+                <i className="fa-solid fa-user fs-3"></i>
                 <div>
                   <p>Available Balance</p>
-                  <p>$0.00</p>
+                  <p>${userBalance && userBalance}</p>
                 </div>
               </div>
               {/* <p>Welcome back, {loggedInUser && loggedInUser.userDetails.username}</p> */}
