@@ -51,6 +51,7 @@ function SignUp() {
   const [isLoading, setIsLoading] = useState(false);
 
   const { user } = useAuth();
+  console.log(user);
 
   const handleSetAgremment = () => setAgremment(!agreement);
 

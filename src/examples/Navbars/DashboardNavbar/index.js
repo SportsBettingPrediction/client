@@ -115,7 +115,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
   const handleLogout = () => {
     AuthApi.Logout(user);
     setUser(null);
-    localStorage.removeItem("user");
+    localStorage.clear();
     return navigate("/authentication/sign-in");
   };
 

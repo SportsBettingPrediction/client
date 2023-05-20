@@ -403,6 +403,15 @@ select {
   bottom: 0; */
 }
 
+.bottomInputAbitrage{
+  box-shadow: 0rem 1.25rem 1.6875rem 0rem rgba(0, 0, 0, 0.2);
+  padding: 30px 0 30px 10px;
+}
+
+.abitrageOdds{
+  /* margin: 30px; */
+}
+
 /* MODAL */
 .subModal{
   background-color: #fffffff1;

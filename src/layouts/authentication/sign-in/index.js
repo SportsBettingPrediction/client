@@ -50,9 +50,9 @@ function SignIn() {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const { setUser } = useAuth();
-  const { user } = useAuth();
-
+  useEffect(() => {
+    localStorage.removeItem("user");
+  }, []);
   const handleSetRememberMe = () => setRememberMe(!rememberMe);
 
   const handleFormData = (e) => {
