@@ -31,7 +31,11 @@ import { useState, useEffect } from "react";
 function Payment({ brand, routes }) {
   const [subScriptionStatus, setSubScriptionStatus] = useState();
   const [subScriptionInfo, setSubScriptionInfo] = useState("");
+  const [subMsg, setSubMsg] = useState("");
   const [copyICon, setCopyIcon] = useState(true);
+  const [loading10, setLoading10] = useState(false);
+  const [loading55, setLoading55] = useState(false);
+  const [loading110, setLoading110] = useState(false);
   const loggedInUser = JSON.parse(localStorage.getItem("user"));
   // function openModal() {
   //   setSubScriptionModalOpen(!subScriptionModalOpen);
@@ -51,6 +55,39 @@ function Payment({ brand, routes }) {
     getUsersSubscriptionStatus();
   }, []);
 
+  async function payForSub(subId, subAmount) {
+    if (subAmount === "10") {
+      setLoading10(true);
+    } else if (subAmount === "55") {
+      setLoading55(true);
+    } else {
+      setLoading110(true);
+    }
+    console.log(subId);
+    const response = await fetch("https://sportbetpredict.onrender.com/api/purchase/subscription", {
+      method: "POST",
+      body: JSON.stringify({
+        subscription_id: subId,
+        user_payment_address: `${loggedInUser.userDetails.paymentAddress}`,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${loggedInUser.token}`,
+      },
+    });
+    if (response) {
+      setLoading10(false);
+      setLoading55(false);
+      setLoading110(false);
+    }
+    const data = await response.json();
+    setSubMsg(data.message);
+    setTimeout(() => {
+      setSubMsg();
+    }, 5000);
+    console.log(data);
+  }
+
   async function getUsersSubscriptionStatus() {
     const response = await fetch(
       "https://sportbetpredict.onrender.com/api/account/user/sub-status",
@@ -69,6 +106,11 @@ function Payment({ brand, routes }) {
 
   return (
     <DashboardLayout>
+      {subMsg && (
+        <div className="subModal">
+          <div className="subModalContent">{subMsg}</div>
+        </div>
+      )}
       <DashboardNavbar />
       <Sidenav brand={brand} brandName="Soft UI Dashboard" routes={routes} />
       <SoftBox mt={4}>
@@ -84,7 +126,6 @@ function Payment({ brand, routes }) {
                       <p>
                         {new Date(subScriptionInfo.userSub.subACreatedAt).toString().slice(3, 11)} -
                         {new Date(subScriptionInfo.userSub.expiringDate).toString().slice(3, 11)}
-                        {/* {subScriptionInfo && subScriptionInfo.userSub.expiringDate} */}
                       </p>
                     </div>
                   </div>
@@ -97,7 +138,7 @@ function Payment({ brand, routes }) {
                     <div className="subscription">
                       <img src={grid} />
                       <div className="subscriptionText">
-                        <h2>Expired</h2>
+                        <h2>{subScriptionInfo.userSubStatus}</h2>
                         <p>Subscribe to continue placing bets</p>
                       </div>
                     </div>
@@ -107,7 +148,7 @@ function Payment({ brand, routes }) {
                     <div className="subscription">
                       <img src={grid} />
                       <div className="subscriptionText">
-                        <h2>No Active Subscription</h2>
+                        <h2>{subScriptionInfo.userSubStatus}</h2>
                         <p>Subscribe to continue placing bets</p>
                       </div>
                     </div>
@@ -117,8 +158,6 @@ function Payment({ brand, routes }) {
             )}
           </Grid>
         </SoftBox>
-
-        {/* {subScriptionModalOpen && ( */}
         <SoftBox>
           <div className="makePayment">
             <h2>MAKE PAYMENT</h2>
@@ -135,7 +174,6 @@ function Payment({ brand, routes }) {
                 />
               </div>
               <div class="addressAndCopy">
-                {/* <p>{loggedInUser && loggedInUser.userDetails.paymentAddress}</p> */}
                 <input
                   type="text"
                   value={loggedInUser && loggedInUser.userDetails.paymentAddress}
@@ -155,29 +193,7 @@ function Payment({ brand, routes }) {
               Lorem Ipsum is simply dummy text of the printing and typesetting industry
             </p>
           </div>
-
-          {/* <div className="subscription">
-              <div className="subscriptionText">
-                <h2>USDC - BSC Chain</h2>
-                <div className="addressAndIcon">
-                  <input
-                    type="text"
-                    value={loggedInUser && loggedInUser.userDetails.paymentAddress}
-                    disabled
-                  />
-                  {copyICon ? (
-                    <i class="fa-regular fa-copy" onClick={copyToClipboard}></i>
-                  ) : (
-                    <div>
-                      <i class="fa-solid fa-check"></i>
-                      <small>Copied</small>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </div> */}
         </SoftBox>
-        {/* )} */}
 
         <SoftBox mb={1.5}>
           <Grid container spacing={3}>
@@ -189,7 +205,15 @@ function Payment({ brand, routes }) {
                     <h2>$10</h2>
                     <p>Monthly</p>
                   </div>
-                  <button>Subscribe</button>
+                  {!loading10 ? (
+                    <button onClick={() => payForSub("644c023336224c2d10e20723", "10")}>
+                      Subscribe
+                    </button>
+                  ) : (
+                    <button className="disabledBtn">
+                      <i class="fa-solid fa-spinner"></i> Subscribe
+                    </button>
+                  )}
                 </div>
               </Grid>
             </Grid>
@@ -200,7 +224,15 @@ function Payment({ brand, routes }) {
                   <h2>$55</h2>
                   <p>6 - Months</p>
                 </div>
-                <button>Subscribe</button>
+                {!loading55 ? (
+                  <button onClick={() => payForSub("644c027c36224c2d10e20724", "55")}>
+                    Subscribe
+                  </button>
+                ) : (
+                  <button className="disabledBtn">
+                    <i class="fa-solid fa-spinner"></i> Subscribe
+                  </button>
+                )}
               </div>
             </Grid>
             <Grid item xs={12} lg={4}>
@@ -210,7 +242,15 @@ function Payment({ brand, routes }) {
                   <h2>$110</h2>
                   <p>Yearly</p>
                 </div>
-                <button>Subscribe</button>
+                {!loading110 ? (
+                  <button onClick={() => payForSub("644c029436224c2d10e20725", "110")}>
+                    Subscribe
+                  </button>
+                ) : (
+                  <button className="disabledBtn">
+                    <i class="fa-solid fa-spinner"></i> Subscribe
+                  </button>
+                )}
               </div>
             </Grid>
           </Grid>

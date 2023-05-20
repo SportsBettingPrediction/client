@@ -403,6 +403,33 @@ select {
   bottom: 0; */
 }
 
+/* MODAL */
+.subModal{
+  background-color: #fffffff1;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30%;
+  text-align: center;
+  color: #000000;
+  height: 20vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0rem 1.25rem 1.6875rem 0rem rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+.disabledBtn{
+  background: linear-gradient(to right, #b9eaff, #70acff) !important;
+  cursor: not-allowed !important;
+}
+
+.fa-spinner{
+  animation: button-anim 1s infinite linear;
+}
+
 @keyframes button-anim {
   from {
     transform: rotate(0);
