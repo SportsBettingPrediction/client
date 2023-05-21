@@ -124,7 +124,7 @@ function Dashboard({ brand, routes }) {
             <Grid item xs={12} sm={6} xl={4}>
               <MiniStatisticsCard
                 title={{ text: "Total Percentage(%)" }}
-                count={arbsTotal && arbsTotal}
+                count={arbsTotal && arbsTotal.toFixed(2)}
                 icon={{ color: "info", component: "public" }}
               />
             </Grid>
