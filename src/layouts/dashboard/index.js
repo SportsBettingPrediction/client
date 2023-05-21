@@ -197,14 +197,14 @@ function Dashboard({ brand, routes }) {
               </div>
               <div className="arbs">
                 <div className="text-dark" style={{ paddingBottom: "5rem" }}>
-                  <p>Book Maker</p>
+                  <p style={{ fontWeight: "bold", fontSize: "17px" }}>Book Maker</p>
                   {arb &&
                     arb.bookmakers
                       .split(",")
                       .map((bookmaker) => <p key={bookmaker}>{bookmaker}</p>)}
                 </div>
                 <div>
-                  <p>Market</p>
+                  <p style={{ fontWeight: "bold", fontSize: "17px" }}>Market</p>
                   {arb &&
                     arb.markets.split(",").map((market) => (
                       <p className="text-muted" key={market}>
@@ -213,7 +213,7 @@ function Dashboard({ brand, routes }) {
                     ))}
                 </div>
                 <div>
-                  <p>Odds</p>
+                  <p style={{ fontWeight: "bold", fontSize: "17px" }}>Odds</p>
                   {arb && arb.odds.split(",").map((odd) => <p key={odd}>{odd}</p>)}
                 </div>
               </div>
