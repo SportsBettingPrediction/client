@@ -67,7 +67,6 @@ function Dashboard({ brand, routes }) {
       navigate("/authentication/sign-in");
     }
     getOpportunities();
-    // console.log(loggedInUser.token);
   }, []);
 
   async function getOpportunities() {
@@ -77,16 +76,29 @@ function Dashboard({ brand, routes }) {
         Authorization: `Bearer ${loggedInUser.token}`,
       },
     });
-    const data = await response.json();
-    setArbs(data);
-    console.log(data);
-    data.arbs.map((bookmaker) => {
-      setBookmarkers(bookmaker.bookmakers.split(","));
-      console.log(bookmaker.bookmakers.split(","));
-    });
-    console.log(bookmarkers);
+    if (response.status === 401) {
+      setArbs({
+        arbs: [
+          {
+            _id: "64697c121b16fc5f148339f1",
+            odds: "2.260, 3.17, 2.69,",
+            age: "12h",
+            profit: 1,
+            markets: "AH2(0), X, 1,",
+            bookmakers: "Pin​nacle, Sven​ska Spel, Ringo​Bet (Fairplay),",
+            teams: "Finland – Slovenia",
+          },
+        ],
+      });
+    }
 
     if (response.ok) {
+      const data = await response.json();
+      console.log(data);
+      setArbs(data);
+      data.arbs.map((bookmaker) => {
+        setBookmarkers(bookmaker.bookmakers.split(","));
+      });
       // Field to retrieve and sum
       const field = "profit";
 
@@ -183,50 +195,28 @@ function Dashboard({ brand, routes }) {
                   </Link>
                 </div>
               </div>
-              {/* <table className="table text-dark table-border table-hover"> */}
               <div className="arbs">
                 <div className="text-dark" style={{ paddingBottom: "5rem" }}>
                   <p>Book Maker</p>
-                  {arb && arb.bookmakers.split(",").map((bookmaker) => <td>{bookmaker}</td>)}
+                  {arb &&
+                    arb.bookmakers
+                      .split(",")
+                      .map((bookmaker) => <p key={bookmaker}>{bookmaker}</p>)}
                 </div>
                 <div>
                   <p>Market</p>
                   {arb &&
-                    arb.markets
-                      .split(",")
-                      .map((market) => <td className="text-muted">{market}</td>)}
+                    arb.markets.split(",").map((market) => (
+                      <p className="text-muted" key={market}>
+                        {market}
+                      </p>
+                    ))}
                 </div>
                 <div>
                   <p>Odds</p>
-                  {arb && arb.odds.split(",").map((odd) => <td>{odd}</td>)}
+                  {arb && arb.odds.split(",").map((odd) => <p key={odd}>{odd}</p>)}
                 </div>
-
-                {/* <td>
-                    <p className="text-muted">2</p>
-                  </td>
-                  <td>
-                    <p>1.23</p>
-                  </td> */}
-                {/* <tr className="text-dark">
-                    <td>Bet king</td>
-                    <td>
-                      <p className="text-muted">2</p>
-                    </td>
-                    <td>
-                      <p>1.23</p>
-                    </td>
-                  </tr> */}
-                {/* <tr className="text-dark">
-                    <td>Sure Bet</td>
-                    <td>
-                      <p className="text-muted">2</p>
-                    </td>
-                    <td>
-                      <p>1.23</p>
-                    </td>
-                  </tr> */}
               </div>
-              {/* </table> */}
             </div>
           ))}
       </SoftBox>
