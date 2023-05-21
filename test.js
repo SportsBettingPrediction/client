@@ -12,3 +12,7 @@ const field = "salary";
 const sum = data.reduce((accumulator, currentValue) => accumulator + currentValue[field], 0);
 
 console.log(`Sum of ${field}: ${sum}`);
+
+const my_string = "boy, girl, dog, cat";
+const splitted = my_string.split(",");
+splitted.forEach((element) => console.log(element));

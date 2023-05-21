@@ -166,24 +166,24 @@ function Payment({ brand, routes }) {
               has been the industry's standard dummy text ever since the 1500s.
             </p>
 
-            <div class="qrCodeAndAddress">
+            <div className="qrCodeAndAddress">
               <div className="qrCode">
                 <QRCode
                   value={loggedInUser && loggedInUser.userDetails.paymentAddress}
                   size="100"
                 />
               </div>
-              <div class="addressAndCopy">
+              <div className="addressAndCopy">
                 <input
                   type="text"
                   value={loggedInUser && loggedInUser.userDetails.paymentAddress}
                   disabled
                 />
                 {copyICon ? (
-                  <i class="fa-regular fa-copy" onClick={copyToClipboard}></i>
+                  <i className="fa-regular fa-copy" onClick={copyToClipboard}></i>
                 ) : (
                   <div>
-                    <i class="fa-solid fa-check"></i>
+                    <i className="fa-solid fa-check"></i>
                     <small>Copied</small>
                   </div>
                 )}
@@ -211,7 +211,7 @@ function Payment({ brand, routes }) {
                     </button>
                   ) : (
                     <button className="disabledBtn">
-                      <i class="fa-solid fa-spinner"></i> Subscribe
+                      <i className="fa-solid fa-spinner"></i> Subscribe
                     </button>
                   )}
                 </div>
@@ -230,7 +230,7 @@ function Payment({ brand, routes }) {
                   </button>
                 ) : (
                   <button className="disabledBtn">
-                    <i class="fa-solid fa-spinner"></i> Subscribe
+                    <i className="fa-solid fa-spinner"></i> Subscribe
                   </button>
                 )}
               </div>
@@ -248,7 +248,7 @@ function Payment({ brand, routes }) {
                   </button>
                 ) : (
                   <button className="disabledBtn">
-                    <i class="fa-solid fa-spinner"></i> Subscribe
+                    <i className="fa-solid fa-spinner"></i> Subscribe
                   </button>
                 )}
               </div>

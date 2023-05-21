@@ -54,6 +54,7 @@ function Dashboard({ brand, routes }) {
   const [arbs, setArbs] = useState("");
   const [arbsTotal, setArbsTotal] = useState("");
   const [arbsAvg, setArbsAvg] = useState("");
+  const [bookmarkers, setBookmarkers] = useState();
   const { size } = typography;
   const { chart, items } = reportsBarChartData;
 
@@ -79,6 +80,11 @@ function Dashboard({ brand, routes }) {
     const data = await response.json();
     setArbs(data);
     console.log(data);
+    data.arbs.map((bookmaker) => {
+      setBookmarkers(bookmaker.bookmakers.split(","));
+      console.log(bookmaker.bookmakers.split(","));
+    });
+    console.log(bookmarkers);
 
     if (response.ok) {
       // Field to retrieve and sum
@@ -92,10 +98,6 @@ function Dashboard({ brand, routes }) {
       setArbsTotal(sum);
 
       setArbsAvg(sum / data.arbs.length);
-      console.log(arbsAvg);
-      console.log(data.arbs.length);
-      console.log(sum);
-      console.log((sum / data.arbs.length) * 100);
     }
   }
 
@@ -116,7 +118,6 @@ function Dashboard({ brand, routes }) {
               <MiniStatisticsCard
                 title={{ text: "Amount Of Opportunities" }}
                 count={arbs && arbs.arbs.length}
-                // percentage={{ color: "success", text: "+55%" }}
                 icon={{ color: "info", component: "paid" }}
               />
             </Grid>
@@ -124,7 +125,6 @@ function Dashboard({ brand, routes }) {
               <MiniStatisticsCard
                 title={{ text: "Total Percentage(%)" }}
                 count={arbsTotal && arbsTotal}
-                // percentage={{ color: "success", text: "+3%" }}
                 icon={{ color: "info", component: "public" }}
               />
             </Grid>
@@ -132,7 +132,6 @@ function Dashboard({ brand, routes }) {
               <MiniStatisticsCard
                 title={{ text: "Average % per Opportunity" }}
                 count={arbsAvg && arbsAvg.toFixed(2)}
-                // percentage={{ color: "error", text: "-2%" }}
                 icon={{ color: "info", component: "emoji_events" }}
               />
             </Grid>
@@ -154,85 +153,82 @@ function Dashboard({ brand, routes }) {
             <option value="java">30%</option>
           </select>
         </div>
+        {arbs &&
+          arbs.arbs.map((arb) => (
+            <div className="matchCard" key={arb._id}>
+              <div className="clubCard">
+                <div className="time">
+                  <i className="fa-regular fa-clock"></i>
+                  <p>{arb.age}</p>
+                </div>
+                <div className="clubLogoAndBetCompany">
+                  <div className="singleClub">
+                    <img src={mancityLogo} />
+                    <p>Mancity</p>
+                  </div>
+                  <div className="betPatform">
+                    <p>Vs</p>
+                  </div>
+                  <div className="singleClub">
+                    <img src={mancityLogo} />
+                    <p>Mancity</p>
+                  </div>
+                </div>
+                <div>
+                  <p>{arb.profit}%</p>
+                </div>
+                <div>
+                  <Link to={"/arbitragecalculator"}>
+                    <i className="fa-solid fa-calculator"></i>
+                  </Link>
+                </div>
+              </div>
+              {/* <table className="table text-dark table-border table-hover"> */}
+              <div className="arbs">
+                <div className="text-dark" style={{ paddingBottom: "5rem" }}>
+                  <p>Book Maker</p>
+                  {arb && arb.bookmakers.split(",").map((bookmaker) => <td>{bookmaker}</td>)}
+                </div>
+                <div>
+                  <p>Market</p>
+                  {arb &&
+                    arb.markets
+                      .split(",")
+                      .map((market) => <td className="text-muted">{market}</td>)}
+                </div>
+                <div>
+                  <p>Odds</p>
+                  {arb && arb.odds.split(",").map((odd) => <td>{odd}</td>)}
+                </div>
 
-        {/* <SoftBox mb={9}>
-          <Grid container spacing={3}>
-            <Grid item xs={12} lg={7}></Grid>
-            <Grid item xs={12} lg={5}>
-              
-            </Grid>
-          </Grid>
-        </SoftBox> */}
-
-        <div className="matchCard">
-          <div className="clubCard">
-            <div className="time">
-              <i className="fa-regular fa-clock"></i>
-              <p>1hr Ago</p>
-            </div>
-            <div className="clubLogoAndBetCompany">
-              <div className="singleClub">
-                <img src={mancityLogo} />
-                <p>Mancity(1.25)</p>
+                {/* <td>
+                    <p className="text-muted">2</p>
+                  </td>
+                  <td>
+                    <p>1.23</p>
+                  </td> */}
+                {/* <tr className="text-dark">
+                    <td>Bet king</td>
+                    <td>
+                      <p className="text-muted">2</p>
+                    </td>
+                    <td>
+                      <p>1.23</p>
+                    </td>
+                  </tr> */}
+                {/* <tr className="text-dark">
+                    <td>Sure Bet</td>
+                    <td>
+                      <p className="text-muted">2</p>
+                    </td>
+                    <td>
+                      <p>1.23</p>
+                    </td>
+                  </tr> */}
               </div>
-              <div className="betPatform">
-                <p>Vs</p>
-              </div>
-              <div className="singleClub">
-                <img src={mancityLogo} />
-                <p>Mancity(1.25)</p>
-              </div>
+              {/* </table> */}
             </div>
-            <div>
-              <p>2.5%</p>
-            </div>
-            <div>
-              <Link to={"/arbitragecalculator"}>
-                <i className="fa-solid fa-calculator"></i>
-              </Link>
-            </div>
-          </div>
-          <table className="table text-dark table-border table-hover">
-            <thead>
-              <tr>
-                <th scope="col">Book Maker</th>
-                <th scope="col">Market</th>
-                <th scope="col">Odds</th>
-              </tr>
-            </thead>
-            <tbody>
-              {/* {allStudents && allStudents.map(student => ( */}
-              <tr className="text-dark" style={{ paddingBottom: "5rem" }}>
-                <td>Bet 9ja</td>
-                <td>
-                  <p className="text-muted">2</p>
-                </td>
-                <td>
-                  <p>1.23</p>
-                </td>
-              </tr>
-              <tr className="text-dark">
-                <td>Bet 9ja</td>
-                <td>
-                  <p className="text-muted">2</p>
-                </td>
-                <td>
-                  <p>1.23</p>
-                </td>
-              </tr>
-              <tr className="text-dark">
-                <td>Bet 9ja</td>
-                <td>
-                  <p className="text-muted">2</p>
-                </td>
-                <td>
-                  <p>1.23</p>
-                </td>
-              </tr>
-              {/* ))} */}
-            </tbody>
-          </table>
-        </div>
+          ))}
       </SoftBox>
       <div className="fotter">
         <Footer />
