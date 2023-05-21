@@ -164,14 +164,14 @@ function Dashboard({ brand, routes }) {
                 <div className="clubLogoAndBetCompany">
                   <div className="singleClub">
                     <img src={mancityLogo} />
-                    <p>Mancity</p>
+                    <p>{arb.teams.split(" – ").map((team) => team.trim())[0]}</p>
                   </div>
                   <div className="betPatform">
                     <p>Vs</p>
                   </div>
                   <div className="singleClub">
                     <img src={mancityLogo} />
-                    <p>Mancity</p>
+                    <p>{arb.teams.split(" – ").map((team) => team.trim())[1]}</p>
                   </div>
                 </div>
                 <div>
