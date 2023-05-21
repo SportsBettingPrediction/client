@@ -51,7 +51,26 @@ function RTL({ brand, routes }) {
   const [, dispatch] = useSoftUIController();
   const { size } = typography;
   const { chart, items } = reportsBarChartData;
+  const [betDivs, setBetDivs] = useState([]);
 
+  const handleAddBetDiv = () => {
+    setBetDivs((prevDivs) => [
+      ...prevDivs,
+      <div key={prevDivs.length}>
+        {console.log(prevDivs.length + 2)}
+        <div className="singleBet">
+          <div className="betInput">
+            <div>
+              <p>Bet {prevDivs.length + 3}</p>
+              <input type="text" placeholder={`Please Enter Bet ${prevDivs.length + 3} Odds`} />
+            </div>
+          </div>
+          <p className="calculatedValue"></p>
+          <p className="calculatedValue"></p>
+        </div>
+      </div>,
+    ]);
+  };
   // const getInitialState = () => {
   //   const value = 2;
   //   return value;
@@ -77,122 +96,81 @@ function RTL({ brand, routes }) {
           Auto-round surebet stakes to avoid suspicion with the bookmakers! Instructions written
           below the calculator.
         </p>
-        <div className="dropDowns">
-          <div>
-            <p>How many bets will you place?</p>
-            <select name="languages" id="percentFilter">
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-            </select>
+      </div>
+      <div className="arbitrageCalculator">
+        <h5 style={{ textAlign: "center", marginBottom: "3rem" }}>
+          Use the Abitrage Calculator here
+        </h5>
+        <div className="upperArbitrageCalculator">
+          <div className="topHeader"></div>
+
+          <div className="singleBet">
+            <div className="betInput">
+              <p style={{ fontSize: "17px", fontWeight: "bold", marginBottom: "5px" }}>
+                Enter Odds & Stake
+              </p>
+              <div>
+                <p>Bet 1</p>
+                <input type="text" placeholder="Please Enter Bet 1 Odds" />
+              </div>
+            </div>
+
+            <div className="stakeInput">
+              <p style={{ fontSize: "17px", fontWeight: "bold", marginBottom: "5px" }}>Stake</p>
+              <p className="calculatedValue"></p>
+            </div>
+
+            <div className="payoutInput">
+              <p style={{ fontSize: "17px", fontWeight: "bold", marginBottom: "5px" }}>Payout</p>
+              <p className="calculatedValue"></p>
+            </div>
           </div>
-          <div>
-            <p>Estimate Total Stake</p>
-            <input type="number" className="" />
+
+          <div className="singleBet">
+            <div className="betInput">
+              <div>
+                <p>Bet 2</p>
+                <input type="text" placeholder="Please Enter Bet 2 Odds" />
+              </div>
+            </div>
+            <p className="calculatedValue"></p>
+            <p className="calculatedValue"></p>
+          </div>
+
+          {betDivs.map((div, index) => (
+            <div key={index}>{div}</div>
+          ))}
+
+          <div className="betInput">
+            <div>
+              <p>Stake</p>
+              <input type="text" placeholder="Please Enter Stake" />
+            </div>
           </div>
         </div>
-
-        <div className="bottomInputAbitrage">
-          <div className="abitrageOdds">
-            <p>Bet 1</p>
+        <div className="lowerArbitrageCalculator">
+          <div>
+            <button onClick={handleAddBetDiv}>
+              <i className="fa-solid fa-circle-plus"></i>MORE BETS
+            </button>
+            <button onClick={(e) => location.reload()}>
+              <i className="fa-solid fa-rotate"></i>RESET
+            </button>
+            <button>
+              <i className="fa-solid fa-calculator"></i>CALCULATE
+            </button>
+          </div>
+          <div className="finalCalculation">
             <div>
-              <p>Odds (decimal)</p>
-              <input type="number" />
+              Total Payout: <span>$0.00</span>
             </div>
             <div>
-              <p>Stake</p>
-              <input type="number" />
+              Total Profit: <span>$0.00</span>
             </div>
             <div>
-              <p>Payout</p>
-              <input type="number" />
-            </div>
-            <div>
-              <p>Profit</p>
-              <input type="number" />
+              ROI: <span>$0.00</span>
             </div>
           </div>
-
-          <div className="abitrageOdds">
-            <p>Bet 2</p>
-            <div>
-              <p>Odds (decimal)</p>
-              <input type="number" />
-            </div>
-            <div>
-              <p>Stake</p>
-              <input type="number" />
-            </div>
-            <div>
-              <p>Payout</p>
-              <input type="number" />
-            </div>
-            <div>
-              <p>Profit</p>
-              <input type="number" />
-            </div>
-          </div>
-
-          {/* <div className="abitrageOdds">
-            <p>Bet 2</p>
-            <div>
-              <p>Odds (decimal)</p>
-              <input type="number" />
-            </div>
-            <div>
-              <p>Stake</p>
-              <input type="number" />
-            </div>
-            <div>
-              <p>Payout</p>
-              <input type="number" />
-            </div>
-            <div>
-              <p>Profit</p>
-              <input type="number" />
-            </div>
-          </div>
-
-          <div className="abitrageOdds">
-            <p>Bet 2</p>
-            <div>
-              <p>Odds (decimal)</p>
-              <input type="number" />
-            </div>
-            <div>
-              <p>Stake</p>
-              <input type="number" />
-            </div>
-            <div>
-              <p>Payout</p>
-              <input type="number" />
-            </div>
-            <div>
-              <p>Profit</p>
-              <input type="number" />
-            </div>
-          </div>
-
-          <div className="abitrageOdds">
-            <p>Bet 2</p>
-            <div>
-              <p>Odds (decimal)</p>
-              <input type="number" />
-            </div>
-            <div>
-              <p>Stake</p>
-              <input type="number" />
-            </div>
-            <div>
-              <p>Payout</p>
-              <input type="number" />
-            </div>
-            <div>
-              <p>Profit</p>
-              <input type="number" />
-            </div>
-          </div> */}
         </div>
       </div>
     </DashboardLayout>

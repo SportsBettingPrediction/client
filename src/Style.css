@@ -265,41 +265,6 @@ select {
   cursor: pointer;
 }
 
-.topInputsAbitrage{
-  width: 100%;
-  display: flex;
-  align-items: center;
-  /* justify-content: center; */
-  gap: 9rem;
-}
-
-.topInputsAbitrage select{
-  width: 150%;
-}
-
-.topInputsAbitrage input{
-  border: 1px solid #808080;
-  padding: 10px 3px;
-  outline: none;
-  width: 180%;
-}
-
-.abitragePart{
-  margin-top: 40px;
-}
-
-.abitrageOdds{
-  display: flex;
-  /* align-items: flex-end; */
-  gap: 2rem;
-  margin-top: 2rem;
-}
-
-.abitrageOdds input{
-  padding: 7px 3px;
-  border: 1px solid #808080;
-}
-
 .playingTeamOpportunity{
   display: flex;
   justify-content: space-between;
@@ -404,15 +369,6 @@ select {
   bottom: 0; */
 }
 
-.bottomInputAbitrage{
-  box-shadow: 0rem 1.25rem 1.6875rem 0rem rgba(0, 0, 0, 0.2);
-  padding: 30px 0 30px 10px;
-}
-
-.abitrageOdds{
-  /* margin: 30px; */
-}
-
 /* MODAL */
 .subModal{
   background-color: #fffffff1;
@@ -440,6 +396,103 @@ select {
   animation: button-anim 1s infinite linear;
 }
 
+.arbitrageCalculator{
+  margin-top: 4rem;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0rem 1.25rem 1.6875rem 0rem rgba(0, 0, 0, 0.2);
+  padding: 40px 0 20px 40px;
+}
+
+.upperArbitrageCalculator{
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  justify-content: center;
+}
+
+.upperArbitrageCalculator .topHeader{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.topHeader p{
+  text-align: center;
+}
+
+.singleBet p, .betInput p{
+  margin-bottom: 0;
+}
+
+.singleBet{
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  margin-bottom: 22px;
+}
+
+.betInput, .stakeInput, .payoutInput{
+  text-align: center;
+}
+
+.betInput div{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.singleBet input, .betInput input{
+  border: 1px solid #344767;
+  padding: 7px 10px;
+  outline: none;
+}
+
+.calculatedValue{
+  padding: 7px 10px;
+  width: 250px;
+  height: 40px;
+  background-color: rgb(217, 217, 217);
+}
+
+.lowerArbitrageCalculator{
+  display: flex;
+  justify-content: space-between;
+  width: 84%;
+  margin-top: 3rem;
+}
+
+.lowerArbitrageCalculator button{
+  all: unset;
+  border: 1px solid #344767;
+  padding: 7px 12px;
+  margin: 0 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: .5s;
+}
+
+.lowerArbitrageCalculator button:hover{
+  background-color: #344767;
+  color: #fff;
+  transition: .5s;
+}
+
+.finalCalculation div{
+  padding: 12px;
+  background-color: rgb(217, 217, 217);
+  border-radius: 3px;
+  margin: 10px 0;
+  font-size: 18px;
+}
+
+.finalCalculation span{
+  font-weight: bold;
+}
+
 @keyframes button-anim {
   from {
     transform: rotate(0);
@@ -451,32 +504,15 @@ select {
 
 
 @media screen and (max-width: 825px) {
-  .abitrageOdds{
-    gap: 5px;
-  }
 
-  .abitrageOdds p{
-    margin-bottom: 5px;
-  }
 }
 
 @media screen and (max-width: 725px) {
-  .abitrageOdds{
-    flex-direction: column;
-    align-items: flex-start;
-  }
 
-  .abitrageOdds input{
-    width: 120%;
-  }
 }
 
 @media screen and (max-width: 678px) {
-  .topInputsAbitrage{
-    flex-direction: column;
-    gap: 10px;
-    align-items: flex-start;
-  }
+
   
   .changePasswordTab{
     flex-direction: column;
@@ -496,9 +532,7 @@ select {
 }
 
 @media screen and (max-width: 400px) {
-  .topInputsAbitrage input, .topInputsAbitrage select{
-    width: 100%;
-  }
+
 }
 
 .arbs{
