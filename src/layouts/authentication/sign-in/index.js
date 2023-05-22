@@ -44,8 +44,8 @@ function SignIn() {
 
   const [rememberMe, setRememberMe] = useState(true);
   const [formData, setFormData] = useState({
-    username: "Franklin",
-    password: "123456789",
+    username: "test4",
+    password: "1234567890",
   });
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
