@@ -546,3 +546,57 @@ select {
   display: block;
   padding: 2px 0;
 }
+
+/* Reset Password */
+
+.passwordResetDiv{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40%;
+  padding: 40px 0;
+  border-radius: 5px;
+  box-shadow: 0rem 1.25rem 1.6875rem 0rem rgba(0, 0, 0, 0.2);
+}
+
+.passwordResetDiv input{
+  border: 1px solid #344767;
+  width: 70%;
+  margin-bottom: 20px;
+  outline: none;
+  padding: 5px 10px;
+}
+
+.resetPasswordBtn{
+  all: unset;
+  background: linear-gradient(to right, #21BBFE, #217EFE);
+  color: #fff;
+  padding: 7px 20px;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+.emailSuccess{
+  text-align: center;
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+  margin: 0 20px 10px;
+  padding: 7px;
+  color: #155724;
+  font-size: 15px;
+}
+
+.emailError{
+  text-align: center;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  margin: 0 20px 10px;
+  padding: 7px;
+  color: #721c24;
+  font-size: 15px;
+}

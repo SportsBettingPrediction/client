@@ -128,7 +128,7 @@ function SignIn() {
                 placeholder="Username"
               />
             </SoftBox>
-            <SoftBox mb={2}>
+            <SoftBox mb={1}>
               <SoftBox mb={1} ml={0.5}>
                 <SoftTypography component="label" variant="caption" fontWeight="bold">
                   Password
@@ -142,6 +142,12 @@ function SignIn() {
                 value={formData?.password}
               />
             </SoftBox>
+            <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "10px" }}>
+              <div></div>
+              <Link to="/forgotpassword" style={{ fontSize: "14px", color: "#344767" }}>
+                Forgot Password?
+              </Link>
+            </div>
             <SoftBox display="flex" alignItems="center">
               <Switch checked={rememberMe} onChange={handleSetRememberMe} />
               <SoftTypography
@@ -173,7 +179,7 @@ function SignIn() {
             </SoftBox>
             <SoftBox mt={3} textAlign="center">
               <SoftTypography variant="button" color="text" fontWeight="regular">
-                Don&apos;t have an account?{" "}
+                Don&apos;t have an account?
                 <SoftTypography
                   component={Link}
                   to="/authentication/sign-up"
