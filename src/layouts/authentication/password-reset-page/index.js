@@ -34,10 +34,11 @@ const PasswordResetPage = () => {
       console.log(response);
     }
     if (response.ok) {
-      setSuccessMsg(`Password has been reset successfully, please use the link to login`);
+      setSuccessMsg(`Password has been reset successfully`);
       setTimeout(() => {
         setSuccessMsg("");
       }, 3000);
+      navigate("/authentication/sign-in");
     }
 
     if (!response.ok) {
