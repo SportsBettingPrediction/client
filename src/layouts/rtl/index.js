@@ -12,7 +12,7 @@ Coded by www.creative-tim.com
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 // @mui material components
 import Grid from "@mui/material/Grid";
@@ -46,75 +46,63 @@ import gradientLineChartData from "layouts/rtl/data/gradientLineChartData";
 // Soft UI Dashboard React contexts
 import { useSoftUIController, setDirection } from "context";
 import Sidenav from "examples/Sidenav";
+import { number } from "prop-types";
 
 function RTL({ brand, routes }) {
   const [, dispatch] = useSoftUIController();
   const { size } = typography;
   const { chart, items } = reportsBarChartData;
-  const [betDivs, setBetDivs] = useState([]);
-  const [odd1, setOdd1] = useState("");
-  const [odd2, setOdd2] = useState("");
-  const [odd3, setOdd3] = useState("");
-  const [stake, setStake] = useState("");
+  const [stake, setStake] = useState(0);
+  const [totals, setTotals] = useState({payout: 0, profit: 0, roi: 0});
+
+  const [odds, setOdds] = useState([{odd: 0, stake: 0, payout: 0},{odd: 0, stake: 0, payout: 0}]);
+
 
   const handleAddBetDiv = () => {
-    setBetDivs((prevDivs) => [
-      ...prevDivs,
-      <div key={prevDivs.length}>
-        {console.log(prevDivs.length + 2)}
-        <div className="singleBet">
-          <div className="betInput">
-            <div>
-              <p>Bet {prevDivs.length + 3}</p>
-              <input type="text" placeholder={`Please Enter Bet ${prevDivs.length + 3} Odds`} />
-            </div>
-          </div>
-          <p className="calculatedValue"></p>
-          <p className="calculatedValue"></p>
-        </div>
-      </div>,
-    ]);
+    if(odds.length === 3) return;
+    setOdds([...odds, {odd: 0, stake: 0, payout: 0}])
   };
 
-  //function that calcuates the arbitrage
-  function calculateArbitrage(odds, totalStake) {
-    const odd = odds.map((odd) => odd);
-    const totalProbability = 1 / odds.reduce((acc, odd) => acc + 1 / odd, 0);
-    const stakes = odds.map((odd) => (totalStake * totalProbability) / odd);
-    const netProfit = stakes.reduce((acc, stake, index) => stake * odds[index], 0) - totalStake;
-    const win = odd[0] * stakes[0];
-
-    console.log(stakes, netProfit, win);
-
-    return { stakes, netProfit, win };
+  function updateOdd(odd, index){
+    const newOdds = odds;
+    newOdds[index].odd = odd;
+    setOdds(newOdds);
   }
 
   function calculateTotalArbitrage() {
-    const odds = [];
+    let totalOdds = odds.reduce((acc, val) => acc.odd + val.odd);// Sum of inverse odds
+    totalOdds = totalOdds && totalOdds !== Infinity ? totalOdds : 0;
+    const betAmounts = odds.map((odd) => {
+      odd.stake = stake * Math.abs(1 - (odd.odd/ totalOdds));
+      odd.payout = odd.odd * odd.stake;
+      // console.log({stake, odd, })
+      return odd
+    }); // Calculate bet amounts for each outcome
+    setOdds(betAmounts);
 
-    if (odd3 === null) {
-      odds.push(odd1, odd2);
-      calculateArbitrage(odds, stake);
-      return;
-    } else {
-      odds.push(odd1, odd2, odd3);
-      calculateArbitrage(odds, stake);
-    }
+    const totalPayout = odds.reduce((acc, val) => acc.payout + val.payout);
+    const totalProfit = (totalPayout/2) - stake;
+
+    setTotals({
+      payout: totalPayout,
+      profit: totalProfit,
+      roi: (totalProfit/stake) * 100
+    })
   }
-  // const getInitialState = () => {
-  //   const value = 2;
-  //   return value;
-  // };
 
-  // const [value, setValue] = useState(getInitialState);
+  useEffect(()=>{
+    if(!odds || odds.length === 0 && !document) return;
 
-  // const handleChange = (e) => {
-  //   setValue(e.target.value);
-  //   console.log(value);
-  // };
+    odds.map((odd, index)=>{
+      document.querySelector("#odd-input-"+index).value = odd <= 0 ? "" : odd;
+    })
+  }, [odds])
 
-  // // console.log(arbitrageCalculator.target);
+  useEffect(()=>{
+    if(!stake && !document) return;
 
+    document.querySelector("#stake-input").value = stake <= 0 ? "" : stake;
+  }, [stake])
   return (
     <DashboardLayout>
       <DashboardNavbar />
@@ -129,60 +117,37 @@ function RTL({ brand, routes }) {
       </div>
       <div className="arbitrageCalculator">
         <h5 style={{ textAlign: "center", marginBottom: "3rem" }}>
-          Use the Abitrage Calculator here
+          Use the Arbitrage Calculator here
         </h5>
         <div className="upperArbitrageCalculator">
           <div className="topHeader"></div>
-
-          <div className="singleBet">
-            <div className="betInput">
-              <p style={{ fontSize: "17px", fontWeight: "bold", marginBottom: "5px" }}>
-                Enter Odds & Stake
-              </p>
-              <div>
-                <p>Bet 1</p>
-                <input
-                  type="text"
-                  onChange={(e) => setOdd1(e.target.value)}
-                  placeholder="Please Enter Bet 1 Odds"
-                />
+          {
+            odds.map((odd, index)=>
+              <div key={index}>
+                <div className="singleBet">
+                  <div className="betInput">
+                    <div>
+                      <p>Bet {index+1}</p>
+                      <input type="number" id={"odd-input-"+index} placeholder={`Please Enter Bet ${index+1} Odds`} onChange={(e)=>{
+                        const currentValue = e.target.value;
+                        const newOdd = currentValue <= 0 ? "" : currentValue;
+                        updateOdd(Number(newOdd), index)
+                      }}/>
+                    </div>
+                  </div>
+                  <p className="calculatedValue">{odd.stake ? (odd.stake).toFixed(2) : ""}</p>
+                  <p className="calculatedValue">{odd.payout ? (odd.payout).toFixed(2) : ""}</p>
+                </div>
               </div>
-            </div>
-
-            <div className="stakeInput">
-              <p style={{ fontSize: "17px", fontWeight: "bold", marginBottom: "5px" }}>Stake</p>
-              <p className="calculatedValue"></p>
-            </div>
-
-            <div className="payoutInput">
-              <p style={{ fontSize: "17px", fontWeight: "bold", marginBottom: "5px" }}>Payout</p>
-              <p className="calculatedValue"></p>
-            </div>
-          </div>
-
-          <div className="singleBet">
-            <div className="betInput">
-              <div>
-                <p>Bet 2</p>
-                <input
-                  type="text"
-                  placeholder="Please Enter Bet 2 Odds"
-                  onChange={(e) => setOdd2(e.target.value)}
-                />
-              </div>
-            </div>
-            <p className="calculatedValue"></p>
-            <p className="calculatedValue"></p>
-          </div>
-
-          {betDivs.map((div, index) => (
-            <div key={index}>{div}</div>
-          ))}
+            )
+          }
 
           <div className="betInput">
             <div>
               <p>Stake</p>
-              <input type="text" placeholder="Please Enter Stake" />
+              <input type="text" placeholder="Please Enter Stake" id="stake-input" onChange={e=>{
+                setStake(Number(e.target.value))
+              }}/>
             </div>
           </div>
         </div>
@@ -191,22 +156,27 @@ function RTL({ brand, routes }) {
             <button onClick={handleAddBetDiv}>
               <i className="fa-solid fa-circle-plus"></i>MORE BETS
             </button>
-            <button onClick={(e) => location.reload()}>
+            <button onClick={(e) => {
+              setOdds([{odd: 0, stake: 0, payout: 0}, {odd: 0, stake: 0, payout: 0}]);
+              setStake(0)
+            }}>
               <i className="fa-solid fa-rotate"></i>RESET
             </button>
-            <button onClick={calculateTotalArbitrage}>
+            <button onClick={()=>{
+              calculateTotalArbitrage()
+            }}>
               <i className="fa-solid fa-calculator"></i>CALCULATE
             </button>
           </div>
           <div className="finalCalculation">
             <div>
-              Total Payout: <span>$0.00</span>
+              Total Payout: <span>${(totals.payout/2).toFixed(2)|| "0.00"}</span>
             </div>
             <div>
-              Total Profit: <span>$0.00</span>
+              Total Profit: <span>${totals.profit.toFixed(2) || "0.00"}</span>
             </div>
             <div>
-              ROI: <span>$0.00</span>
+              ROI: <span>${totals.roi.toFixed(2) || "0.00"}</span>
             </div>
           </div>
         </div>
