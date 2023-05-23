@@ -52,6 +52,10 @@ function RTL({ brand, routes }) {
   const { size } = typography;
   const { chart, items } = reportsBarChartData;
   const [betDivs, setBetDivs] = useState([]);
+  const [odd1, setOdd1] = useState("");
+  const [odd2, setOdd2] = useState("");
+  const [odd3, setOdd3] = useState("");
+  const [stake, setStake] = useState("");
 
   const handleAddBetDiv = () => {
     setBetDivs((prevDivs) => [
@@ -71,6 +75,32 @@ function RTL({ brand, routes }) {
       </div>,
     ]);
   };
+
+  //function that calcuates the arbitrage
+  function calculateArbitrage(odds, totalStake) {
+    const odd = odds.map((odd) => odd);
+    const totalProbability = 1 / odds.reduce((acc, odd) => acc + 1 / odd, 0);
+    const stakes = odds.map((odd) => (totalStake * totalProbability) / odd);
+    const netProfit = stakes.reduce((acc, stake, index) => stake * odds[index], 0) - totalStake;
+    const win = odd[0] * stakes[0];
+
+    console.log(stakes, netProfit, win);
+
+    return { stakes, netProfit, win };
+  }
+
+  function calculateTotalArbitrage() {
+    const odds = [];
+
+    if (odd3 === null) {
+      odds.push(odd1, odd2);
+      calculateArbitrage(odds, stake);
+      return;
+    } else {
+      odds.push(odd1, odd2, odd3);
+      calculateArbitrage(odds, stake);
+    }
+  }
   // const getInitialState = () => {
   //   const value = 2;
   //   return value;
@@ -111,7 +141,11 @@ function RTL({ brand, routes }) {
               </p>
               <div>
                 <p>Bet 1</p>
-                <input type="text" placeholder="Please Enter Bet 1 Odds" />
+                <input
+                  type="text"
+                  onChange={(e) => setOdd1(e.target.value)}
+                  placeholder="Please Enter Bet 1 Odds"
+                />
               </div>
             </div>
 
@@ -130,7 +164,11 @@ function RTL({ brand, routes }) {
             <div className="betInput">
               <div>
                 <p>Bet 2</p>
-                <input type="text" placeholder="Please Enter Bet 2 Odds" />
+                <input
+                  type="text"
+                  placeholder="Please Enter Bet 2 Odds"
+                  onChange={(e) => setOdd2(e.target.value)}
+                />
               </div>
             </div>
             <p className="calculatedValue"></p>
@@ -156,7 +194,7 @@ function RTL({ brand, routes }) {
             <button onClick={(e) => location.reload()}>
               <i className="fa-solid fa-rotate"></i>RESET
             </button>
-            <button>
+            <button onClick={calculateTotalArbitrage}>
               <i className="fa-solid fa-calculator"></i>CALCULATE
             </button>
           </div>
