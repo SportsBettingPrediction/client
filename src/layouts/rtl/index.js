@@ -52,10 +52,10 @@ function RTL({ brand, routes }) {
   const { size } = typography;
   const { chart, items } = reportsBarChartData;
   const [betDivs, setBetDivs] = useState([]);
-  const [odd1, setOdd1] = useState("");
-  const [odd2, setOdd2] = useState("");
+  const [odd1, setOdd1] = useState();
+  const [odd2, setOdd2] = useState();
   const [odd3, setOdd3] = useState("");
-  const [stake, setStake] = useState("");
+  const [stake, setStake] = useState();
 
   const handleAddBetDiv = () => {
     setBetDivs((prevDivs) => [
@@ -78,6 +78,7 @@ function RTL({ brand, routes }) {
 
   //function that calcuates the arbitrage
   function calculateArbitrage(odds, totalStake) {
+    console.log(odds);
     const odd = odds.map((odd) => odd);
     const totalProbability = 1 / odds.reduce((acc, odd) => acc + 1 / odd, 0);
     const stakes = odds.map((odd) => (totalStake * totalProbability) / odd);
@@ -92,12 +93,14 @@ function RTL({ brand, routes }) {
   function calculateTotalArbitrage() {
     const odds = [];
 
-    if (odd3 === null) {
-      odds.push(odd1, odd2);
+    if (!odd3) {
+      odds.push(Number(odd1), Number(odd2));
+      console.log(odds);
       calculateArbitrage(odds, stake);
       return;
     } else {
       odds.push(odd1, odd2, odd3);
+      console.log(odds);
       calculateArbitrage(odds, stake);
     }
   }
