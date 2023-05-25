@@ -502,6 +502,16 @@ select {
   font-weight: bold;
 }
 
+.loadingGif{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loadingGif img{
+  margin-top: 5rem;
+}
+
 @keyframes button-anim {
   from {
     transform: rotate(0);
@@ -636,4 +646,8 @@ select {
   padding: 7px;
   color: #721c24;
   font-size: 15px;
+}
+
+.css-m6bmkn-MuiPaper-root-MuiAppBar-root .MuiToolbar-root{
+  gap: 20px;
 }

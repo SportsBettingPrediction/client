@@ -48,12 +48,14 @@ import Sidenav from "examples/Sidenav";
 import Index from "layouts/dashboard/components/Matchcard/Index";
 import { useNavigate } from "react-router-dom";
 import mancityLogo from "../../images/manu.png";
+import LoadingGif from "../../assets/images/loader/loading-gif.gif";
 import { Link } from "react-router-dom";
 
 function Dashboard({ brand, routes }) {
   const [arbs, setArbs] = useState("");
   const [arbsTotal, setArbsTotal] = useState("");
   const [arbsAvg, setArbsAvg] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const [bookmarkers, setBookmarkers] = useState();
   const { size } = typography;
   const { chart, items } = reportsBarChartData;
@@ -70,12 +72,16 @@ function Dashboard({ brand, routes }) {
   }, []);
 
   async function getOpportunities() {
+    setIsLoading(true);
     const response = await fetch("https://sportbetpredict.onrender.com/api/account/arbs", {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${loggedInUser.token}`,
       },
     });
+    if (response) {
+      setIsLoading(false);
+    }
     if (response.status === 401) {
       setArbs({
         arbs: [
@@ -153,8 +159,9 @@ function Dashboard({ brand, routes }) {
             </Grid>
           </Grid>
         </SoftBox>
+        <div className="loadingGif">{isLoading && <img src={LoadingGif} />}</div>
 
-        <div className="dropDowns">
+        {/* <div className="dropDowns">
           <select name="languages" id="bet_company" onChange={filterBetCompany}>
             <option>--Select Bet Company--</option>
             <option value="bet9ja">Bet 9ja</option>
@@ -168,7 +175,7 @@ function Dashboard({ brand, routes }) {
             <option value="php">20%</option>
             <option value="java">30%</option>
           </select>
-        </div>
+        </div> */}
         {arbs &&
           arbs.arbs.map((arb) => (
             <div className="matchCard" key={arb._id}>

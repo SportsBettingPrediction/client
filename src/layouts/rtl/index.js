@@ -54,6 +54,7 @@ function RTL({ brand, routes }) {
   const { chart, items } = reportsBarChartData;
   const [stake, setStake] = useState(0);
   const [totals, setTotals] = useState({ payout: 0, profit: 0, roi: 0 });
+  const [emptyFields, setEmptyFields] = useState("");
 
   const [odds, setOdds] = useState([
     { odd: 0, stake: 0, payout: 0 },
@@ -72,6 +73,17 @@ function RTL({ brand, routes }) {
   }
 
   function calculateTotalArbitrage() {
+    odds.forEach((odd) => {
+      if (odd.odd <= 0 || odd.stake <= 0) {
+        setEmptyFields("The fields can not be left empty");
+        setTotals({ payout: 0, profit: 0, roi: 0 });
+        return;
+      }
+    });
+    setTimeout(() => {
+      setEmptyFields("");
+    }, 3000);
+
     let totalOdds = odds.reduce((acc, val) => acc.odd + val.odd); // Sum of inverse odds
     totalOdds = totalOdds && totalOdds !== Infinity ? totalOdds : 0;
     const betAmounts = odds.map((odd) => {
@@ -118,9 +130,12 @@ function RTL({ brand, routes }) {
         </p>
       </div>
       <div className="arbitrageCalculator">
-        <h5 style={{ textAlign: "center", marginBottom: "3rem" }}>
+        <h5 style={{ textAlign: "center", marginBottom: "2rem" }}>
           Use the Arbitrage Calculator here
         </h5>
+        {emptyFields && (
+          <p style={{ textAlign: "center", marginBottom: "3rem", color: "red" }}>{emptyFields}</p>
+        )}
         <div className="upperArbitrageCalculator">
           <div className="topHeader"></div>
           {odds.map((odd, index) => (

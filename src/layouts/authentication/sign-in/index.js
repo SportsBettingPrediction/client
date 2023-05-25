@@ -77,7 +77,7 @@ function SignIn() {
     }
     const data = await response.json();
     if (!response.ok) {
-      setError(data.message);
+      setError(data.error || data.message);
     }
     if (response.ok) {
       localStorage.setItem("user", JSON.stringify(data));
