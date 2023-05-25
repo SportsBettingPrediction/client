@@ -166,7 +166,7 @@ function RTL({ brand, routes }) {
           </div>
         </div>
         <div className="lowerArbitrageCalculator">
-          <div>
+          <div className="controls">
             <button onClick={handleAddBetDiv}>
               <i className="fa-solid fa-circle-plus"></i>MORE BETS
             </button>
