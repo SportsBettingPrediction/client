@@ -56,6 +56,7 @@ export default function App() {
         <Route path="/dashboard" element={<Dashboard brand={brand} routes={routes} />} />
         <Route path="/profile" element={<Overview brand={brand} routes={routes} />} />
         <Route path="/arbitragecalculator" element={<RTL brand={brand} routes={routes} />} />
+        {/* <Route path="/arbitragecalculator" element={<RTL brand={brand} routes={routes} />} /> */}
       </Routes>
     </ThemeProvider>
   );

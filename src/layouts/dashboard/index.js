@@ -119,6 +119,10 @@ function Dashboard({ brand, routes }) {
     setSelectedCompany(e.target.value);
   }
 
+  function openArbCalculator() {
+    navigate("/arbitragecalculator");
+  }
+
   return (
     <DashboardLayout>
       <Sidenav brand={brand} brandName="Soft UI Dashboard" routes={routes} />
@@ -190,8 +194,9 @@ function Dashboard({ brand, routes }) {
                   <p>{arb.profit}%</p>
                 </div>
                 <div>
-                  <Link to={"/arbitragecalculator"}>
-                    <i className="fa-solid fa-calculator"></i>
+                  <Link to={`/arbitragecalculator/${arb.odds}`}>
+                    {console.log(arb.odds.split(","))}
+                    <i className="fa-solid fa-calculator" onClick={openArbCalculator}></i>
                   </Link>
                 </div>
               </div>

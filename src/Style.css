@@ -401,7 +401,7 @@ select {
   display: flex;
   flex-direction: column;
   box-shadow: 0rem 1.25rem 1.6875rem 0rem rgba(0, 0, 0, 0.2);
-  padding: 40px 0 20px 40px;
+  padding: 40px 20px;
 }
 
 .upperArbitrageCalculator{
@@ -423,6 +423,7 @@ select {
 
 .singleBet p, .betInput p{
   margin-bottom: 0;
+  width: 90%;
 }
 
 .singleBet{
@@ -434,13 +435,16 @@ select {
 
 .betInput, .stakeInput, .payoutInput{
   text-align: center;
+  width: 100%;
 }
 
 .betInput div{
   display: flex;
   align-items: center;
   gap: 10px;
+  width: 100%;
 }
+
 
 .singleBet input, .betInput input{
   border: 1px solid #344767;
@@ -503,8 +507,25 @@ select {
 }
 
 
-@media screen and (max-width: 825px) {
+@media screen and (max-width: 940px) {
+  .singleBet,  .betInput div{
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    text-align: start;
+  }
 
+  .singleBet input, .betInput input{
+    width: 100%;
+  }
+
+  .singleBet p{
+    width: 100%;
+  }
+
+  .stakeP{
+    display: none;
+  }
 }
 
 @media screen and (max-width: 725px) {

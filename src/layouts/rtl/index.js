@@ -147,18 +147,22 @@ function RTL({ brand, routes }) {
             </div>
           ))}
 
-          <div className="betInput">
-            <div>
-              <p>Stake</p>
-              <input
-                type="text"
-                placeholder="Please Enter Stake"
-                id="stake-input"
-                onChange={(e) => {
-                  setStake(Number(e.target.value));
-                }}
-              />
+          <div className="singleBet">
+            <div className="betInput">
+              <div>
+                <p>Stake</p>
+                <input
+                  type="text"
+                  placeholder="Please Enter Stake"
+                  id="stake-input"
+                  onChange={(e) => {
+                    setStake(Number(e.target.value));
+                  }}
+                />
+              </div>
             </div>
+            <p className="calculatedValue stakeP" style={{ backgroundColor: "#fff" }}></p>
+            <p className="calculatedValue stakeP" style={{ backgroundColor: "#fff" }}></p>
           </div>
         </div>
         <div className="lowerArbitrageCalculator">
