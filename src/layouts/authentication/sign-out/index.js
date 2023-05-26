@@ -30,9 +30,9 @@ function SignOut() {
     return navigate("/authentication/sign-in");
   };
 
-  // useEffect(() => {
-  //   handleLogout();
-  // }, []);
+  useEffect(() => {
+    handleLogout();
+  }, []);
 
   return null;
 }

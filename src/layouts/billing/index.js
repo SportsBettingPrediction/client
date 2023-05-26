@@ -256,7 +256,9 @@ function Payment({ brand, routes }) {
           </Grid>
         </SoftBox>
       </SoftBox>
-      <Footer />
+      <div className="fotter">
+        <Footer />
+      </div>
     </DashboardLayout>
   );
 }

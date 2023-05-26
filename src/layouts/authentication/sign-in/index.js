@@ -44,14 +44,15 @@ function SignIn() {
 
   const [rememberMe, setRememberMe] = useState(true);
   const [formData, setFormData] = useState({
-    username: "test4",
+    username: "Test172",
+    // username: "test4",
     password: "1234567890",
   });
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    localStorage.removeItem("user");
+    localStorage.clear();
   }, []);
   const handleSetRememberMe = () => setRememberMe(!rememberMe);
 
@@ -65,6 +66,11 @@ function SignIn() {
   const submitFormData = async (e) => {
     e.preventDefault();
     setIsLoading(true);
+    // try {
+      
+    // } catch (error) {
+      
+    // }
     const response = await fetch("https://sportbetpredict.onrender.com/api/login", {
       method: "POST",
       body: JSON.stringify(formData),
@@ -72,18 +78,19 @@ function SignIn() {
         "Content-Type": "application/json",
       },
     });
+    console.log(response)
     if (response) {
       setIsLoading(false);
     }
     const data = await response.json();
-    if (!response.ok) {
-      setError(data.error || data.message);
-    }
-    if (response.ok) {
+    console.log("Message",data);
+    // if (!response.ok) {
+    // }
+    if (response.status === 200) {
       localStorage.setItem("user", JSON.stringify(data));
       navigate("/dashboard");
     } else {
-      console.log(data);
+      setError(data.error || data.message);
     }
   };
 

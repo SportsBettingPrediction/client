@@ -369,9 +369,14 @@ select {
 }
 
 .fotter{
-  /* position: fixed;
-  width: 100%;
-  bottom: 0; */
+  position: fixed;
+  width: 80%;
+  bottom: 0;
+  right: 0;
+  background-color: #ffffff;
+  padding: 7px 14px;
+  z-index: 99999;
+  /* margin-bottom: 3rem; */
 }
 
 /* MODAL */
@@ -521,6 +526,11 @@ select {
   }
 }
 
+@media screen and (max-width:1199px){
+  .fotter{
+    width: 100%;
+  }
+}
 
 @media screen and (max-width: 940px) {
   .singleBet,  .betInput div{
@@ -650,4 +660,13 @@ select {
 
 .css-m6bmkn-MuiPaper-root-MuiAppBar-root .MuiToolbar-root{
   gap: 20px;
+}
+
+.noSubMsg{
+  text-align: center;
+  font-size: 22px;
+  padding: 10px 20px;
+  box-shadow: 0rem .5rem .5rem 0rem rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  margin-top: 20px;
 }

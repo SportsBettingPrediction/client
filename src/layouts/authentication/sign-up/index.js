@@ -53,6 +53,10 @@ function SignUp() {
   const { user } = useAuth();
   console.log(user);
 
+  useEffect(() => {
+    localStorage.clear();
+  }, []);
+
   const handleSetAgremment = () => setAgremment(!agreement);
 
   const handleFormData = (e) => {

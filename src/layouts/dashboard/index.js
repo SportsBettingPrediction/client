@@ -52,7 +52,8 @@ import LoadingGif from "../../assets/images/loader/loading-gif.gif";
 import { Link } from "react-router-dom";
 
 function Dashboard({ brand, routes }) {
-  const [arbs, setArbs] = useState("");
+  const [arbs, setArbs] = useState();
+  const [arbsInvalid, setArbsInvalid] = useState("");
   const [arbsTotal, setArbsTotal] = useState("");
   const [arbsAvg, setArbsAvg] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -83,19 +84,8 @@ function Dashboard({ brand, routes }) {
       setIsLoading(false);
     }
     if (response.status === 401) {
-      setArbs({
-        arbs: [
-          {
-            _id: "64697c121b16fc5f148339f1",
-            odds: "2.260, 3.17, 2.69,",
-            age: "12h",
-            profit: 1,
-            markets: "AH2(0), X, 1,",
-            bookmakers: "Pin​nacle, Sven​ska Spel, Ringo​Bet (Fairplay),",
-            teams: "Finland – Slovenia",
-          },
-        ],
-      });
+      setArbsInvalid("");
+      setArbs(null);
     }
 
     if (response.ok) {
@@ -176,61 +166,67 @@ function Dashboard({ brand, routes }) {
             <option value="java">30%</option>
           </select>
         </div> */}
-        {arbs &&
-          arbs.arbs.map((arb) => (
-            <div className="matchCard" key={arb._id}>
-              <div className="clubCard">
-                <div className="time">
-                  <i className="fa-regular fa-clock"></i>
-                  <p>{arb.age}</p>
-                </div>
-                <div className="clubLogoAndBetCompany">
-                  <div className="singleClub">
-                    <img src={mancityLogo} />
-                    <p>{arb.teams.split(" – ").map((team) => team.trim())[0]}</p>
+        {arbs === null ? (
+          <p className="noSubMsg">You do not have an active subscription</p>
+        ) : (
+          <>
+            {arbs &&
+              arbs.arbs.map((arb) => (
+                <div className="matchCard" key={arb._id}>
+                  <div className="clubCard">
+                    <div className="time">
+                      <i className="fa-regular fa-clock"></i>
+                      <p>{arb.age}</p>
+                    </div>
+                    <div className="clubLogoAndBetCompany">
+                      <div className="singleClub">
+                        <img src={mancityLogo} />
+                        <p>{arb.teams.split(" – ").map((team) => team.trim())[0]}</p>
+                      </div>
+                      <div className="betPatform">
+                        <p>Vs</p>
+                      </div>
+                      <div className="singleClub">
+                        <img src={mancityLogo} />
+                        <p>{arb.teams.split(" – ").map((team) => team.trim())[1]}</p>
+                      </div>
+                    </div>
+                    <div>
+                      <p>{arb.profit}%</p>
+                    </div>
+                    <div>
+                      <Link to={`/arbitragecalculator/${arb.odds}`}>
+                        {console.log(arb.odds.split(","))}
+                        <i className="fa-solid fa-calculator" onClick={openArbCalculator}></i>
+                      </Link>
+                    </div>
                   </div>
-                  <div className="betPatform">
-                    <p>Vs</p>
+                  <div className="arbs">
+                    <div className="text-dark" style={{ paddingBottom: "5rem" }}>
+                      <p style={{ fontWeight: "bold", fontSize: "17px" }}>Book Maker</p>
+                      {arb &&
+                        arb.bookmakers
+                          .split(",")
+                          .map((bookmaker) => <p key={bookmaker}>{bookmaker}</p>)}
+                    </div>
+                    <div>
+                      <p style={{ fontWeight: "bold", fontSize: "17px" }}>Market</p>
+                      {arb &&
+                        arb.markets.split(",").map((market) => (
+                          <p className="text-muted" key={market}>
+                            {market}
+                          </p>
+                        ))}
+                    </div>
+                    <div>
+                      <p style={{ fontWeight: "bold", fontSize: "17px" }}>Odds</p>
+                      {arb && arb.odds.split(",").map((odd) => <p key={odd}>{odd}</p>)}
+                    </div>
                   </div>
-                  <div className="singleClub">
-                    <img src={mancityLogo} />
-                    <p>{arb.teams.split(" – ").map((team) => team.trim())[1]}</p>
-                  </div>
                 </div>
-                <div>
-                  <p>{arb.profit}%</p>
-                </div>
-                <div>
-                  <Link to={`/arbitragecalculator/${arb.odds}`}>
-                    {console.log(arb.odds.split(","))}
-                    <i className="fa-solid fa-calculator" onClick={openArbCalculator}></i>
-                  </Link>
-                </div>
-              </div>
-              <div className="arbs">
-                <div className="text-dark" style={{ paddingBottom: "5rem" }}>
-                  <p style={{ fontWeight: "bold", fontSize: "17px" }}>Book Maker</p>
-                  {arb &&
-                    arb.bookmakers
-                      .split(",")
-                      .map((bookmaker) => <p key={bookmaker}>{bookmaker}</p>)}
-                </div>
-                <div>
-                  <p style={{ fontWeight: "bold", fontSize: "17px" }}>Market</p>
-                  {arb &&
-                    arb.markets.split(",").map((market) => (
-                      <p className="text-muted" key={market}>
-                        {market}
-                      </p>
-                    ))}
-                </div>
-                <div>
-                  <p style={{ fontWeight: "bold", fontSize: "17px" }}>Odds</p>
-                  {arb && arb.odds.split(",").map((odd) => <p key={odd}>{odd}</p>)}
-                </div>
-              </div>
-            </div>
-          ))}
+              ))}
+          </>
+        )}
       </SoftBox>
       <div className="fotter">
         <Footer />

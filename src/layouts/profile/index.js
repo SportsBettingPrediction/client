@@ -186,6 +186,9 @@ function Overview({ brand, routes }) {
           </div>
         </div>
       </div>
+      <div className="fotter">
+        <Footer />
+      </div>
     </DashboardLayout>
   );
 }

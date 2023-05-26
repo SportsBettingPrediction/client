@@ -62,38 +62,40 @@ function RTL({ brand, routes }) {
   ]);
 
   const handleAddBetDiv = () => {
+    console.log(odds);
     if (odds.length === 3) return;
     setOdds([...odds, { odd: 0, stake: 0, payout: 0 }]);
   };
 
   function updateOdd(odd, index) {
     const newOdds = odds;
-    newOdds[index].odd = odd;
+    newOdds[index].odd = odd == "" ? 0 : odd;
     setOdds(newOdds);
   }
 
   function calculateTotalArbitrage() {
-    odds.forEach((odd) => {
-      if (odd.odd <= 0 || odd.stake <= 0) {
-        setEmptyFields("The fields can not be left empty");
-        setTotals({ payout: 0, profit: 0, roi: 0 });
-        return;
-      }
-    });
-    setTimeout(() => {
-      setEmptyFields("");
-    }, 3000);
+    // odds.forEach((odd) => {
+    //   if (odd.odd <= 0 || odd.stake <= 0) {
+    //     setEmptyFields("The fields can not be left empty");
+    //     setTotals({ payout: 0, profit: 0, roi: 0 });
+    //     return;
+    //   }
+    // });
+    // setTimeout(() => {
+    //   setEmptyFields("");
+    // }, 3000);
 
     let totalOdds = odds.reduce((acc, val) => acc.odd + val.odd); // Sum of inverse odds
+    console.log({totalOdds, odds})
     totalOdds = totalOdds && totalOdds !== Infinity ? totalOdds : 0;
+    
     const betAmounts = odds.map((odd) => {
-      odd.stake = stake * Math.abs(1 - odd.odd / totalOdds);
+      odd.stake = stake * Math.abs((1 - odd.odd) / totalOdds);
       odd.payout = odd.odd * odd.stake;
-      // console.log({stake, odd, })
       return odd;
     }); // Calculate bet amounts for each outcome
     setOdds(betAmounts);
-
+    console.log(betAmounts);
     const totalPayout = odds.reduce((acc, val) => acc.payout + val.payout);
     const totalProfit = totalPayout / 2 - stake;
 
@@ -114,7 +116,6 @@ function RTL({ brand, routes }) {
 
   useEffect(() => {
     if (!stake && !document) return;
-
     document.querySelector("#stake-input").value = stake <= 0 ? "" : stake;
   }, [stake]);
   return (
