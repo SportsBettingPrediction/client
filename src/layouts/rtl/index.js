@@ -55,9 +55,10 @@ function RTL({ brand, routes }) {
   const { chart, items } = reportsBarChartData;
   const [stake, setStake] = useState(0);
   const [totals, setTotals] = useState({ payout: 0, profit: 0, roi: 0 });
+  const [dashboardOdds, setDashboardOdds] = useState()
+
   const location = useLocation();
-  const value = location.state.value;
-  console.log(value)
+
   const [emptyFields, setEmptyFields] = useState("");
 
   const [odds, setOdds] = useState([
@@ -111,13 +112,18 @@ function RTL({ brand, routes }) {
   }
 
   useEffect(() => {
+    if(!location.state) return
+    setDashboardOdds(location.state.value)
     if (!odds || (odds.length === 0 && !document)) return;
-
+    
     odds.map((odd, index) => {
       document.querySelector("#odd-input-" + index).value = odd <= 0 ? "" : odd;
     });
   }, [odds]);
 
+  // odds from the dashboard
+  console.log(dashboardOdds)
+  
   useEffect(() => {
     if (!stake && !document) return;
     document.querySelector("#stake-input").value = stake <= 0 ? "" : stake;

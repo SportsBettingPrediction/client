@@ -43,6 +43,8 @@ import sidenavLogoLabel from "examples/Sidenav/styles/sidenav";
 // Soft UI Dashboard React context
 import { useSoftUIController, setMiniSidenav } from "context";
 
+import ArbskingLogo from "../../images/Arbsking_Dashboard_Logo.png";
+
 function Sidenav({ color, brand, brandName, routes, ...rest }) {
   const [controller, dispatch] = useSoftUIController();
   const { miniSidenav, transparentSidenav } = controller;
@@ -144,14 +146,14 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
           </SoftTypography>
         </SoftBox>
         <SoftBox component={NavLink} to="/" display="flex" alignItems="center">
-          {brand && <SoftBox component="img" src={brand} alt="Soft UI Logo" width="2rem" />}
+          {brand && <SoftBox component="img" src={ArbskingLogo} alt="Arbsking Logo" width="5rem" />}
           <SoftBox
             width={!brandName && "100%"}
             sx={(theme) => sidenavLogoLabel(theme, { miniSidenav })}
           >
-            <SoftTypography variant="button" fontWeight="medium">
-              <h4>Arbking</h4>
-            </SoftTypography>
+            {/* <SoftTypography variant="button" fontWeight="medium">
+              <h4>Arbsking</h4>
+            </SoftTypography> */}
           </SoftBox>
         </SoftBox>
       </SoftBox>

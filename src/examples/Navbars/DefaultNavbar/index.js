@@ -37,6 +37,8 @@ import DefaultNavbarMobile from "examples/Navbars/DefaultNavbar/DefaultNavbarMob
 // Soft UI Dashboard React base styles
 import breakpoints from "assets/theme/base/breakpoints";
 
+
+
 function DefaultNavbar({ transparent, light, action }) {
   const [mobileNavbar, setMobileNavbar] = useState(false);
   const [mobileView, setMobileView] = useState(false);
@@ -93,7 +95,7 @@ function DefaultNavbar({ transparent, light, action }) {
       >
         <SoftBox component={Link} to="/" py={transparent ? 1.5 : 0.75} lineHeight={1}>
           <SoftTypography variant="button" fontWeight="bold" color={light ? "white" : "dark"}>
-            ArbKing
+            ArbsKing
           </SoftTypography>
         </SoftBox>
         <SoftBox color="inherit" display={{ xs: "none", lg: "flex" }} m={0} p={0}>
