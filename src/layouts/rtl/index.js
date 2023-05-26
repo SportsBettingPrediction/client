@@ -47,6 +47,7 @@ import gradientLineChartData from "layouts/rtl/data/gradientLineChartData";
 import { useSoftUIController, setDirection } from "context";
 import Sidenav from "examples/Sidenav";
 import { number } from "prop-types";
+import { useLocation } from "react-router-dom";
 
 function RTL({ brand, routes }) {
   const [, dispatch] = useSoftUIController();
@@ -54,6 +55,9 @@ function RTL({ brand, routes }) {
   const { chart, items } = reportsBarChartData;
   const [stake, setStake] = useState(0);
   const [totals, setTotals] = useState({ payout: 0, profit: 0, roi: 0 });
+  const location = useLocation();
+  const value = location.state.value;
+  console.log(value)
   const [emptyFields, setEmptyFields] = useState("");
 
   const [odds, setOdds] = useState([
@@ -86,9 +90,9 @@ function RTL({ brand, routes }) {
     // }, 3000);
 
     let totalOdds = odds.reduce((acc, val) => acc.odd + val.odd); // Sum of inverse odds
-    console.log({totalOdds, odds})
+    console.log({ totalOdds, odds });
     totalOdds = totalOdds && totalOdds !== Infinity ? totalOdds : 0;
-    
+
     const betAmounts = odds.map((odd) => {
       odd.stake = stake * Math.abs((1 - odd.odd) / totalOdds);
       odd.payout = odd.odd * odd.stake;
@@ -218,6 +222,9 @@ function RTL({ brand, routes }) {
             </div>
           </div>
         </div>
+      </div>
+      <div className="fotter">
+        <Footer />
       </div>
     </DashboardLayout>
   );
