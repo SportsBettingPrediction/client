@@ -123,35 +123,36 @@ function Dashboard({ brand, routes }) {
     <DashboardLayout>
       <Sidenav brand={brand} brandName="Soft UI Dashboard" routes={routes} />
       <DashboardNavbar />
-      <SoftBox py={3}>
-        <SoftBox mb={3}>
-          <Grid container spacing={3}>
-            <Grid item xs={12} sm={6} xl={4}>
-              <MiniStatisticsCard
-                title={{ text: "Amount Of Opportunities" }}
-                count={arbs && arbs.arbs.length}
-                icon={{ color: "info", component: "paid" }}
-              />
+      <div className="dasboardContainer">
+        <SoftBox py={3}>
+          <SoftBox mb={3}>
+            <Grid container spacing={3}>
+              <Grid item xs={12} sm={6} xl={4}>
+                <MiniStatisticsCard
+                  title={{ text: "Amount Of Opportunities" }}
+                  count={arbs && arbs.arbs.length}
+                  icon={{ color: "info", component: "paid" }}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6} xl={4}>
+                <MiniStatisticsCard
+                  title={{ text: "Total Percentage(%)" }}
+                  count={arbsTotal && arbsTotal.toFixed(2)}
+                  icon={{ color: "info", component: "public" }}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6} xl={4}>
+                <MiniStatisticsCard
+                  title={{ text: "Average % per Opportunity" }}
+                  count={arbsAvg && arbsAvg.toFixed(2)}
+                  icon={{ color: "info", component: "emoji_events" }}
+                />
+              </Grid>
             </Grid>
-            <Grid item xs={12} sm={6} xl={4}>
-              <MiniStatisticsCard
-                title={{ text: "Total Percentage(%)" }}
-                count={arbsTotal && arbsTotal.toFixed(2)}
-                icon={{ color: "info", component: "public" }}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6} xl={4}>
-              <MiniStatisticsCard
-                title={{ text: "Average % per Opportunity" }}
-                count={arbsAvg && arbsAvg.toFixed(2)}
-                icon={{ color: "info", component: "emoji_events" }}
-              />
-            </Grid>
-          </Grid>
-        </SoftBox>
-        <div className="loadingGif">{isLoading && <img src={LoadingGif} />}</div>
+          </SoftBox>
+          <div className="loadingGif">{isLoading && <img src={LoadingGif} />}</div>
 
-        {/* <div className="dropDowns">
+          {/* <div className="dropDowns">
           <select name="languages" id="bet_company" onChange={filterBetCompany}>
             <option>--Select Bet Company--</option>
             <option value="bet9ja">Bet 9ja</option>
@@ -166,68 +167,69 @@ function Dashboard({ brand, routes }) {
             <option value="java">30%</option>
           </select>
         </div> */}
-        {arbs === null ? (
-          <p className="noSubMsg">You do not have an active subscription</p>
-        ) : (
-          <>
-            {arbs &&
-              arbs.arbs.map((arb) => (
-                <div className="matchCard" key={arb._id}>
-                  <div className="clubCard">
-                    <div className="time">
-                      <i className="fa-regular fa-clock"></i>
-                      <p>{arb.age}</p>
-                    </div>
-                    <div className="clubLogoAndBetCompany">
-                      <div className="singleClub">
-                        <img src={mancityLogo} />
-                        <p>{arb.teams.split(" – ").map((team) => team.trim())[0]}</p>
+          {arbs === null ? (
+            <p className="noSubMsg">You do not have an active subscription</p>
+          ) : (
+            <>
+              {arbs &&
+                arbs.arbs.map((arb) => (
+                  <div className="matchCard" key={arb._id}>
+                    <div className="clubCard">
+                      <div className="time">
+                        <i className="fa-regular fa-clock"></i>
+                        <p>{arb.age}</p>
                       </div>
-                      <div className="betPatform">
-                        <p>Vs</p>
+                      <div className="clubLogoAndBetCompany">
+                        <div className="singleClub">
+                          <img src={mancityLogo} />
+                          <p>{arb.teams.split(" – ").map((team) => team.trim())[0]}</p>
+                        </div>
+                        <div className="betPatform">
+                          <p>Vs</p>
+                        </div>
+                        <div className="singleClub">
+                          <img src={mancityLogo} />
+                          <p>{arb.teams.split(" – ").map((team) => team.trim())[1]}</p>
+                        </div>
                       </div>
-                      <div className="singleClub">
-                        <img src={mancityLogo} />
-                        <p>{arb.teams.split(" – ").map((team) => team.trim())[1]}</p>
+                      <div>
+                        <p>{arb.profit}%</p>
+                      </div>
+                      <div>
+                        <Link to="/arbitragecalculator" state={{ value: arb.odds }}>
+                          {/* {console.log(arb.odds.split(","))} */}
+                          <i className="fa-solid fa-calculator" onClick={openArbCalculator}></i>
+                        </Link>
                       </div>
                     </div>
-                    <div>
-                      <p>{arb.profit}%</p>
-                    </div>
-                    <div>
-                      <Link to='/arbitragecalculator' state = {{ value: arb.odds }} >
-                        {/* {console.log(arb.odds.split(","))} */}
-                        <i className="fa-solid fa-calculator" onClick={openArbCalculator}></i>
-                      </Link>
+                    <div className="arbs">
+                      <div className="text-dark" style={{ paddingBottom: "5rem" }}>
+                        <p style={{ fontWeight: "bold", fontSize: "17px" }}>Book Maker</p>
+                        {arb &&
+                          arb.bookmakers
+                            .split(",")
+                            .map((bookmaker) => <p key={bookmaker}>{bookmaker}</p>)}
+                      </div>
+                      <div>
+                        <p style={{ fontWeight: "bold", fontSize: "17px" }}>Market</p>
+                        {arb &&
+                          arb.markets.split(",").map((market) => (
+                            <p className="text-muted" key={market}>
+                              {market}
+                            </p>
+                          ))}
+                      </div>
+                      <div>
+                        <p style={{ fontWeight: "bold", fontSize: "17px" }}>Odds</p>
+                        {arb && arb.odds.split(",").map((odd) => <p key={odd}>{odd}</p>)}
+                      </div>
                     </div>
                   </div>
-                  <div className="arbs">
-                    <div className="text-dark" style={{ paddingBottom: "5rem" }}>
-                      <p style={{ fontWeight: "bold", fontSize: "17px" }}>Book Maker</p>
-                      {arb &&
-                        arb.bookmakers
-                          .split(",")
-                          .map((bookmaker) => <p key={bookmaker}>{bookmaker}</p>)}
-                    </div>
-                    <div>
-                      <p style={{ fontWeight: "bold", fontSize: "17px" }}>Market</p>
-                      {arb &&
-                        arb.markets.split(",").map((market) => (
-                          <p className="text-muted" key={market}>
-                            {market}
-                          </p>
-                        ))}
-                    </div>
-                    <div>
-                      <p style={{ fontWeight: "bold", fontSize: "17px" }}>Odds</p>
-                      {arb && arb.odds.split(",").map((odd) => <p key={odd}>{odd}</p>)}
-                    </div>
-                  </div>
-                </div>
-              ))}
-          </>
-        )}
-      </SoftBox>
+                ))}
+            </>
+          )}
+        </SoftBox>
+      </div>
       <div className="fotter">
         <Footer />
       </div>

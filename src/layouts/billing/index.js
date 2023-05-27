@@ -113,100 +113,138 @@ function Payment({ brand, routes }) {
       )}
       <DashboardNavbar />
       <Sidenav brand={brand} brandName="Soft UI Dashboard" routes={routes} />
-      <SoftBox mt={4}>
-        <SoftBox mb={1.5}>
-          <Grid container spacing={3}>
-            {subScriptionStatus && subScriptionStatus ? (
-              <Grid item xs={12} lg={6}>
-                <Grid item xs={12}>
-                  <div className="subscription">
-                    <img src={shieldImage} />
-                    <div className="subscriptionText">
-                      <h2>Active Subscription</h2>
-                      <p>
-                        {new Date(subScriptionInfo.userSub.subACreatedAt).toString().slice(3, 11)} -
-                        {new Date(subScriptionInfo.userSub.expiringDate).toString().slice(3, 11)}
-                      </p>
+      <div className="paymentContainer">
+        <SoftBox mt={4}>
+          <SoftBox mb={1.5}>
+            <Grid container spacing={3}>
+              {subScriptionStatus && subScriptionStatus ? (
+                <Grid item xs={12} lg={6}>
+                  <Grid item xs={12}>
+                    <div className="subscription">
+                      <img src={shieldImage} />
+                      <div className="subscriptionText">
+                        <h2>Active Subscription</h2>
+                        <p>
+                          {new Date(subScriptionInfo.userSub.subACreatedAt).toString().slice(3, 11)}{" "}
+                          -{new Date(subScriptionInfo.userSub.expiringDate).toString().slice(3, 11)}
+                        </p>
+                      </div>
                     </div>
+                  </Grid>
+                </Grid>
+              ) : (
+                <>
+                  {subScriptionInfo && subScriptionInfo.userSubStatus === "No Subscription" ? (
+                    <Grid item xs={12} lg={6}>
+                      <div className="subscription">
+                        <img src={grid} />
+                        <div className="subscriptionText">
+                          <h2>{subScriptionInfo.userSubStatus}</h2>
+                          <p>Subscribe to continue placing bets</p>
+                        </div>
+                      </div>
+                    </Grid>
+                  ) : (
+                    <Grid item xs={12} lg={6}>
+                      <div className="subscription">
+                        <img src={grid} />
+                        <div className="subscriptionText">
+                          <h2>{subScriptionInfo.userSubStatus}</h2>
+                          <p>Subscribe to continue placing bets</p>
+                        </div>
+                      </div>
+                    </Grid>
+                  )}
+                </>
+              )}
+            </Grid>
+          </SoftBox>
+          <SoftBox>
+            <div className="makePayment">
+              <h2>MAKE PAYMENT</h2>
+              <p>
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+                Ipsum has been the industry's standard dummy text ever since the 1500s.
+              </p>
+
+              <div className="qrCodeAndAddress">
+                <div className="qrCode">
+                  <QRCode
+                    value={loggedInUser && loggedInUser.userDetails.paymentAddress}
+                    size="100"
+                  />
+                </div>
+                <div className="addressAndCopy">
+                  <input
+                    type="text"
+                    value={loggedInUser && loggedInUser.userDetails.paymentAddress}
+                    disabled
+                  />
+                  {copyICon ? (
+                    <i className="fa-regular fa-copy" onClick={copyToClipboard}></i>
+                  ) : (
+                    <div>
+                      <i className="fa-solid fa-check"></i>
+                      <small>Copied</small>
+                    </div>
+                  )}
+                </div>
+              </div>
+              <p className="makePaymentBottomText">
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry
+              </p>
+            </div>
+          </SoftBox>
+
+          <SoftBox mb={1.5}>
+            <Grid container spacing={3}>
+              <Grid item xs={12} lg={4}>
+                <Grid item xs={12}>
+                  <div className="subscriptionPlans">
+                    <h3>Basic</h3>
+                    <div className="priceAndDuration">
+                      <h2>$10</h2>
+                      <p>Monthly</p>
+                    </div>
+                    {!loading10 ? (
+                      <button onClick={() => payForSub("64690b1694617642d7b9ef9f", "10")}>
+                        Subscribe
+                      </button>
+                    ) : (
+                      <button className="disabledBtn">
+                        <i className="fa-solid fa-spinner"></i> Subscribe
+                      </button>
+                    )}
                   </div>
                 </Grid>
               </Grid>
-            ) : (
-              <>
-                {subScriptionInfo && subScriptionInfo.userSubStatus === "No Subscription" ? (
-                  <Grid item xs={12} lg={6}>
-                    <div className="subscription">
-                      <img src={grid} />
-                      <div className="subscriptionText">
-                        <h2>{subScriptionInfo.userSubStatus}</h2>
-                        <p>Subscribe to continue placing bets</p>
-                      </div>
-                    </div>
-                  </Grid>
-                ) : (
-                  <Grid item xs={12} lg={6}>
-                    <div className="subscription">
-                      <img src={grid} />
-                      <div className="subscriptionText">
-                        <h2>{subScriptionInfo.userSubStatus}</h2>
-                        <p>Subscribe to continue placing bets</p>
-                      </div>
-                    </div>
-                  </Grid>
-                )}
-              </>
-            )}
-          </Grid>
-        </SoftBox>
-        <SoftBox>
-          <div className="makePayment">
-            <h2>MAKE PAYMENT</h2>
-            <p>
-              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-              has been the industry's standard dummy text ever since the 1500s.
-            </p>
-
-            <div className="qrCodeAndAddress">
-              <div className="qrCode">
-                <QRCode
-                  value={loggedInUser && loggedInUser.userDetails.paymentAddress}
-                  size="100"
-                />
-              </div>
-              <div className="addressAndCopy">
-                <input
-                  type="text"
-                  value={loggedInUser && loggedInUser.userDetails.paymentAddress}
-                  disabled
-                />
-                {copyICon ? (
-                  <i className="fa-regular fa-copy" onClick={copyToClipboard}></i>
-                ) : (
-                  <div>
-                    <i className="fa-solid fa-check"></i>
-                    <small>Copied</small>
-                  </div>
-                )}
-              </div>
-            </div>
-            <p className="makePaymentBottomText">
-              Lorem Ipsum is simply dummy text of the printing and typesetting industry
-            </p>
-          </div>
-        </SoftBox>
-
-        <SoftBox mb={1.5}>
-          <Grid container spacing={3}>
-            <Grid item xs={12} lg={4}>
-              <Grid item xs={12}>
-                <div className="subscriptionPlans">
-                  <h3>Basic</h3>
+              <Grid item xs={12} lg={4}>
+                <div className="subscriptionPlans second">
+                  <h3>Standard</h3>
                   <div className="priceAndDuration">
-                    <h2>$10</h2>
-                    <p>Monthly</p>
+                    <h2>$55</h2>
+                    <p>6 - Months</p>
                   </div>
-                  {!loading10 ? (
-                    <button onClick={() => payForSub("64690b1694617642d7b9ef9f", "10")}>
+                  {!loading55 ? (
+                    <button onClick={() => payForSub("64690b1e94617642d7b9efa0", "55")}>
+                      Subscribe
+                    </button>
+                  ) : (
+                    <button className="disabledBtn">
+                      <i className="fa-solid fa-spinner"></i> Subscribe
+                    </button>
+                  )}
+                </div>
+              </Grid>
+              <Grid item xs={12} lg={4}>
+                <div className="subscriptionPlans third">
+                  <h3>Premium</h3>
+                  <div className="priceAndDuration">
+                    <h2>$110</h2>
+                    <p>Yearly</p>
+                  </div>
+                  {!loading110 ? (
+                    <button onClick={() => payForSub("64690b0b94617642d7b9ef9e", "110")}>
                       Subscribe
                     </button>
                   ) : (
@@ -217,45 +255,9 @@ function Payment({ brand, routes }) {
                 </div>
               </Grid>
             </Grid>
-            <Grid item xs={12} lg={4}>
-              <div className="subscriptionPlans second">
-                <h3>Standard</h3>
-                <div className="priceAndDuration">
-                  <h2>$55</h2>
-                  <p>6 - Months</p>
-                </div>
-                {!loading55 ? (
-                  <button onClick={() => payForSub("64690b1e94617642d7b9efa0", "55")}>
-                    Subscribe
-                  </button>
-                ) : (
-                  <button className="disabledBtn">
-                    <i className="fa-solid fa-spinner"></i> Subscribe
-                  </button>
-                )}
-              </div>
-            </Grid>
-            <Grid item xs={12} lg={4}>
-              <div className="subscriptionPlans third">
-                <h3>Premium</h3>
-                <div className="priceAndDuration">
-                  <h2>$110</h2>
-                  <p>Yearly</p>
-                </div>
-                {!loading110 ? (
-                  <button onClick={() => payForSub("64690b0b94617642d7b9ef9e", "110")}>
-                    Subscribe
-                  </button>
-                ) : (
-                  <button className="disabledBtn">
-                    <i className="fa-solid fa-spinner"></i> Subscribe
-                  </button>
-                )}
-              </div>
-            </Grid>
-          </Grid>
+          </SoftBox>
         </SoftBox>
-      </SoftBox>
+      </div>
       <div className="fotter">
         <Footer />
       </div>

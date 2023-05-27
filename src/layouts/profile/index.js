@@ -98,91 +98,93 @@ function Overview({ brand, routes }) {
         <Header />
       </div>
       <Sidenav brand={brand} brandName="Soft UI Dashboard" routes={routes} />
-      <div className="userDoubleInfo">
-        <div className="userSingleInfo">
-          <p>First Name</p>
-          <div className="iconAndDetail">
-            <i className="fa-solid fa-user"></i>
-            <p>{loggedInUser && loggedInUser.userDetails.firstname}</p>
+      <div className="profileContainer">
+        <div className="userDoubleInfo">
+          <div className="userSingleInfo">
+            <p>First Name</p>
+            <div className="iconAndDetail">
+              <i className="fa-solid fa-user"></i>
+              <p>{loggedInUser && loggedInUser.userDetails.firstname}</p>
+            </div>
+          </div>
+          <div className="userSingleInfo">
+            <p>Last Name</p>
+            <div className="iconAndDetail">
+              <i className="fa-solid fa-user"></i>
+              <p>{loggedInUser && loggedInUser.userDetails.lastname}</p>
+            </div>
           </div>
         </div>
-        <div className="userSingleInfo">
-          <p>Last Name</p>
-          <div className="iconAndDetail">
-            <i className="fa-solid fa-user"></i>
-            <p>{loggedInUser && loggedInUser.userDetails.lastname}</p>
-          </div>
-        </div>
-      </div>
 
-      <div className="userDoubleInfo">
-        <div className="userSingleInfo">
-          <p>Email</p>
-          <div className="iconAndDetail">
-            <i className="fa-solid fa-envelope"></i>
-            <p>{loggedInUser && loggedInUser.userDetails.email}</p>
+        <div className="userDoubleInfo">
+          <div className="userSingleInfo">
+            <p>Email</p>
+            <div className="iconAndDetail">
+              <i className="fa-solid fa-envelope"></i>
+              <p>{loggedInUser && loggedInUser.userDetails.email}</p>
+            </div>
+          </div>
+          <div className="userSingleInfo">
+            <p>Payment Address</p>
+            <div className="iconAndDetail">
+              <i className="fa-solid fa-wallet"></i>
+              <p>{loggedInUser && loggedInUser.userDetails.paymentAddress}</p>
+            </div>
           </div>
         </div>
-        <div className="userSingleInfo">
-          <p>Payment Address</p>
-          <div className="iconAndDetail">
-            <i className="fa-solid fa-wallet"></i>
-            <p>{loggedInUser && loggedInUser.userDetails.paymentAddress}</p>
-          </div>
-        </div>
-      </div>
 
-      <div className="userSingleInfo">
-        <p>Password</p>
-        <div className="iconAndDetail">
-          <i className="fa-solid fa-key"></i>
-          <p>**********</p>
-        </div>
-        <div className="changePasswordTab">
-          <button
-            onClick={() => setShowPasswordTab(!showPasswordTab)}
-            className="changePasswordButton"
-          >
-            {!showPasswordTab ? (
-              <>Change Password</>
-            ) : (
-              <>
-                <i className="fa-solid fa-xmark"></i>
-              </>
-            )}
-          </button>
-          <div>
-            {msg && <p className="msg">{msg}</p>}
-            {successMsg && <p className="successMsg">{successMsg}</p>}
-            {showPasswordTab && (
-              <>
-                <input
-                  type="password"
-                  placeholder="Old password"
-                  value={oldpassword}
-                  onChange={(e) => setOldPassword(e.target.value)}
-                  required
-                />
-                <input
-                  type="password"
-                  placeholder="New password"
-                  value={newpassword}
-                  onChange={(e) => setNewPassword(e.target.value)}
-                  required
-                />
-                <br />
-                {!loading ? (
-                  <button type="button" className="submitButton" onClick={changePassword}>
-                    Submit
-                  </button>
-                ) : (
-                  <button type="button" disabled className="buttonload">
-                    <i className="fa fa-spinner fa-spin"></i>
-                    <p style={{ margin: 0 }}>Submit</p>
-                  </button>
-                )}
-              </>
-            )}
+        <div className="userSingleInfo">
+          <p>Password</p>
+          <div className="iconAndDetail">
+            <i className="fa-solid fa-key"></i>
+            <p>**********</p>
+          </div>
+          <div className="changePasswordTab">
+            <button
+              onClick={() => setShowPasswordTab(!showPasswordTab)}
+              className="changePasswordButton"
+            >
+              {!showPasswordTab ? (
+                <>Change Password</>
+              ) : (
+                <>
+                  <i className="fa-solid fa-xmark"></i>
+                </>
+              )}
+            </button>
+            <div>
+              {msg && <p className="msg">{msg}</p>}
+              {successMsg && <p className="successMsg">{successMsg}</p>}
+              {showPasswordTab && (
+                <>
+                  <input
+                    type="password"
+                    placeholder="Old password"
+                    value={oldpassword}
+                    onChange={(e) => setOldPassword(e.target.value)}
+                    required
+                  />
+                  <input
+                    type="password"
+                    placeholder="New password"
+                    value={newpassword}
+                    onChange={(e) => setNewPassword(e.target.value)}
+                    required
+                  />
+                  <br />
+                  {!loading ? (
+                    <button type="button" className="submitButton" onClick={changePassword}>
+                      Submit
+                    </button>
+                  ) : (
+                    <button type="button" disabled className="buttonload">
+                      <i className="fa fa-spinner fa-spin"></i>
+                      <p style={{ margin: 0 }}>Submit</p>
+                    </button>
+                  )}
+                </>
+              )}
+            </div>
           </div>
         </div>
       </div>
