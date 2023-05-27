@@ -114,6 +114,7 @@ function SignUp() {
 
   const handleRedirect = () => navigate("/dashboard");
   // Registration Successful. A Confirmation Email as been sent to frank123@gmial.com
+  // franknew22222
   return (
     <>
       {success && (

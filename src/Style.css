@@ -532,66 +532,6 @@ select {
   }
 }
 
-@media screen and (max-width: 940px) {
-  .singleBet,  .betInput div{
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    text-align: start;
-  }
-
-  .singleBet input, .betInput input{
-    width: 100%;
-  }
-
-  .singleBet p{
-    width: 100%;
-  }
-
-  .stakeP{
-    display: none;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .lowerArbitrageCalculator{
-    flex-direction: column;
-    margin-top: 1rem;
-  }
-
-  .lowerArbitrageCalculator .controls{
-    margin-bottom: 1rem;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-  }
-
-}
-
-@media screen and (max-width: 678px) {
-
-  
-  .changePasswordTab{
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  
-}
-
-@media screen and (max-width: 576px) {
-  .userDoubleInfo{
-    flex-direction: column;
-  }
-
-  .dropDowns{
-    flex-direction: column;
-  }
-}
-
-@media screen and (max-width: 400px) {
-
-}
-
 .arbs{
   display: flex !important;
   justify-content: space-between;
@@ -675,9 +615,9 @@ select {
   text-align: center;
   box-shadow: 0rem .5rem .5rem 0rem rgba(0, 0, 0, 0.1);
   background-color: #fff;
-  font-size: 18px;
-  border-radius: 10px;
-  padding: 20px;
+  font-size: 16px;
+  padding: 40px;
+  width: 40%;
 }
 
 .registrationSuccessMessageBg{
@@ -694,3 +634,68 @@ select {
   transform: translate(-50%, -50%);
   z-index: 1;
 }
+
+@media screen and (max-width: 940px) {
+  .singleBet,  .betInput div{
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    text-align: start;
+  }
+
+  .singleBet input, .betInput input{
+    width: 100%;
+  }
+
+  .singleBet p{
+    width: 100%;
+  }
+
+  .stakeP{
+    display: none;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .lowerArbitrageCalculator{
+    flex-direction: column;
+    margin-top: 1rem;
+  }
+
+  .lowerArbitrageCalculator .controls{
+    margin-bottom: 1rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+}
+
+@media screen and (max-width: 678px) {
+
+  
+  .changePasswordTab{
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .registrationSuccessMessage, .passwordResetDiv{
+    width: 90%;
+  }
+  
+}
+
+@media screen and (max-width: 576px) {
+  .userDoubleInfo{
+    flex-direction: column;
+  }
+
+  .dropDowns{
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 400px) {
+
+}
+

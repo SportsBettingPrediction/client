@@ -20,6 +20,7 @@ const EmailConfirmPage = () => {
       setSuccessMessage(data.message);
     }
     if (!response.ok) {
+      console.log(data)
       setErrorMessage(data.message);
     }
   }
