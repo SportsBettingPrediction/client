@@ -42,6 +42,7 @@ import Billing from "layouts/billing";
 import RTL from "layouts/rtl";
 import ForgotPassword from "layouts/authentication/forgotpassword";
 import PasswordResetPage from "layouts/authentication/password-reset-page";
+import EmailConfirmPage from "layouts/authentication/confirm-email";
 
 export default function App() {
   return (
@@ -51,11 +52,11 @@ export default function App() {
         <Route path="/authentication/sign-up" element={<SignUp />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
         <Route path="/api/reset-password/:id/:token" element={<PasswordResetPage />} />
+        <Route path="/api/email-confirmation/:id/:token" element={<EmailConfirmPage />} />
         <Route path="/payments" element={<Billing brand={brand} routes={routes} />} />
         <Route path="/" element={<Dashboard brand={brand} routes={routes} />} />
         <Route path="/dashboard" element={<Dashboard brand={brand} routes={routes} />} />
         <Route path="/profile" element={<Overview brand={brand} routes={routes} />} />
-        {/* <Route path="/arbitragecalculator/:odds" element={<RTL brand={brand} routes={routes} />} /> */}
         <Route path="/arbitragecalculator" element={<RTL brand={brand} routes={routes} />} />
       </Routes>
     </ThemeProvider>
