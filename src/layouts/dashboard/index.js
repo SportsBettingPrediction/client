@@ -90,7 +90,7 @@ function Dashboard({ brand, routes }) {
 
     if (response.ok) {
       const data = await response.json();
-      console.log(data);
+      // console.log(data);
       setArbs(data);
       data.arbs.map((bookmaker) => {
         setBookmarkers(bookmaker.bookmakers.split(","));
@@ -196,7 +196,7 @@ function Dashboard({ brand, routes }) {
                     </div>
                     <div>
                       <Link to='/arbitragecalculator' state = {{ value: arb.odds }} >
-                        {console.log(arb.odds.split(","))}
+                        {/* {console.log(arb.odds.split(","))} */}
                         <i className="fa-solid fa-calculator" onClick={openArbCalculator}></i>
                       </Link>
                     </div>

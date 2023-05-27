@@ -26,6 +26,7 @@ function SignOut() {
   const handleLogout = async () => {
     // await AuthApi.Logout(user);
     // await setUser(null);
+    console.log("dfgjk")
     localStorage.clear();
     return navigate("/authentication/sign-in");
   };

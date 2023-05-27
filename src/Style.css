@@ -670,3 +670,27 @@ select {
   border-radius: 8px;
   margin-top: 20px;
 }
+
+.registrationSuccessMessage{
+  text-align: center;
+  box-shadow: 0rem .5rem .5rem 0rem rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  font-size: 18px;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.registrationSuccessMessageBg{
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}

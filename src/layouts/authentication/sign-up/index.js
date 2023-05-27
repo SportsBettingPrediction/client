@@ -48,6 +48,7 @@ function SignUp() {
   const [agreement, setAgremment] = useState(true);
   const [formData, setFormData] = useState({});
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const { user } = useAuth();
@@ -87,8 +88,10 @@ function SignUp() {
     }
     const data = await response.json();
     if (response.ok) {
-      localStorage.setItem("user", JSON.stringify(data));
-      navigate("/dashboard");
+      setSuccess(data.message);
+      console.log(data);
+      // localStorage.setItem("user", JSON.stringify(data));
+      // navigate("/dashboard");
     } else {
       console.log(data);
       setError(data.message);
@@ -110,148 +113,151 @@ function SignUp() {
   };
 
   const handleRedirect = () => navigate("/dashboard");
-
+  // Registration Successful. A Confirmation Email as been sent to frank123@gmial.com
   return (
-    <BasicLayout
-      title="Welcome!"
-      // description="Use these awesome forms to login or create new account in your project for free."
-      image={curved6}
-    >
-      {isLoading ? (
-        <SoftBox display="flex" justifyContent="center">
-          <RotatingLines
-            strokeColor="black"
-            strokeWidth="5"
-            animationDuration="0.75"
-            width="96"
-            visible={true}
-          />
-        </SoftBox>
-      ) : user && user.token ? (
-        <Card>
-          <h3 style={{ textAlign: "center" }}>You are already signed in.</h3>
-          <SoftBox mt={4} mb={1}>
-            <SoftButton variant="gradient" buttonColor="info" fullWidth onClick={handleRedirect}>
-              {`Let's go`}
-            </SoftButton>
+    <>
+      {success && (
+        <div className="registrationSuccessMessageBg">
+          <p className="registrationSuccessMessage">
+            {success}
+          </p>
+        </div>
+      )}
+
+      <BasicLayout title="Welcome!" image={curved6}>
+        {isLoading ? (
+          <SoftBox display="flex" justifyContent="center">
+            <RotatingLines
+              strokeColor="black"
+              strokeWidth="5"
+              animationDuration="0.75"
+              width="96"
+              visible={true}
+            />
           </SoftBox>
-        </Card>
-      ) : (
-        <Card>
-          <SoftBox p={3} mb={1} textAlign="center">
-            <SoftTypography variant="h5" fontWeight="medium">
-              Register with
-            </SoftTypography>
-          </SoftBox>
-          {/* <SoftBox display="flex" flexDirection="column" alignItems="center" mb={2}>
-            <GithubSocial />
-          </SoftBox> */}
-          <Separator />
-          <SoftBox pt={2} pb={3} px={3}>
-            <SoftBox component="form" role="form">
-              <SoftBox mb={2}>
-                <SoftInput
-                  type="text"
-                  name="firstname"
-                  placeholder="First Name"
-                  onChange={handleFormData}
-                  required
-                />
-              </SoftBox>
-              <SoftBox mb={2}>
-                <SoftInput
-                  type="text"
-                  name="lastname"
-                  placeholder="Last Name"
-                  onChange={handleFormData}
-                  required
-                />
-              </SoftBox>
-              <SoftBox mb={2}>
-                <SoftInput
-                  type="text"
-                  name="username"
-                  placeholder="Username"
-                  onChange={handleFormData}
-                  required
-                />
-              </SoftBox>
-              <SoftBox mb={2}>
-                <SoftInput
-                  type="email"
-                  name="email"
-                  onChange={handleFormData}
-                  placeholder="Email"
-                  required
-                />
-              </SoftBox>
-              <SoftBox mb={2}>
-                <SoftInput
-                  type="password"
-                  name="password"
-                  onChange={handleFormData}
-                  placeholder="Password"
-                  required
-                />
-              </SoftBox>
-              <SoftBox display="flex" alignItems="center">
-                <Checkbox checked={agreement} onChange={handleSetAgremment} />
-                <SoftTypography
-                  variant="button"
-                  fontWeight="regular"
-                  onClick={handleSetAgremment}
-                  sx={{ cursor: "poiner", userSelect: "none" }}
-                >
-                  &nbsp;&nbsp;I agree the&nbsp;
-                </SoftTypography>
-                <SoftTypography
-                  component="a"
-                  href="#"
-                  variant="button"
-                  fontWeight="bold"
-                  textGradient
-                >
-                  Terms and Conditions
-                </SoftTypography>
-              </SoftBox>
-              <SoftBox mt={2} mb={2} textAlign="center">
-                <h6
-                  style={{
-                    fontSize: ".8em",
-                    color: "red",
-                    textAlign: "center",
-                    fontWeight: 400,
-                    transition: ".2s all",
-                  }}
-                >
-                  {error}
-                </h6>
-              </SoftBox>
-              <SoftBox mt={4} mb={1}>
-                <SoftButton variant="gradient" color="dark" onClick={handleSubmit} fullWidth>
-                  sign up
-                </SoftButton>
-              </SoftBox>
-              <SoftBox mt={3} textAlign="center">
-                <SoftTypography variant="button" color="text" fontWeight="regular">
-                  Already have an account?&nbsp;
+        ) : user && user.token ? (
+          <Card>
+            <h3 style={{ textAlign: "center" }}>You are already signed in.</h3>
+            <SoftBox mt={4} mb={1}>
+              <SoftButton variant="gradient" buttonColor="info" fullWidth onClick={handleRedirect}>
+                {`Let's go`}
+              </SoftButton>
+            </SoftBox>
+          </Card>
+        ) : (
+          <Card>
+            <SoftBox p={3} mb={1} textAlign="center">
+              <SoftTypography variant="h5" fontWeight="medium">
+                Register with
+              </SoftTypography>
+            </SoftBox>
+            <Separator />
+            <SoftBox pt={2} pb={3} px={3}>
+              <SoftBox component="form" role="form">
+                <SoftBox mb={2}>
+                  <SoftInput
+                    type="text"
+                    name="firstname"
+                    placeholder="First Name"
+                    onChange={handleFormData}
+                    required
+                  />
+                </SoftBox>
+                <SoftBox mb={2}>
+                  <SoftInput
+                    type="text"
+                    name="lastname"
+                    placeholder="Last Name"
+                    onChange={handleFormData}
+                    required
+                  />
+                </SoftBox>
+                <SoftBox mb={2}>
+                  <SoftInput
+                    type="text"
+                    name="username"
+                    placeholder="Username"
+                    onChange={handleFormData}
+                    required
+                  />
+                </SoftBox>
+                <SoftBox mb={2}>
+                  <SoftInput
+                    type="email"
+                    name="email"
+                    onChange={handleFormData}
+                    placeholder="Email"
+                    required
+                  />
+                </SoftBox>
+                <SoftBox mb={2}>
+                  <SoftInput
+                    type="password"
+                    name="password"
+                    onChange={handleFormData}
+                    placeholder="Password"
+                    required
+                  />
+                </SoftBox>
+                <SoftBox display="flex" alignItems="center">
+                  <Checkbox checked={agreement} onChange={handleSetAgremment} />
                   <SoftTypography
-                    component={Link}
-                    to="/authentication/sign-in"
                     variant="button"
-                    color="dark"
+                    fontWeight="regular"
+                    onClick={handleSetAgremment}
+                    sx={{ cursor: "poiner", userSelect: "none" }}
+                  >
+                    &nbsp;&nbsp;I agree the&nbsp;
+                  </SoftTypography>
+                  <SoftTypography
+                    component="a"
+                    href="#"
+                    variant="button"
                     fontWeight="bold"
                     textGradient
                   >
-                    Sign in
+                    Terms and Conditions
                   </SoftTypography>
-                </SoftTypography>
+                </SoftBox>
+                <SoftBox mt={2} mb={2} textAlign="center">
+                  <h6
+                    style={{
+                      fontSize: ".8em",
+                      color: "red",
+                      textAlign: "center",
+                      fontWeight: 400,
+                      transition: ".2s all",
+                    }}
+                  >
+                    {error}
+                  </h6>
+                </SoftBox>
+                <SoftBox mt={4} mb={1}>
+                  <SoftButton variant="gradient" color="dark" onClick={handleSubmit} fullWidth>
+                    sign up
+                  </SoftButton>
+                </SoftBox>
+                <SoftBox mt={3} textAlign="center">
+                  <SoftTypography variant="button" color="text" fontWeight="regular">
+                    Already have an account?&nbsp;
+                    <SoftTypography
+                      component={Link}
+                      to="/authentication/sign-in"
+                      variant="button"
+                      color="dark"
+                      fontWeight="bold"
+                      textGradient
+                    >
+                      Sign in
+                    </SoftTypography>
+                  </SoftTypography>
+                </SoftBox>
               </SoftBox>
             </SoftBox>
-          </SoftBox>
-        </Card>
-      )}
-    </BasicLayout>
+          </Card>
+        )}
+      </BasicLayout>
+    </>
   );
 }
 
