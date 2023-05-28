@@ -60,6 +60,7 @@ function RTL({ brand, routes }) {
   const location = useLocation();
 
   const [emptyFields, setEmptyFields] = useState("");
+  const oddRefs = [ useRef(), useRef(), useRef() ]
 
   const [odds, setOdds] = useState([
     { odd: 0, stake: 0, payout: 0 },
@@ -113,13 +114,22 @@ function RTL({ brand, routes }) {
 
   useEffect(() => {
     if(!location.state) return
-    setDashboardOdds(location.state.value)
-    if (!odds || (odds.length === 0 && !document)) return;
+    let dashOddValue = location.state.value.replace(/,\s*$/, '').split(",")
+    let newOdd = dashOddValue.map((value) => {
+      return { odd: Number(value), stake: 0, payout: 0 }
+    })
+
+    setOdds(newOdd)
+  },[])
+
+  useEffect(() => {
+    // if (!odds || (odds.length === 0 && !document)) return;
     
     odds.map((odd, index) => {
-      document.querySelector("#odd-input-" + index).value = odd <= 0 ? "" : odd;
+      oddRefs[index].value = odd <= 0 ? "" : odd;
     });
   }, [odds]);
+
 
   // odds from the dashboard
   console.log(dashboardOdds)
@@ -156,6 +166,7 @@ function RTL({ brand, routes }) {
                   <div>
                     <p>Bet {index + 1}</p>
                     <input
+                    ref={oddRefs[index]}
                       type="number"
                       id={"odd-input-" + index}
                       placeholder={`Please Enter Bet ${index + 1} Odds`}
