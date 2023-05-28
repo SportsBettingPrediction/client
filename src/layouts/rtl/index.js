@@ -141,7 +141,7 @@ function RTL({ brand, routes }) {
   return (
     <DashboardLayout>
       <DashboardNavbar />
-      <Sidenav brand={brand} brandName="Soft UI Dashboard" routes={routes} />
+      <Sidenav brand={brand} brandName="Arbsking" routes={routes} />
       <div className="abitragePart">
         <h2>ARBITRAGE CALCULATOR | SUREBET CALCULATOR</h2>
         <p>

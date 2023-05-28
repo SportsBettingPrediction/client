@@ -79,6 +79,7 @@ function Payment({ brand, routes }) {
       setLoading10(false);
       setLoading55(false);
       setLoading110(false);
+      getUsersSubscriptionStatus()
     }
     const data = await response.json();
     setSubMsg(data.message);
@@ -112,7 +113,7 @@ function Payment({ brand, routes }) {
         </div>
       )}
       <DashboardNavbar />
-      <Sidenav brand={brand} brandName="Soft UI Dashboard" routes={routes} />
+      <Sidenav brand={brand} brandName="Arbsking" routes={routes} />
       <div className="paymentContainer">
         <SoftBox mt={4}>
           <SoftBox mb={1.5}>

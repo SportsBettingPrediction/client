@@ -46,7 +46,7 @@ function VRInfo() {
 
   return (
     <BaseLayout>
-      <Sidenav brand={brand} brandName="Soft UI Dashboard" routes={routes} />
+      <Sidenav brand={brand} brandName="Arbsking" routes={routes} />
       <SoftBox
         minHeight="100vh"
         ml={{ xs: 0, md: 10 }}

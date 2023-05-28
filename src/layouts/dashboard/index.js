@@ -121,7 +121,7 @@ function Dashboard({ brand, routes }) {
 
   return (
     <DashboardLayout>
-      <Sidenav brand={brand} brandName="Soft UI Dashboard" routes={routes} />
+      <Sidenav brand={brand} brandName="Arbsking" routes={routes} />
       <DashboardNavbar />
       <div className="dasboardContainer">
         <SoftBox py={3}>

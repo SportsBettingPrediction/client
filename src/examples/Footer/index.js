@@ -63,10 +63,9 @@ function Footer({ company, links }) {
         &copy; {new Date().getFullYear()} 
         <Link href={href} target="_blank">
           <SoftTypography variant="button" fontWeight="medium">
-            &nbsp;{name}&nbsp;
+            &nbsp;ArbsKing&nbsp;
           </SoftTypography>
         </Link>
-        - Coded by AppSeed.
       </SoftBox>
       <SoftBox
         component="ul"
@@ -95,9 +94,9 @@ function Footer({ company, links }) {
 Footer.defaultProps = {
   company: { href: "https://www.creative-tim.com/?AFFILIATE=128200", name: "Creative-Tim" },
   links: [
-    { href: "https://appseed.us/product/soft-ui-dashboard/api-server-nodejs/react/", name: "Sources" },
+    // { href: "https://appseed.us/product/soft-ui-dashboard/api-server-nodejs/react/", name: "Sources" },
     { href: "https://appseed.us/support/", name: "Support" },
-    { href: "https://appseed.us/", name: "AppSeed" },
+    // { href: "https://appseed.us/", name: "AppSeed" },
   ],
 };
 

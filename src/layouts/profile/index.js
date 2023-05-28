@@ -97,7 +97,7 @@ function Overview({ brand, routes }) {
       <div style={{ color: "#fff !important" }}>
         <Header />
       </div>
-      <Sidenav brand={brand} brandName="Soft UI Dashboard" routes={routes} />
+      <Sidenav brand={brand} brandName="Arbsking" routes={routes} />
       <div className="profileContainer">
         <div className="userDoubleInfo">
           <div className="userSingleInfo">
