@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 
 const ForgotPassword = () => {
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState("franklinchinedu61@gmail.com");
   const [successMsg, setSuccessMsg] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
   const [loading, setLoading] = useState(false);
@@ -30,14 +30,14 @@ const ForgotPassword = () => {
       );
       setTimeout(() => {
         setSuccessMsg("");
-      }, 3000);
+      }, 10000);
     }
 
     if (!response.ok) {
       setErrorMsg(data.message);
       setTimeout(() => {
         setErrorMsg("");
-      }, 3000);
+      }, 7000);
     }
     console.log(data);
   }
@@ -46,13 +46,16 @@ const ForgotPassword = () => {
     <>
       <DefaultNavbar />
       <div className="passwordResetDiv">
-        {successMsg && <p className="emailSuccess">{successMsg}</p>}
+        <div className="emailSuccessDiv">
+          {successMsg && <p className="emailSuccess">{successMsg}</p>}
+        </div>
         {errorMsg && <p className="emailError">{errorMsg}</p>}
         <p>User Reset Password Request</p>
         <input
           type="text"
           onChange={(e) => setEmail(e.target.value)}
           placeholder="email@email.com"
+          value={email}
         />
         {!loading ? (
           <button className="resetPasswordBtn" onClick={(e) => forgotPassword()}>

@@ -200,7 +200,10 @@ function DashboardNavbar({ absolute, light, isMini }) {
                 <i className="fa-solid fa-user fs-3"></i>
                 <div>
                   <p>Available Balance</p>
-                  <p>${userBalance && userBalance}</p>
+                  <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                    <p style={{ backgroundColor:"green", color:"#fff", padding:"3px 5px", borderRadius:"3px" }}>${userBalance && userBalance}</p>
+                    <i className="fa-solid fa-rotate-right" style={{ cursor:"pointer" }} onClick={() => getUserBalance()}></i>
+                  </div>
                 </div>
               </div>
               {/* <p>Welcome back, {loggedInUser && loggedInUser.userDetails.username}</p> */}

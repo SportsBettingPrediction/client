@@ -16,6 +16,20 @@ const PasswordResetPage = () => {
   }, []);
 
   async function resetPassword() {
+    if (!password || !password2) {
+      setErrorMsg("Please fill in the fields");
+      setTimeout(() => {
+        setErrorMsg("");
+      }, 5000);
+      return;
+    }
+    if (password !== password2) {
+      setErrorMsg("Please both password fields must match");
+      setTimeout(() => {
+        setErrorMsg("");
+      }, 5000);
+      return;
+    }
     setLoading(true);
     const response = await fetch(
       "https://sportbetpredict.onrender.com/api/forgotpassword/reset-password",
@@ -34,25 +48,29 @@ const PasswordResetPage = () => {
       console.log(response);
     }
     if (response.ok) {
-      setSuccessMsg(`Password has been reset successfully`);
-      setTimeout(() => {
-        setSuccessMsg("");
-      }, 3000);
-      navigate("/authentication/sign-in");
+      setSuccessMsg(
+        "Password has been reset successfully use the button below to continue to the login page"
+      );
     }
 
     if (!response.ok) {
       setErrorMsg(data.message);
       setTimeout(() => {
         setErrorMsg("");
-      }, 3000);
+      }, 5000);
     }
   }
   return (
     <>
       <DefaultNavbar />
       <div className="passwordResetDiv">
-        {successMsg && <p className="emailSuccess">{successMsg}</p>}
+        {successMsg && (
+          <div className="passwordResetSuccess">
+            <i class="fa-solid fa-check"></i>
+            <p>{successMsg}</p>
+            <a href="/authentication/sign-in">Continue to Login</a>
+          </div>
+        )}
         {errorMsg && <p className="emailError">{errorMsg}</p>}
         <p>Reset Password</p>
         <input

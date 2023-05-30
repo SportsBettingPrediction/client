@@ -24,6 +24,7 @@ import grid from "../../images/grid.png";
 import qrcode from "../../images/qr-code.png";
 import QRCode from "react-qr-code";
 import { useState, useEffect } from "react";
+import LoadingGif from "../../assets/images/loader/loading-gif.gif";
 
 // Soft UI Dashboard React routes
 // import routes from "routes";
@@ -33,6 +34,7 @@ function Payment({ brand, routes }) {
   const [subScriptionInfo, setSubScriptionInfo] = useState("");
   const [subMsg, setSubMsg] = useState("");
   const [copyICon, setCopyIcon] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [loading10, setLoading10] = useState(false);
   const [loading55, setLoading55] = useState(false);
   const [loading110, setLoading110] = useState(false);
@@ -79,7 +81,7 @@ function Payment({ brand, routes }) {
       setLoading10(false);
       setLoading55(false);
       setLoading110(false);
-      getUsersSubscriptionStatus()
+      getUsersSubscriptionStatus();
     }
     const data = await response.json();
     setSubMsg(data.message);
@@ -90,6 +92,7 @@ function Payment({ brand, routes }) {
   }
 
   async function getUsersSubscriptionStatus() {
+    setLoading(true);
     const response = await fetch(
       "https://sportbetpredict.onrender.com/api/account/user/sub-status",
       {
@@ -100,7 +103,11 @@ function Payment({ brand, routes }) {
         },
       }
     );
+    if (response) {
+      setLoading(false);
+    }
     const data = await response.json();
+    console.log(data);
     setSubScriptionInfo(data);
     setSubScriptionStatus(data.subStatus);
   }
@@ -122,6 +129,7 @@ function Payment({ brand, routes }) {
                 <Grid item xs={12} lg={6}>
                   <Grid item xs={12}>
                     <div className="subscription">
+                      {/* {loading && } */}
                       <img src={shieldImage} />
                       <div className="subscriptionText">
                         <h2>Active Subscription</h2>
@@ -148,11 +156,26 @@ function Payment({ brand, routes }) {
                   ) : (
                     <Grid item xs={12} lg={6}>
                       <div className="subscription">
-                        <img src={grid} />
+                        <div className="loadingGif">
+                          {loading && (
+                            <div
+                              style={{
+                                display: "flex",
+                                alignItems: "center",
+                                gap: "20px",
+                                justifyContent: "center",
+                              }}
+                            >
+                              <img src={LoadingGif} width={"30%"} style={{ marginTop: "0" }} />
+                              <p>Getting subscription status</p>
+                            </div>
+                          )}
+                        </div>
+                        {/* <img src={grid} />
                         <div className="subscriptionText">
                           <h2>{subScriptionInfo.userSubStatus}</h2>
                           <p>Subscribe to continue placing bets</p>
-                        </div>
+                        </div> */}
                       </div>
                     </Grid>
                   )}
@@ -163,10 +186,17 @@ function Payment({ brand, routes }) {
           <SoftBox>
             <div className="makePayment">
               <h2>MAKE PAYMENT</h2>
-              <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                Ipsum has been the industry's standard dummy text ever since the 1500s.
-              </p>
+              <ul style={{ textAlign: "left" }}>
+                <li>Copy your wallet address or scan the barcode below to get it</li>
+                <li>Using any of the crypto payment app, pay into your the wallet address</li>
+                <li>
+                  After payment has been made, refresh the balance or the page to reflect your
+                  current acount balance
+                </li>
+                <li>
+                  From our available plans below, you can now purchase any plan of your choice
+                </li>
+              </ul>
 
               <div className="qrCodeAndAddress">
                 <div className="qrCode">
@@ -191,8 +221,15 @@ function Payment({ brand, routes }) {
                   )}
                 </div>
               </div>
-              <p className="makePaymentBottomText">
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry
+              <p className="makePaymentBottomText" style={{ lineHeight: "30px" }}>
+                Please visit the link below to read more on how to make crypto payments<br></br>{" "}
+                <a
+                  href="https://bitpay.com/blog/how-to-pay-with-crypto/"
+                  style={{ textDecoration: "underline" }}
+                >
+                  Read More
+                  <i className="fa-solid fa-arrow-right" style={{ marginLeft: "5px" }}></i>
+                </a>
               </p>
             </div>
           </SoftBox>
