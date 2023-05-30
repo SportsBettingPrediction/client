@@ -391,10 +391,12 @@ select {
   color: #000000;
   height: 20vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   box-shadow: 0rem 1.25rem 1.6875rem 0rem rgba(0, 0, 0, 0.2);
   border-radius: 10px;
+  padding: 100px 20px;
 }
 
 .disabledBtn{
@@ -546,7 +548,7 @@ select {
 
 /* Reset Password */
 
-.passwordResetDiv .fa-xmark{
+.passwordResetDiv .fa-xmark, .subModal .fa-xmark{
   font-size: 2rem;
   color: red;
   border: 1px solid red;
@@ -555,12 +557,21 @@ select {
   margin-bottom: 16px;
 }
 
-.passwordResetDiv .fa-check{
+.passwordResetDiv .fa-check, .subModal .fa-check, .registrationSuccessMessage .fa-check{
   font-size: 2rem;
   color: rgb(0, 191, 35);
   border: 1px solid rgb(0, 191, 35);
   border-radius: 50%;
   padding: 1rem;
+  margin-bottom: 16px;
+}
+
+.subModal .fa-exclamation{
+  font-size: 2rem;
+  color: #FFD43B;
+  border: 1px solid #FFD43B;
+  border-radius: 50%;
+  padding: 1rem 1.7rem;
   margin-bottom: 16px;
 }
 
@@ -588,7 +599,7 @@ select {
   padding: 5px 10px;
 }
 
-.resetPasswordBtn, .passwordResetDiv a{
+.resetPasswordBtn, .passwordResetDiv , .registrationSuccessMessage button{
   all: unset;
   background: linear-gradient(to right, #21BBFE, #217EFE);
   color: #fff;
@@ -666,6 +677,10 @@ select {
   font-size: 16px;
   padding: 40px;
   width: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .registrationSuccessMessageBg{
@@ -749,3 +764,14 @@ select {
 
 }
 
+.gridImage{
+  filter: invert(20%) sepia(34%) saturate(6050%) hue-rotate(350deg) brightness(85%) contrast(99%);
+}
+
+.shieldImage{
+  filter: invert(54%) sepia(95%) saturate(385%) hue-rotate(106deg) brightness(97%) contrast(88%);
+}
+
+.expiredImage{
+  filter: invert(95%) sepia(97%) saturate(4122%) hue-rotate(323deg) brightness(102%) contrast(101%);
+}

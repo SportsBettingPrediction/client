@@ -55,7 +55,6 @@ function SignIn() {
     localStorage.clear();
   }, []);
 
-
   const handleSetRememberMe = () => setRememberMe(!rememberMe);
 
   const handleFormData = (e) => {
@@ -189,7 +188,8 @@ function SignIn() {
             <SoftBox mt={3} textAlign="center">
               <SoftTypography variant="button" color="text" fontWeight="regular">
                 Don&apos;t have an account?
-                <SoftTypography
+                <a href="/authentication/sign-up">Sign up</a>
+                {/* <SoftTypography
                   component={Link}
                   to="/authentication/sign-up"
                   variant="button"
@@ -198,7 +198,7 @@ function SignIn() {
                   textGradient
                 >
                   Sign up
-                </SoftTypography>
+                </SoftTypography> */}
               </SoftTypography>
             </SoftBox>
           </SoftBox>

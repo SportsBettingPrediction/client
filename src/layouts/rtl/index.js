@@ -145,7 +145,7 @@ function RTL({ brand, routes }) {
       <div className="abitragePart">
         <h2>ARBITRAGE CALCULATOR | SUREBET CALCULATOR</h2>
         <p>
-          Use this calculator to determine stakes and profits for 2-5 way arbitrage opportunities!
+          Use this calculator to determine stakes and profits for 2-3 way arbitrage opportunities!
           Auto-round surebet stakes to avoid suspicion with the bookmakers! Instructions written
           below the calculator.
         </p>

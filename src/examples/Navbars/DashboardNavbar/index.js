@@ -201,59 +201,15 @@ function DashboardNavbar({ absolute, light, isMini }) {
                 <div>
                   <p>Available Balance</p>
                   <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                    <p style={{ backgroundColor:"green", color:"#fff", padding:"3px 5px", borderRadius:"3px" }}>${userBalance && userBalance}</p>
+                    <p style={{ backgroundColor:"#1AC888", color:"#fff", padding:"3px 5px", borderRadius:"3px" }}>${userBalance && userBalance}</p>
                     <i className="fa-solid fa-rotate-right" style={{ cursor:"pointer" }} onClick={() => getUserBalance()}></i>
                   </div>
                 </div>
               </div>
-              {/* <p>Welcome back, {loggedInUser && loggedInUser.userDetails.username}</p> */}
             </SoftBox>
-            {/* <SoftBox pr={1}>
-              <SoftInput
-                placeholder="Type here..."
-                icon={{ component: "search", direction: "left" }}
-              />
-            </SoftBox> */}
+            
             <SoftBox color={light ? "white" : "inherit"}>
-              {/* {user && user.token ? (
-                <IconButton
-                  size="small"
-                  color="inherit"
-                  sx={navbarIconButton}
-                  aria-controls="logout"
-                  aria-haspopup="true"
-                  variant="contained"
-                  onClick={handleLogout}
-                >
-                  <SoftTypography
-                    variant="button"
-                    fontWeight="medium"
-                    color={light ? "white" : "dark"}
-                  >
-                    Logout
-                  </SoftTypography>
-                </IconButton>
-              ) : (
-                <Link to="/authentication/sign-in">
-                  <IconButton sx={navbarIconButton} size="small">
-                    <Icon
-                      sx={({ palette: { dark, white } }) => ({
-                        color: light ? white.main : dark.main,
-                      })}
-                    >
-                      account_circle
-                    </Icon>
-                    <SoftTypography
-                      variant="button"
-                      fontWeight="medium"
-                      color={light ? "white" : "dark"}
-                    >
-                      Sign in
-                    </SoftTypography>
-                  </IconButton>
-                </Link>
-              )} */}
-              {/* <div className="navButton"> */}
+              
               <IconButton
                 size="large"
                 color="inherit"
@@ -264,26 +220,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
                   {miniSidenav ? "menu_open" : "menu"}
                 </Icon>
               </IconButton>
-              {/* </div> */}
-              {/* <IconButton
-                size="small"
-                color="inherit"
-                sx={navbarIconButton}
-                onClick={handleConfiguratorOpen}
-              >
-                <Icon>settings</Icon>
-              </IconButton>
-              <IconButton
-                size="small"
-                color="inherit"
-                sx={navbarIconButton}
-                aria-controls="notification-menu"
-                aria-haspopup="true"
-                variant="contained"
-                onClick={handleOpenMenu}
-              >
-                <Icon className={light ? "text-white" : "text-dark"}>notifications</Icon>
-              </IconButton> */}
+              
               {renderMenu()}
             </SoftBox>
           </SoftBox>

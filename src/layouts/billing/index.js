@@ -20,6 +20,7 @@ import BillingInformation from "layouts/billing/components/BillingInformation";
 import Transactions from "layouts/billing/components/Transactions";
 import Sidenav from "examples/Sidenav";
 import shieldImage from "../../images/secure-shield.png";
+import warningImage from "../../images/warning.png";
 import grid from "../../images/grid.png";
 import qrcode from "../../images/qr-code.png";
 import QRCode from "react-qr-code";
@@ -116,6 +117,13 @@ function Payment({ brand, routes }) {
     <DashboardLayout>
       {subMsg && (
         <div className="subModal">
+          {subMsg === "You still have an active subscription." ? (
+            <i className="fa-solid fa-xmark"></i>
+          ) : subMsg === "Subscription purchased successfully." ? (
+            <i className="fa-solid fa-check"></i>
+          ) : (
+            <i className="fa-solid fa-check"></i>
+          )}
           <div className="subModalContent">{subMsg}</div>
         </div>
       )}
@@ -130,7 +138,7 @@ function Payment({ brand, routes }) {
                   <Grid item xs={12}>
                     <div className="subscription">
                       {/* {loading && } */}
-                      <img src={shieldImage} />
+                      <img src={shieldImage} className="shieldImage"/>
                       <div className="subscriptionText">
                         <h2>Active Subscription</h2>
                         <p>
@@ -146,7 +154,17 @@ function Payment({ brand, routes }) {
                   {subScriptionInfo && subScriptionInfo.userSubStatus === "No Subscription" ? (
                     <Grid item xs={12} lg={6}>
                       <div className="subscription">
-                        <img src={grid} />
+                        <img src={grid} className="gridImage"/>
+                        <div className="subscriptionText">
+                          <h2>{subScriptionInfo.userSubStatus}</h2>
+                          <p>Subscribe to continue placing bets</p>
+                        </div>
+                      </div>
+                    </Grid>
+                  ) : subScriptionInfo.userSubStatus === "Expired" ? (
+                    <Grid item xs={12} lg={6}>
+                      <div className="subscription">
+                        <img src={warningImage} className="expiredImage"/>
                         <div className="subscriptionText">
                           <h2>{subScriptionInfo.userSubStatus}</h2>
                           <p>Subscribe to continue placing bets</p>
@@ -171,11 +189,6 @@ function Payment({ brand, routes }) {
                             </div>
                           )}
                         </div>
-                        {/* <img src={grid} />
-                        <div className="subscriptionText">
-                          <h2>{subScriptionInfo.userSubStatus}</h2>
-                          <p>Subscribe to continue placing bets</p>
-                        </div> */}
                       </div>
                     </Grid>
                   )}
@@ -187,7 +200,9 @@ function Payment({ brand, routes }) {
             <div className="makePayment">
               <h2>MAKE PAYMENT</h2>
               <ul style={{ textAlign: "left" }}>
-                <li>Copy your wallet address or scan the barcode below to get the wallet address.</li>
+                <li>
+                  Copy your wallet address or scan the barcode below to get the wallet address.
+                </li>
                 <li>Using any of the crypto payment app, pay into the wallet address.</li>
                 <li>
                   After payment has been made, refresh the balance or the page to reflect your

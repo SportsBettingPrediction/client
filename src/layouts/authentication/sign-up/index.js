@@ -48,7 +48,7 @@ function SignUp() {
   const [agreement, setAgremment] = useState(true);
   const [formData, setFormData] = useState({});
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
+  const [success, setSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const { user } = useAuth();
@@ -120,7 +120,9 @@ function SignUp() {
       {success && (
         <div className="registrationSuccessMessageBg">
           <p className="registrationSuccessMessage">
+            <i class="fa-solid fa-check"></i>
             {success}
+            <button style={{ marginTop: "10px" }} onClick={() => {setSuccess(false); navigate("/authentication/sign-in")}}>Ok</button>
           </p>
         </div>
       )}
