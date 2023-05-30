@@ -122,7 +122,7 @@ function Payment({ brand, routes }) {
           ) : subMsg === "Subscription purchased successfully." ? (
             <i className="fa-solid fa-check"></i>
           ) : (
-            <i className="fa-solid fa-check"></i>
+            <i className="fa-solid fa-xmark"></i>
           )}
           <div className="subModalContent">{subMsg}</div>
         </div>
