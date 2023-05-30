@@ -632,6 +632,10 @@ select {
   color: #344767;
 }
 
+.errorBg{
+  padding: 0 20px;
+}
+
 .emailError{
   text-align: center;
   background-color: #f8d7da;

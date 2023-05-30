@@ -187,14 +187,14 @@ function Payment({ brand, routes }) {
             <div className="makePayment">
               <h2>MAKE PAYMENT</h2>
               <ul style={{ textAlign: "left" }}>
-                <li>Copy your wallet address or scan the barcode below to get it</li>
-                <li>Using any of the crypto payment app, pay into your the wallet address</li>
+                <li>Copy your wallet address or scan the barcode below to get the wallet address.</li>
+                <li>Using any of the crypto payment app, pay into the wallet address.</li>
                 <li>
                   After payment has been made, refresh the balance or the page to reflect your
-                  current acount balance
+                  current acount balance.
                 </li>
                 <li>
-                  From our available plans below, you can now purchase any plan of your choice
+                  From our available plans below, you can now purchase any plan of your choice.
                 </li>
               </ul>
 
@@ -226,6 +226,7 @@ function Payment({ brand, routes }) {
                 <a
                   href="https://bitpay.com/blog/how-to-pay-with-crypto/"
                   style={{ textDecoration: "underline" }}
+                  target="_blank"
                 >
                   Read More
                   <i className="fa-solid fa-arrow-right" style={{ marginLeft: "5px" }}></i>

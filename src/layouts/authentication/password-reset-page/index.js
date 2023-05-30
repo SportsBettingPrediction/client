@@ -54,10 +54,12 @@ const PasswordResetPage = () => {
     }
 
     if (!response.ok) {
-      setErrorMsg(data.message);
+      setErrorMsg(
+        "This link appears to be expired, invalid or already used please resend your password reset request to get a new link or contact our customer care service"
+      );
       setTimeout(() => {
         setErrorMsg("");
-      }, 5000);
+      }, 10000);
     }
   }
   return (
@@ -71,7 +73,11 @@ const PasswordResetPage = () => {
             <a href="/authentication/sign-in">Continue to Login</a>
           </div>
         )}
-        {errorMsg && <p className="emailError">{errorMsg}</p>}
+        {errorMsg && (
+          <div className="errorBg">
+            <p className="emailError">{errorMsg}</p>
+          </div>
+        )}
         <p>Reset Password</p>
         <input
           type="password"
