@@ -37,7 +37,7 @@ import DefaultNavbarMobile from "examples/Navbars/DefaultNavbar/DefaultNavbarMob
 // Soft UI Dashboard React base styles
 import breakpoints from "assets/theme/base/breakpoints";
 
-
+import Logo from "../../../images/Arbsking_Dashboard_Logo.png";
 
 function DefaultNavbar({ transparent, light, action }) {
   const [mobileNavbar, setMobileNavbar] = useState(false);
@@ -93,11 +93,14 @@ function DefaultNavbar({ transparent, light, action }) {
           backdropFilter: transparent ? "none" : `saturate(200%) blur(30px)`,
         })}
       >
-        <SoftBox component={Link} to="/" py={transparent ? 1.5 : 0.75} lineHeight={1}>
-          <SoftTypography variant="button" fontWeight="bold" color={light ? "white" : "dark"}>
-            ArbsKing
-          </SoftTypography>
-        </SoftBox>
+        {/* <SoftBox component={Link} to="https://arbsking.netlify.app/" py={transparent ? 1.5 : 0.75} lineHeight={1}> */}
+        <a href="https://arbsking.netlify.app/">
+          <img src={Logo} width={"8%"} />
+        </a>
+        {/* <SoftTypography variant="button" fontWeight="bold" color={light ? "white" : "dark"}>
+            ArbsKing....
+          </SoftTypography> */}
+        {/* </SoftBox> */}
         <SoftBox color="inherit" display={{ xs: "none", lg: "flex" }} m={0} p={0}>
           {/* <DefaultNavbarLink icon="donut_large" name="dashboard" route="/dashboard" light={light} />
           <DefaultNavbarLink icon="person" name="profile" route="/profile" light={light} /> */}
