@@ -59,85 +59,23 @@ function RTL({ brand, routes }) {
 
   const location = useLocation();
 
-  const [emptyFields, setEmptyFields] = useState("");
-  const oddRefs = [ useRef(), useRef(), useRef() ]
-
   const [odds, setOdds] = useState([
     { odd: 0, stake: 0, payout: 0 },
     { odd: 0, stake: 0, payout: 0 },
   ]);
 
   const handleAddBetDiv = () => {
-    console.log(odds);
     if (odds.length === 3) return;
     setOdds([...odds, { odd: 0, stake: 0, payout: 0 }]);
   };
 
-  function updateOdd(odd, index) {
-    const newOdds = odds;
-    newOdds[index].odd = odd == "" ? 0 : odd;
-    setOdds(newOdds);
-  }
-
   function calculateTotalArbitrage() {
-    // odds.forEach((odd) => {
-    //   if (odd.odd <= 0 || odd.stake <= 0) {
-    //     setEmptyFields("The fields can not be left empty");
-    //     setTotals({ payout: 0, profit: 0, roi: 0 });
-    //     return;
-    //   }
-    // });
-    // setTimeout(() => {
-    //   setEmptyFields("");
-    // }, 3000);
-
-    let totalOdds = odds.reduce((acc, val) => acc.odd + val.odd); // Sum of inverse odds
-    console.log({ totalOdds, odds });
-    totalOdds = totalOdds && totalOdds !== Infinity ? totalOdds : 0;
-
-    const betAmounts = odds.map((odd) => {
-      odd.stake = stake * Math.abs((1 - odd.odd) / totalOdds);
-      odd.payout = odd.odd * odd.stake;
-      return odd;
-    }); // Calculate bet amounts for each outcome
-    setOdds(betAmounts);
-    console.log(betAmounts);
-    const totalPayout = odds.reduce((acc, val) => acc.payout + val.payout);
-    const totalProfit = totalPayout / 2 - stake;
-
-    setTotals({
-      payout: totalPayout,
-      profit: totalProfit,
-      roi: (totalProfit / stake) * 100,
-    });
+    alert("Calculate odd function")
   }
-
-  useEffect(() => {
-    if(!location.state) return
-    let dashOddValue = location.state.value.replace(/,\s*$/, '').split(",")
-    let newOdd = dashOddValue.map((value) => {
-      return { odd: Number(value), stake: 0, payout: 0 }
-    })
-
-    setOdds(newOdd)
-  },[])
-
-  useEffect(() => {
-    // if (!odds || (odds.length === 0 && !document)) return;
-    
-    odds.map((odd, index) => {
-      oddRefs[index].value = odd <= 0 ? "" : odd;
-    });
-  }, [odds]);
-
 
   // odds from the dashboard
   console.log(dashboardOdds)
-  
-  useEffect(() => {
-    if (!stake && !document) return;
-    document.querySelector("#stake-input").value = stake <= 0 ? "" : stake;
-  }, [stake]);
+
   return (
     <DashboardLayout>
       <DashboardNavbar />
@@ -154,9 +92,6 @@ function RTL({ brand, routes }) {
         <h5 style={{ textAlign: "center", marginBottom: "2rem" }}>
           Use the Arbitrage Calculator here
         </h5>
-        {emptyFields && (
-          <p style={{ textAlign: "center", marginBottom: "3rem", color: "red" }}>{emptyFields}</p>
-        )}
         <div className="upperArbitrageCalculator">
           <div className="topHeader"></div>
           {odds.map((odd, index) => (
@@ -166,20 +101,15 @@ function RTL({ brand, routes }) {
                   <div>
                     <p>Bet {index + 1}</p>
                     <input
-                    ref={oddRefs[index]}
                       type="number"
                       id={"odd-input-" + index}
                       placeholder={`Please Enter Bet ${index + 1} Odds`}
-                      onChange={(e) => {
-                        const currentValue = e.target.value;
-                        const newOdd = currentValue <= 0 ? "" : currentValue;
-                        updateOdd(Number(newOdd), index);
-                      }}
+                      onChange={(e) => {}}
                     />
                   </div>
                 </div>
-                <p className="calculatedValue">{odd.stake ? odd.stake.toFixed(2) : ""}</p>
-                <p className="calculatedValue">{odd.payout ? odd.payout.toFixed(2) : ""}</p>
+                <p className="calculatedValue"></p>
+                <p className="calculatedValue"></p>
               </div>
             </div>
           ))}
@@ -192,9 +122,7 @@ function RTL({ brand, routes }) {
                   type="text"
                   placeholder="Please Enter Stake"
                   id="stake-input"
-                  onChange={(e) => {
-                    setStake(Number(e.target.value));
-                  }}
+                  onChange={(e) => {}}
                 />
               </div>
             </div>
