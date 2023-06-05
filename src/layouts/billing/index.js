@@ -52,7 +52,7 @@ function Payment({ brand, routes }) {
     }, 5000);
   }
 
-  console.log(loggedInUser);
+  console.log("From line 55", loggedInUser);
 
   useEffect(() => {
     getUsersSubscriptionStatus();

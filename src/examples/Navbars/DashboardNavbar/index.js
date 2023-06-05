@@ -111,6 +111,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
   }, [dispatch, fixedNavbar]);
 
   async function getUserBalance() {
+    console.log("Fetching user balance info")
     const response = await fetch(
       "https://sportbetpredict.onrender.com/api/account/user/sub-status",
       {
@@ -122,8 +123,12 @@ function DashboardNavbar({ absolute, light, isMini }) {
       }
     );
     const data = await response.json();
-    console.log(data);
+    console.log("User balance status => ",data);
     setUserBalance(data.userBalance);
+    if(data.message === "You must be logged in to perform that action!"){
+      // navigate("/authentication/sign-in")
+      console.log("/authentication/sign-in")
+    }
     // setSubScriptionInfo(data);
     // setSubScriptionStatus(data.subStatus);
   }

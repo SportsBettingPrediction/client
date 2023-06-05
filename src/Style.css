@@ -758,6 +758,9 @@ select {
   .arbitrageCalculator, .dasboardContainer, .paymentContainer, .profileContainer{
     margin-bottom: 5.5rem;
   }
+  .makePayment{
+    padding: 3rem 1rem;
+  }
 }
 
 @media screen and (max-width: 400px) {

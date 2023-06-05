@@ -120,7 +120,7 @@ function SignUp() {
       {success && (
         <div className="registrationSuccessMessageBg">
           <p className="registrationSuccessMessage">
-            <i class="fa-solid fa-check"></i>
+            <i className="fa-solid fa-check"></i>
             {success}
             <button style={{ marginTop: "10px" }} onClick={() => {setSuccess(false); navigate("/authentication/sign-in")}}>Ok</button>
           </p>

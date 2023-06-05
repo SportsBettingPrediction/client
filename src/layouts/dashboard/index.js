@@ -182,7 +182,7 @@ function Dashboard({ brand, routes }) {
                       <div className="clubLogoAndBetCompany">
                         <div className="singleClub">
                           {/* <img src={mancityLogo} /> */}
-                          <i class="fa-regular fa-futbol fs-5"></i>
+                          <i className="fa-regular fa-futbol fs-5"></i>
                           <p>{arb.teams.split(" – ").map((team) => team.trim())[0]}</p>
                         </div>
                         <div className="betPatform mx-4">
@@ -190,7 +190,7 @@ function Dashboard({ brand, routes }) {
                         </div>
                         <div className="singleClub">
                           {/* <img src={mancityLogo} /> */}
-                          <i class="fa-regular fa-futbol fs-5"></i>
+                          <i className="fa-regular fa-futbol fs-5"></i>
                           <p>{arb.teams.split(" – ").map((team) => team.trim())[1]}</p>
                         </div>
                       </div>

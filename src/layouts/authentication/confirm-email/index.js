@@ -37,7 +37,7 @@ const EmailConfirmPage = () => {
         <div className="loadingGif">{isLoading && <img src={LoadingGif} width={"30%"} style={{ marginTop:"0" }}/>}</div>
         {successMessage && (
           <>
-            <i class="fa-solid fa-check"></i>
+            <i className="fa-solid fa-check"></i>
             <h5>Verified</h5>
             <p>{successMessage}</p>
             <a href="/authentication/sign-in">Continue to Login</a>

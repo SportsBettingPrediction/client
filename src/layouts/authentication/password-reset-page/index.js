@@ -68,7 +68,7 @@ const PasswordResetPage = () => {
       <div className="passwordResetDiv">
         {successMsg && (
           <div className="passwordResetSuccess">
-            <i class="fa-solid fa-check"></i>
+            <i className="fa-solid fa-check"></i>
             <p>{successMsg}</p>
             <a href="/authentication/sign-in">Continue to Login</a>
           </div>
