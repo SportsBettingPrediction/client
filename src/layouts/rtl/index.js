@@ -65,16 +65,40 @@ function RTL({ brand, routes }) {
   ]);
 
   const handleAddBetDiv = () => {
-    if (odds.length === 3) return;
+    if (odds.length === 4) return;
     setOdds([...odds, { odd: 0, stake: 0, payout: 0 }]);
   };
 
   function calculateTotalArbitrage() {
-    alert("Calculate odd function")
+    const totalOdds = odds.map(val => 1/val.odd).reduce((x, y) => x + y, 0);
+    const newOdds = odds.map(val=>{
+      const newVal = val;
+      newVal.stake = stake ? stake*Math.abs((1/newVal.odd)/totalOdds) : 0;
+      newVal.payout = newVal.odd * newVal.stake;
+      return newVal;
+    })
+
+    const totalPayout = odds.map(val => val.payout).reduce((x,y) => x+y, 0)
+    const profit = (totalPayout - (odds.length*stake))/odds.length;
+    const roi = (profit/stake) * 100;
+    const payout = totalPayout / odds.length;
+    
+    setOdds(newOdds)
+    setTotals({profit, roi, payout})
   }
 
-  // odds from the dashboard
-  console.log(dashboardOdds)
+  function updateOdd(value, index) {
+    const newOdds = odds;
+    newOdds[index].odd = value;
+    setOdds(newOdds);
+  }
+
+  function resetInputValues() {
+    odds.map((odd, index)=>{
+      document.querySelector("#odd-input-"+index).value = "";
+    })
+    document.querySelector("#stake-input").value = "";
+  }
 
   return (
     <DashboardLayout>
@@ -104,12 +128,16 @@ function RTL({ brand, routes }) {
                       type="number"
                       id={"odd-input-" + index}
                       placeholder={`Please Enter Bet ${index + 1} Odds`}
-                      onChange={(e) => {}}
+                      onChange={(e) => {
+                        const value = Number(isNaN(e.target.value) ? 0 : e.target.value)
+                        updateOdd(value, index)
+                      }}
+                      defaultValue={odd.odd ? odd.odd : ""}
                     />
                   </div>
                 </div>
-                <p className="calculatedValue"></p>
-                <p className="calculatedValue"></p>
+                <p className="calculatedValue">{odd.stake ? odd.stake : ""}</p>
+                <p className="calculatedValue">{odd.payout ? odd.payout : ""}</p>
               </div>
             </div>
           ))}
@@ -122,7 +150,10 @@ function RTL({ brand, routes }) {
                   type="text"
                   placeholder="Please Enter Stake"
                   id="stake-input"
-                  onChange={(e) => {}}
+                  onChange={(e) => {
+                    const value = Number(!isNaN(e.target.value) ? e.target.value : 0);
+                    setStake(value);
+                  }}
                 />
               </div>
             </div>
@@ -143,6 +174,7 @@ function RTL({ brand, routes }) {
                 ]);
                 setStake(0);
                 setTotals({ payout: 0, profit: 0, roi: 0 });
+                resetInputValues();
               }}
             >
               <i className="fa-solid fa-rotate"></i>RESET
@@ -157,13 +189,13 @@ function RTL({ brand, routes }) {
           </div>
           <div className="finalCalculation">
             <div>
-              Total Payout: <span>${(totals.payout / 2).toFixed(2) || "0.00"}</span>
+              Total Payout: <span>${(totals.payout).toFixed(2) || "0.00"}</span>
             </div>
             <div>
               Total Profit: <span>${totals.profit.toFixed(2) || "0.00"}</span>
             </div>
             <div>
-              ROI: <span>${totals.roi.toFixed(2) || "0.00"}</span>
+              ROI: <span>{totals.roi.toFixed(2) || "0.00"}%</span>
             </div>
           </div>
         </div>
