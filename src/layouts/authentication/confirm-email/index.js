@@ -33,8 +33,8 @@ const EmailConfirmPage = () => {
   return (
     <>
       <DefaultNavbar />
-      <div className="passwordResetDiv">
-        <div className="loadingGif">{isLoading && <img src={LoadingGif} width={"30%"} style={{ marginTop:"0" }}/>}</div>
+      <div className="emailConfirmationDiv">
+        <div className="loadingGif">{isLoading && <img src={LoadingGif} width={"50%"} style={{ marginTop:"0" }}/>}</div>
         {successMessage && (
           <>
             <i className="fa-solid fa-check"></i>

@@ -513,6 +513,12 @@ select {
   display: flex;
   align-items: center;
   justify-content: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* width: 100%; */
+  /* height:100vh */
 }
 
 .loadingGif img{
@@ -548,7 +554,7 @@ select {
 
 /* Reset Password */
 
-.passwordResetDiv .fa-xmark, .subModal .fa-xmark{
+.passwordResetDiv .fa-xmark, .subModal .fa-xmark, .emailConfirmationDiv  .fa-xmark{
   font-size: 2rem;
   color: red;
   border: 1px solid red;
@@ -557,7 +563,7 @@ select {
   margin-bottom: 16px;
 }
 
-.passwordResetDiv .fa-check, .subModal .fa-check, .registrationSuccessMessage .fa-check{
+.passwordResetDiv .fa-check, .subModal .fa-check, .registrationSuccessMessage .fa-check, .emailConfirmationDiv  .fa-check{
   font-size: 2rem;
   color: rgb(0, 191, 35);
   border: 1px solid rgb(0, 191, 35);
@@ -575,7 +581,7 @@ select {
   margin-bottom: 16px;
 }
 
-.passwordResetDiv{
+.passwordResetDiv, .emailConfirmationDiv{
   text-align: center;
   display: flex;
   align-items: center;
@@ -599,7 +605,7 @@ select {
   padding: 5px 10px;
 }
 
-.resetPasswordBtn, .passwordResetDiv , .registrationSuccessMessage button{
+.resetPasswordBtn, .passwordResetDiv button, .registrationSuccessMessage button, .emailConfirmationDiv a{
   all: unset;
   background: linear-gradient(to right, #21BBFE, #217EFE);
   color: #fff;
@@ -608,7 +614,7 @@ select {
   cursor: pointer;
 }
 
-.passwordResetDiv p{
+.passwordResetDiv p, .emailConfirmationDiv p{
   margin: 10px 0 20px;
 }
 
@@ -740,8 +746,12 @@ select {
     align-items: flex-start;
   }
 
-  .registrationSuccessMessage, .passwordResetDiv{
+  .registrationSuccessMessage, .passwordResetDiv, .emailConfirmationDiv{
     width: 90%;
+  }
+
+  .arbskinglogo{
+    width: 16%;
   }
   
 }
@@ -764,6 +774,10 @@ select {
 }
 
 @media screen and (max-width: 400px) {
+
+  .arbskinglogo{
+    width: 20%;
+  }
 
 }
 

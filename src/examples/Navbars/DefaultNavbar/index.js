@@ -94,8 +94,8 @@ function DefaultNavbar({ transparent, light, action }) {
         })}
       >
         {/* <SoftBox component={Link} to="https://arbsking.netlify.app/" py={transparent ? 1.5 : 0.75} lineHeight={1}> */}
-        <a href="https://arbsking.netlify.app/">
-          <img src={Logo} width={"8%"} />
+        <a href="https://arbsking.com">
+          <img src={Logo} width={"8%"}  className="arbskinglogo"/>
         </a>
         {/* <SoftTypography variant="button" fontWeight="bold" color={light ? "white" : "dark"}>
             ArbsKing....
