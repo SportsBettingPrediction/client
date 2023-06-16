@@ -122,7 +122,7 @@ function SignUp() {
           <p className="registrationSuccessMessage">
             <i className="fa-solid fa-check"></i>
             {success}
-            <button style={{ marginTop: "10px" }} onClick={() => {setSuccess(false); navigate("/authentication/sign-in")}}>Ok</button>
+            <button style={{ marginTop: "10px" }} onClick={() => {setSuccess(false); navigate("/dashboard/authentication/sign-in")}}>Ok</button>
           </p>
         </div>
       )}
@@ -245,7 +245,7 @@ function SignUp() {
                     Already have an account?&nbsp;
                     <SoftTypography
                       component={Link}
-                      to="/authentication/sign-in"
+                      to="/dashboard/authentication/sign-in"
                       variant="button"
                       color="dark"
                       fontWeight="bold"

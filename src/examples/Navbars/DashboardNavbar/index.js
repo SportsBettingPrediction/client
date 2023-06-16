@@ -71,6 +71,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
   const route = useLocation().pathname.split("/").slice(1);
   const navigate = useNavigate();
   const [userBalance, setUserBalance] = useState("");
+  const [loading, setLoading] = useState(false)
 
   const { user } = useAuth();
   const { setUser } = useAuth();
@@ -111,7 +112,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
   }, [dispatch, fixedNavbar]);
 
   async function getUserBalance() {
-    console.log("Fetching user balance info")
+    setLoading(true)
     const response = await fetch(
       "https://sportbetpredict.onrender.com/api/account/user/sub-status",
       {
@@ -122,13 +123,19 @@ function DashboardNavbar({ absolute, light, isMini }) {
         },
       }
     );
+    if(response){
+      setLoading(false)
+    }
     const data = await response.json();
     console.log("User balance status => ",data);
     setUserBalance(data.userBalance);
-    if(data.message === "You must be logged in to perform that action!"){
-      // navigate("/authentication/sign-in")
-      console.log("/authentication/sign-in")
+    if(data.jwtStatus !== "Not Expired"){
+      navigate("/dashboard/authentication/sign-in")
     }
+    // if(data.message === "You must be logged in to perform that action!"){
+    //   // navigate("/authentication/sign-in")
+    //   console.log("/authentication/sign-in")
+    // }
     // setSubScriptionInfo(data);
     // setSubScriptionStatus(data.subStatus);
   }
@@ -142,7 +149,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
     AuthApi.Logout(user);
     setUser(null);
     localStorage.clear();
-    return navigate("/authentication/sign-in");
+    return navigate("/dashboard/authentication/sign-in");
   };
 
   // Render the notifications menu
@@ -207,7 +214,8 @@ function DashboardNavbar({ absolute, light, isMini }) {
                   <p>Available Balance</p>
                   <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
                     <p style={{ backgroundColor:"#1AC888", color:"#fff", padding:"3px 5px", borderRadius:"3px" }}>${userBalance && userBalance}</p>
-                    <i className="fa-solid fa-rotate-right" style={{ cursor:"pointer" }} onClick={() => getUserBalance()}></i>
+                    {loading ? <i class="fa-solid fa-spinner fa-spin"></i> : <i className="fa-solid fa-arrow-rotate-right" style={{ cursor:"pointer" }} onClick={() => getUserBalance()}></i> }
+                    
                   </div>
                 </div>
               </div>

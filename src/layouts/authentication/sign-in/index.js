@@ -152,7 +152,7 @@ function SignIn() {
             </SoftBox>
             <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "10px" }}>
               <div></div>
-              <Link to="/forgotpassword" style={{ fontSize: "14px", color: "#344767" }}>
+              <Link to="/dashboard/forgotpassword" style={{ fontSize: "14px", color: "#344767" }}>
                 Forgot Password?
               </Link>
             </div>
@@ -188,7 +188,7 @@ function SignIn() {
             <SoftBox mt={3} textAlign="center">
               <SoftTypography variant="button" color="text" fontWeight="regular">
                 Don&apos;t have an account?
-                <a href="/authentication/sign-up">Sign up</a>
+                <a href="/dashboard/authentication/sign-up">Sign up</a>
                 {/* <SoftTypography
                   component={Link}
                   to="/authentication/sign-up"

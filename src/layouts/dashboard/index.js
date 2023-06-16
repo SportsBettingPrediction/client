@@ -67,7 +67,7 @@ function Dashboard({ brand, routes }) {
 
   useEffect(() => {
     if (!loggedInUser) {
-      navigate("/authentication/sign-in");
+      navigate("/dashboard/authentication/sign-in");
     }
     getOpportunities();
   }, []);
@@ -198,7 +198,7 @@ function Dashboard({ brand, routes }) {
                         <p>{arb.profit}%</p>
                       </div>
                       <div>
-                        <Link to="/arbitragecalculator" state={{ value: arb.odds }}>
+                        <Link to="/dashboard/arbitragecalculator" state={{ value: arb.odds }}>
                           {/* {console.log(arb.odds.split(","))} */}
                           <i className="fa-solid fa-calculator" onClick={openArbCalculator}></i>
                         </Link>

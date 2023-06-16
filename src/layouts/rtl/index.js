@@ -56,13 +56,32 @@ function RTL({ brand, routes }) {
   const [stake, setStake] = useState(0);
   const [totals, setTotals] = useState({ payout: 0, profit: 0, roi: 0 });
   const [dashboardOdds, setDashboardOdds] = useState()
+  const [checkIfCalculateIsClicked, setCheckIfCalculateIsClicked] = useState(false)
 
   const location = useLocation();
+  console.log(location.state)
 
-  const [odds, setOdds] = useState([
-    { odd: 0, stake: 0, payout: 0 },
-    { odd: 0, stake: 0, payout: 0 },
-  ]);
+  const [odds, setOdds] = useState([]);
+
+  useEffect(() => {
+    if(location.state === null){
+      setOdds([
+        { odd: 0, stake: 0, payout: 0 },
+        { odd: 0, stake: 0, payout: 0 },
+      ])
+    }else{
+      const oddsArray = location.state.value.split(",").map(str => parseFloat(str.trim()));
+
+      const obj = {
+        odd1: oddsArray[0],
+        odd2: oddsArray[1]
+      };
+      setOdds([
+        { odd: obj.odd1, stake: 0, payout: 0 },
+        { odd: obj.odd2, stake: 0, payout: 0 },
+      ])
+    }
+  },[])
 
   const handleAddBetDiv = () => {
     if (odds.length === 4) return;
@@ -70,6 +89,7 @@ function RTL({ brand, routes }) {
   };
 
   function calculateTotalArbitrage() {
+    setCheckIfCalculateIsClicked(true)
     const totalOdds = odds.map(val => 1/val.odd).reduce((x, y) => x + y, 0);
     const newOdds = odds.map(val=>{
       const newVal = val;
@@ -136,8 +156,8 @@ function RTL({ brand, routes }) {
                     />
                   </div>
                 </div>
-                <p className="calculatedValue">{odd.stake ? odd.stake : ""}</p>
-                <p className="calculatedValue">{odd.payout ? odd.payout : ""}</p>
+                <p className={checkIfCalculateIsClicked ? `calculatedValue`:`unCalculatedValue`}>{odd.stake ? odd.stake : ""}</p>
+                <p className={checkIfCalculateIsClicked ? `calculatedValue`:`unCalculatedValue`}>{odd.payout ? odd.payout : ""}</p>
               </div>
             </div>
           ))}

@@ -138,7 +138,7 @@ function Payment({ brand, routes }) {
                   <Grid item xs={12}>
                     <div className="subscription">
                       {/* {loading && } */}
-                      <img src={shieldImage} className="shieldImage"/>
+                      <img src={shieldImage} className="shieldImage" />
                       <div className="subscriptionText">
                         <h2>Active Subscription</h2>
                         <p>
@@ -154,7 +154,7 @@ function Payment({ brand, routes }) {
                   {subScriptionInfo && subScriptionInfo.userSubStatus === "No Subscription" ? (
                     <Grid item xs={12} lg={6}>
                       <div className="subscription">
-                        <img src={grid} className="gridImage"/>
+                        <img src={grid} className="gridImage" />
                         <div className="subscriptionText">
                           <h2>{subScriptionInfo.userSubStatus}</h2>
                           <p>Subscribe to continue placing bets</p>
@@ -164,7 +164,7 @@ function Payment({ brand, routes }) {
                   ) : subScriptionInfo.userSubStatus === "Expired" ? (
                     <Grid item xs={12} lg={6}>
                       <div className="subscription">
-                        <img src={warningImage} className="expiredImage"/>
+                        <img src={warningImage} className="expiredImage" />
                         <div className="subscriptionText">
                           <h2>{subScriptionInfo.userSubStatus}</h2>
                           <p>Subscribe to continue placing bets</p>
@@ -172,25 +172,32 @@ function Payment({ brand, routes }) {
                       </div>
                     </Grid>
                   ) : (
-                    <Grid item xs={12} lg={6}>
-                      <div className="subscription">
-                        <div className="loadingGif">
-                          {loading && (
-                            <div
-                              style={{
-                                display: "flex",
-                                alignItems: "center",
-                                gap: "20px",
-                                justifyContent: "center",
-                              }}
-                            >
-                              <img src={LoadingGif} width={"30%"} style={{ marginTop: "0" }} />
-                              <p>Getting subscription status</p>
-                            </div>
-                          )}
+                    loading && (
+                      <Grid item xs={12} lg={6}>
+                        <div className="subscription" style={{ fontSize:"24px" }}>
+                          <i class="fa-solid fa-spinner fa-spin"></i>
+                          <p style={{ marginBottom: "0", fontSize:"16px" }}>Getting subscription status</p>
                         </div>
-                      </div>
-                    </Grid>
+                      </Grid>
+                    )
+
+                    //   <div className="subscription">
+                    //     <div className="loadingGif">
+                    //       {loading && (
+                    //         <div
+                    //           style={{
+                    //             display: "flex",
+                    //             alignItems: "center",
+                    //             gap: "20px",
+                    //             justifyContent: "center",
+                    //           }}
+                    //         >
+                    //           <img src={LoadingGif} width={"30%"} style={{ marginTop: "0" }} />
+                    //           <p>Getting subscription status</p>
+                    //         </div>
+                    //       )}
+                    //     </div>
+                    //   </div>
                   )}
                 </>
               )}

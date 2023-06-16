@@ -167,10 +167,21 @@ select {
   padding: 20px;
   border-radius: 20px;
   box-shadow: 0rem 1.25rem 1.6875rem 0rem rgba(0, 0, 0, 0.05);
+  /* background-color: red; */
 }
 
-.subscription img{
+.subscription img, .subscription_loader img{
   width: 50px !important;
+}
+
+.subscription_loader{
+  /* box-shadow: 0rem 1.25rem 1.6875rem 0rem rgba(0, 0, 0, 0.05); */
+  background-color: #b80000;
+  width: 80%;
+  position: fixed;
+  top: 50%;
+  left: 65%;
+  transform: translate(-50%, -50%);
 }
 
 .makePayment{
@@ -263,6 +274,15 @@ select {
   padding: 7px 10px;
   border-radius: 50px;
   cursor: pointer;
+  transition: .5s;
+  border: 1px solid transparent;
+}
+
+.subscriptionPlans button:hover{
+  background: transparent;
+  border: 1px solid #21BBFE;
+  color: #217EFE;
+  transition: .5s;
 }
 
 .playingTeamOpportunity{
@@ -310,6 +330,7 @@ select {
 
 .iconAndDetail p{
   margin-bottom: 0;
+  overflow: hidden;
   /* text-transform: uppercase; */
 }
 
@@ -462,6 +483,13 @@ select {
   border: 1px solid #344767;
   padding: 7px 10px;
   outline: none;
+}
+
+.unCalculatedValue{
+  /* padding: 7px 10px; */
+  width: 250px;
+  /* height: 40px; */
+  background-color: rgb(217, 217, 217);
 }
 
 .calculatedValue{

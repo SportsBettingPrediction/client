@@ -92,10 +92,10 @@ function Footer({ company, links }) {
 
 // Setting default values for the props of Footer
 Footer.defaultProps = {
-  company: { href: "https://www.creative-tim.com/?AFFILIATE=128200", name: "Creative-Tim" },
+  company: { href: "#", name: "Creative-Tim" },
   links: [
     // { href: "https://appseed.us/product/soft-ui-dashboard/api-server-nodejs/react/", name: "Sources" },
-    { href: "https://appseed.us/support/", name: "Support" },
+    { href: "https://arbsking.com/#contact-us-section", name: "Support" },
     // { href: "https://appseed.us/", name: "AppSeed" },
   ],
 };
