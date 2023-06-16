@@ -704,6 +704,25 @@ select {
   z-index: 1;
 }
 
+.navLinks{
+  display: flex;
+  list-style: none;
+  margin-bottom: 0;
+  gap: 2rem;
+}
+
+.navLinks a{
+  color: #67748e;
+}
+
+.logoTag{
+  width: 5%;
+}
+
+.arbskinglogo{
+  width: 100%;
+}
+
 @media screen and (max-width: 940px) {
   .singleBet,  .betInput div{
     flex-direction: column;
@@ -723,6 +742,10 @@ select {
   .stakeP{
     display: none;
   }
+
+  .logoTag{
+    width: 10%;
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -738,6 +761,10 @@ select {
     gap: 10px;
   }
 
+  .logoTag{
+    width: 12%;
+  }
+
 }
 
 @media screen and (max-width: 678px) {
@@ -749,11 +776,11 @@ select {
   .registrationSuccessMessage, .passwordResetDiv, .emailConfirmationDiv{
     width: 90%;
   }
-
-  .arbskinglogo{
-    width: 16%;
-  }
   
+}
+
+.navControls{
+  display: none;
 }
 
 @media screen and (max-width: 576px) {
@@ -771,13 +798,53 @@ select {
   .makePayment{
     padding: 3rem 1rem;
   }
+
+  .navLinks{
+    box-shadow: 0rem .5rem .5rem 0rem rgba(0, 0, 0, 0.1);
+    flex-direction: column;
+    position: fixed;
+    text-align: center;
+    width: 100%;
+    top: 97px;
+    border-radius: 50px;
+    gap: 10px;
+    z-index: 2;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 0;
+    overflow: hidden;
+    transition: .5s;
+  }
+
+  .navLinks li:nth-of-type(1){
+    margin: 10px 0 0;
+  }
+  
+  .navLinks li:nth-of-type(2){
+    margin: 0 0 10px;
+  }
+
+  .navControls{
+    display: block;
+    cursor: pointer;
+    font-size: 18px;
+  }
+
+  .navControls button:nth-of-type(2){
+    display: none;
+  }  
+  
+  .navOpen{
+    height: 80px;
+    transition: .5s;
+  }
 }
 
-@media screen and (max-width: 400px) {
 
-  .arbskinglogo{
-    width: 20%;
-  }
+
+
+
+@media screen and (max-width: 400px) {
 
 }
 

@@ -71,6 +71,15 @@ function DefaultNavbar({ transparent, light, action }) {
     return () => window.removeEventListener("resize", displayMobileNavbar);
   }, []);
 
+  const [isNavOpen, setIsNavOpen] = useState(false)
+
+  function openNav(){
+    setIsNavOpen(!isNavOpen)
+  }
+  function closeNav(){
+    setIsNavOpen(!isNavOpen)
+  }
+
   return (
     <Container>
       <SoftBox
@@ -94,72 +103,23 @@ function DefaultNavbar({ transparent, light, action }) {
         })}
       >
         {/* <SoftBox component={Link} to="https://arbsking.netlify.app/" py={transparent ? 1.5 : 0.75} lineHeight={1}> */}
-        <a href="https://arbsking.com">
-          <img src={Logo} width={"8%"}  className="arbskinglogo"/>
+        <a href="https://arbsking.com" className="logoTag">
+          <img src={Logo} className="arbskinglogo"/>
         </a>
-        {/* <SoftTypography variant="button" fontWeight="bold" color={light ? "white" : "dark"}>
-            ArbsKing....
-          </SoftTypography> */}
-        {/* </SoftBox> */}
-        <SoftBox color="inherit" display={{ xs: "none", lg: "flex" }} m={0} p={0}>
-          {/* <DefaultNavbarLink icon="donut_large" name="dashboard" route="/dashboard" light={light} />
-          <DefaultNavbarLink icon="person" name="profile" route="/profile" light={light} /> */}
-          <DefaultNavbarLink
-            icon="account_circle"
-            name="sign up"
-            route="/authentication/sign-up"
-            light={light}
-          />
-          <DefaultNavbarLink
-            icon="key"
-            name="sign in"
-            route="/authentication/sign-in"
-            light={light}
-          />
-        </SoftBox>
-        {action &&
-          (action.type === "internal" ? (
-            <SoftBox display={{ xs: "none", lg: "inline-block" }}>
-              <SoftButton
-                component={Link}
-                to={action.route}
-                variant="gradient"
-                color={action.color ? action.color : "info"}
-                size="small"
-                circular
-              >
-                {action.label}
-              </SoftButton>
-            </SoftBox>
-          ) : (
-            <SoftBox display={{ xs: "none", lg: "inline-block" }}>
-              <SoftButton
-                component="a"
-                href={action.route}
-                target="_blank"
-                rel="noreferrer"
-                variant="gradient"
-                color={action.color ? action.color : "info"}
-                size="small"
-                circular
-              >
-                {action.label}
-              </SoftButton>
-            </SoftBox>
-          ))}
-        <SoftBox
-          display={{ xs: "inline-block", lg: "none" }}
-          lineHeight={0}
-          py={1.5}
-          pl={1.5}
-          color="inherit"
-          sx={{ cursor: "pointer" }}
-          onClick={openMobileNavbar}
-        >
-          <Icon fontSize="default">{mobileNavbar ? "close" : "menu"}</Icon>
-        </SoftBox>
+        <div className="navControls">
+          {!isNavOpen && <i className="fa-solid fa-bars" onClick={openNav}></i>}
+          {isNavOpen && <i className="fa-solid fa-close" onClick={closeNav}></i>}
+        </div>
+        
+        <ul className={isNavOpen ? `navLinks navOpen`: `navLinks navClose`} >
+          <li>
+            <a href="/authentication/sign-up">Sign Up</a>
+          </li>
+          <li>
+            <a href="/authentication/sign-in">Sign In</a>
+          </li>
+        </ul>
       </SoftBox>
-      {mobileView && <DefaultNavbarMobile open={mobileNavbar} close={closeMobileNavbar} />}
     </Container>
   );
 }

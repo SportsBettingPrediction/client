@@ -156,7 +156,7 @@ function SignIn() {
                 Forgot Password?
               </Link>
             </div>
-            <SoftBox display="flex" alignItems="center">
+            {/* <SoftBox display="flex" alignItems="center">
               <Switch checked={rememberMe} onChange={handleSetRememberMe} />
               <SoftTypography
                 variant="button"
@@ -166,7 +166,7 @@ function SignIn() {
               >
                 &nbsp;&nbsp;Remember me
               </SoftTypography>
-            </SoftBox>
+            </SoftBox> */}
             <SoftBox mt={2} mb={2} textAlign="center">
               <h6
                 style={{

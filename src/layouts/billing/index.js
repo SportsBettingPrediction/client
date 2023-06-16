@@ -36,9 +36,9 @@ function Payment({ brand, routes }) {
   const [subMsg, setSubMsg] = useState("");
   const [copyICon, setCopyIcon] = useState(true);
   const [loading, setLoading] = useState(false);
-  const [loading10, setLoading10] = useState(false);
-  const [loading55, setLoading55] = useState(false);
-  const [loading110, setLoading110] = useState(false);
+  const [loading12, setLoading12] = useState(false);
+  const [loading65, setLoading65] = useState(false);
+  const [loading130, setLoading130] = useState(false);
   const loggedInUser = JSON.parse(localStorage.getItem("user"));
   // function openModal() {
   //   setSubScriptionModalOpen(!subScriptionModalOpen);
@@ -59,12 +59,12 @@ function Payment({ brand, routes }) {
   }, []);
 
   async function payForSub(subId, subAmount) {
-    if (subAmount === "10") {
-      setLoading10(true);
-    } else if (subAmount === "55") {
-      setLoading55(true);
+    if (subAmount === "12") {
+      setLoading12(true);
+    } else if (subAmount === "65") {
+      setLoading65(true);
     } else {
-      setLoading110(true);
+      setLoading130(true);
     }
     console.log(subId);
     const response = await fetch("https://sportbetpredict.onrender.com/api/purchase/subscription", {
@@ -79,9 +79,9 @@ function Payment({ brand, routes }) {
       },
     });
     if (response) {
-      setLoading10(false);
-      setLoading55(false);
-      setLoading110(false);
+      setLoading12(false);
+      setLoading65(false);
+      setLoading130(false);
       getUsersSubscriptionStatus();
     }
     const data = await response.json();
@@ -257,11 +257,11 @@ function Payment({ brand, routes }) {
                   <div className="subscriptionPlans">
                     <h3>Basic</h3>
                     <div className="priceAndDuration">
-                      <h2>$10</h2>
+                      <h2>$12</h2>
                       <p>Monthly</p>
                     </div>
-                    {!loading10 ? (
-                      <button onClick={() => payForSub("64690b1694617642d7b9ef9f", "10")}>
+                    {!loading12 ? (
+                      <button onClick={() => payForSub("64690b1694617642d7b9ef9f", "12")}>
                         Subscribe
                       </button>
                     ) : (
@@ -276,11 +276,11 @@ function Payment({ brand, routes }) {
                 <div className="subscriptionPlans second">
                   <h3>Standard</h3>
                   <div className="priceAndDuration">
-                    <h2>$55</h2>
+                    <h2>$65</h2>
                     <p>6 - Months</p>
                   </div>
-                  {!loading55 ? (
-                    <button onClick={() => payForSub("64690b1e94617642d7b9efa0", "55")}>
+                  {!loading65 ? (
+                    <button onClick={() => payForSub("64690b1e94617642d7b9efa0", "65")}>
                       Subscribe
                     </button>
                   ) : (
@@ -294,11 +294,11 @@ function Payment({ brand, routes }) {
                 <div className="subscriptionPlans third">
                   <h3>Premium</h3>
                   <div className="priceAndDuration">
-                    <h2>$110</h2>
+                    <h2>$130</h2>
                     <p>Yearly</p>
                   </div>
-                  {!loading110 ? (
-                    <button onClick={() => payForSub("64690b0b94617642d7b9ef9e", "110")}>
+                  {!loading130 ? (
+                    <button onClick={() => payForSub("64690b0b94617642d7b9ef9e", "130")}>
                       Subscribe
                     </button>
                   ) : (
