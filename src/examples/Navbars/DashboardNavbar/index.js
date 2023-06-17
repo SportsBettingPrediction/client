@@ -211,11 +211,10 @@ function DashboardNavbar({ absolute, light, isMini }) {
               <div className="userAndBalance">
                 <i className="fa-solid fa-user fs-3"></i>
                 <div>
-                  <p>Available Balance</p>
+                  <p className="white-text">Available Balance</p>
                   <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
                     <p style={{ backgroundColor:"#1AC888", color:"#fff", padding:"3px 5px", borderRadius:"3px" }}>${userBalance && userBalance}</p>
                     {loading ? <i class="fa-solid fa-spinner fa-spin"></i> : <i className="fa-solid fa-arrow-rotate-right" style={{ cursor:"pointer" }} onClick={() => getUserBalance()}></i> }
-                    
                   </div>
                 </div>
               </div>

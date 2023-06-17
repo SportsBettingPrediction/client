@@ -12,6 +12,7 @@ import SoftTypography from "components/SoftTypography";
 
 // Soft UI Dashboard React examples
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
+import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Footer from "examples/Footer";
 import ProfileInfoCard from "examples/Cards/InfoCards/ProfileInfoCard";
 import ProfilesList from "examples/Lists/ProfilesList";
@@ -94,9 +95,10 @@ function Overview({ brand, routes }) {
 
   return (
     <DashboardLayout>
-      <div style={{ color: "#fff !important" }}>
+      {/* <div style={{ color: "#fff !important" }}>
         <Header />
-      </div>
+      </div> */}
+      <DashboardNavbar />
       <Sidenav brand={brand} brandName="Arbsking" routes={routes} />
       <div className="profileContainer">
         <div className="userDoubleInfo">
@@ -104,7 +106,14 @@ function Overview({ brand, routes }) {
             <p>First Name</p>
             <div className="iconAndDetail">
               <i className="fa-solid fa-user"></i>
-              <p>{loggedInUser && loggedInUser.userDetails.firstname}</p>
+              <p>
+                {loggedInUser && loggedInUser.userDetails.firstname}{" "}
+                {!loggedInUser.userDetails.referralAgent && (
+                  <i class="fa-solid fa-circle-check" style={{ marginLeft: "5px" }}>
+                    {/* <span class="tooltiptext">Tooltip text</span> */}
+                  </i>
+                )}
+              </p>
             </div>
           </div>
           <div className="userSingleInfo">

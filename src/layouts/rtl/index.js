@@ -209,10 +209,10 @@ function RTL({ brand, routes }) {
           </div>
           <div className="finalCalculation">
             <div>
-              Total Payout: <span>${(totals.payout).toFixed(2) || "0.00"}</span>
+              Total Payout: <span>₦‎{(totals.payout).toFixed(2) || "0.00"}</span>
             </div>
             <div>
-              Total Profit: <span>${totals.profit.toFixed(2) || "0.00"}</span>
+              Total Profit: <span>₦‎{totals.profit.toFixed(2) || "0.00"}</span>
             </div>
             <div>
               ROI: <span>{totals.roi.toFixed(2) || "0.00"}%</span>
