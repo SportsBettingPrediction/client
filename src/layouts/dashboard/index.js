@@ -236,7 +236,7 @@ function Dashboard({ brand, routes }) {
           </SoftBox>
           <div className="loadingGif">{isLoading && <img src={LoadingGif} />}</div>
 
-          <div className="dropDowns">
+          <div className="select">
             <select name="languages" id="bet_company" onChange={filterBetCompany}>
               <option value="all">All</option>
               <option value="nigerian-nigerian">Nigerian - Nigerian</option>
