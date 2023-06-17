@@ -545,11 +545,13 @@ select {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  z-index: 999;
   /* width: 100%; */
   /* height:100vh */
 }
 
 .loadingGif img{
+  width: 50%;
   margin-top: 5rem;
 }
 
@@ -749,6 +751,17 @@ select {
 
 .arbskinglogo{
   width: 100%;
+}
+
+.bookmakeer-and-link{
+  display: flex;
+  align-items: center;
+}
+
+@media screen and (max-width:992px) {
+  .arbitrageCalculator, .dasboardContainer, .paymentContainer, .profileContainer{
+    margin-bottom: 5.5rem;
+  }
 }
 
 @media screen and (max-width: 940px) {

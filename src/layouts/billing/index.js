@@ -25,6 +25,7 @@ import grid from "../../images/grid.png";
 import qrcode from "../../images/qr-code.png";
 import QRCode from "react-qr-code";
 import { useState, useEffect } from "react";
+import {useNavigate} from "react-router-dom"
 import LoadingGif from "../../assets/images/loader/loading-gif.gif";
 
 // Soft UI Dashboard React routes
@@ -54,7 +55,12 @@ function Payment({ brand, routes }) {
 
   console.log("From line 55", loggedInUser);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
+    if (!loggedInUser) {
+      navigate("/dashboard/authentication/sign-in");
+    }
     getUsersSubscriptionStatus();
   }, []);
 

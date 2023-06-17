@@ -40,7 +40,7 @@ const EmailConfirmPage = () => {
             <i className="fa-solid fa-check"></i>
             <h5>Verified</h5>
             <p>{successMessage}</p>
-            <a href="/authentication/sign-in">Continue to Login</a>
+            <a href="/dashboard/authentication/sign-in">Continue to Login</a>
           </>
         )}
         {errorMessage && (
@@ -48,7 +48,7 @@ const EmailConfirmPage = () => {
             <i className="fa-solid fa-xmark"></i>
             <h5>Already Verified</h5>
             <p>{errorMessage}</p>
-            <a href="/authentication/sign-in">Continue to Login</a>
+            <a href="/dashboard/authentication/sign-in">Continue to Login</a>
           </>
         )}
       </div>

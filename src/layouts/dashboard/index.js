@@ -90,7 +90,7 @@ function Dashboard({ brand, routes }) {
 
     if (response.ok) {
       const data = await response.json();
-      // console.log(data);
+      console.log(data);
       setArbs(data);
       data.arbs.map((bookmaker) => {
         setBookmarkers(bookmaker.bookmakers.split(","));
@@ -109,11 +109,95 @@ function Dashboard({ brand, routes }) {
     }
   }
 
-  const [selectedCompany, setSelectedCompany] = useState();
+  async function getNigerianOpportunities() {
+    setIsLoading(true);
+    const response = await fetch("https://sportbetpredict.onrender.com/api/account/arbs/nigerian", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${loggedInUser.token}`,
+      },
+    });
+    if (response) {
+      setIsLoading(false);
+    }
+    if (response.status === 401) {
+      setArbsInvalid("");
+      setArbs(null);
+    }
+
+    if (response.ok) {
+      const data = await response.json();
+      console.log(data);
+      setArbs(data);
+      data.arbs.map((bookmaker) => {
+        setBookmarkers(bookmaker.bookmakers.split(","));
+      });
+      // Field to retrieve and sum
+      const field = "profit";
+
+      // Calculate the sum
+      const sum = data.arbs.reduce(
+        (accumulator, currentValue) => accumulator + currentValue[field],
+        0
+      );
+      setArbsTotal(sum);
+
+      setArbsAvg(sum / data.arbs.length);
+    }
+  }
+
+  async function getNigerianForeignOpportunities() {
+    setIsLoading(true);
+    const response = await fetch("https://sportbetpredict.onrender.com/api/account/arbs/nigerian-foreign", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${loggedInUser.token}`,
+      },
+    });
+    if (response) {
+      setIsLoading(false);
+    }
+    if (response.status === 401) {
+      setArbsInvalid("");
+      setArbs(null);
+    }
+
+    if (response.ok) {
+      const data = await response.json();
+      console.log(data);
+      setArbs(data);
+      data.arbs.map((bookmaker) => {
+        setBookmarkers(bookmaker.bookmakers.split(","));
+      });
+      // Field to retrieve and sum
+      const field = "profit";
+
+      // Calculate the sum
+      const sum = data.arbs.reduce(
+        (accumulator, currentValue) => accumulator + currentValue[field],
+        0
+      );
+      setArbsTotal(sum);
+
+      setArbsAvg(sum / data.arbs.length);
+    }
+  }
+
+  const [selectedCompany, setSelectedCompany] = useState("");
+  // getOpportunities()
 
   function filterBetCompany(e) {
     setSelectedCompany(e.target.value);
-  }
+    console.log(selectedCompany)
+    if (e.target.value === "nigerian-nigerian") {
+      getNigerianOpportunities()
+      } else if (e.target.value === "all") {
+        getOpportunities();
+      }else if(e.target.value === "nigerian-foreign"){
+        console.log("ni-fr")
+        getNigerianForeignOpportunities()
+      }
+    }
 
   function openArbCalculator() {
     navigate("/arbitragecalculator");
@@ -152,21 +236,20 @@ function Dashboard({ brand, routes }) {
           </SoftBox>
           <div className="loadingGif">{isLoading && <img src={LoadingGif} />}</div>
 
-          {/* <div className="dropDowns">
-          <select name="languages" id="bet_company" onChange={filterBetCompany}>
-            <option>--Select Bet Company--</option>
-            <option value="bet9ja">Bet 9ja</option>
-            <option value="sportybet">Sporty Bet</option>
-            <option value="betking">Bet King</option>
-          </select>
+          <div className="dropDowns">
+            <select name="languages" id="bet_company" onChange={filterBetCompany}>
+              <option value="all">All</option>
+              <option value="nigerian-nigerian">Nigerian - Nigerian</option>
+              <option value="nigerian-foreign">Nigerian - Foreign</option>
+            </select>
 
-          <select name="languages" id="percentFilter">
+            {/* <select name="languages" id="percentFilter">
             <option value="golang">-- Percentage Profit --</option>
             <option value="javascript">10%</option>
             <option value="php">20%</option>
             <option value="java">30%</option>
-          </select>
-        </div> */}
+          </select> */}
+          </div>
           {arbs === null ? (
             <p className="noSubMsg">You do not have an active subscription</p>
           ) : (
@@ -177,7 +260,7 @@ function Dashboard({ brand, routes }) {
                     <div className="clubCard">
                       <div className="time">
                         <i className="fa-regular fa-clock"></i>
-                        <p>{arb.age}</p>
+                        <p>{arb.matchTime}</p>
                       </div>
                       <div className="clubLogoAndBetCompany">
                         <div className="singleClub">
@@ -208,9 +291,11 @@ function Dashboard({ brand, routes }) {
                       <div className="text-dark" style={{ paddingBottom: "5rem" }}>
                         <p style={{ fontWeight: "bold", fontSize: "17px" }}>Book Maker</p>
                         {arb &&
-                          arb.bookmakers
-                            .split(",")
-                            .map((bookmaker) => <p key={bookmaker}>{bookmaker}</p>)}
+                          arb.bookmakers.split(",").map((bookmaker) => (
+                            <p key={bookmaker} style={{ display: "block" }}>
+                              {bookmaker}
+                            </p>
+                          ))}
                       </div>
                       <div>
                         <p style={{ fontWeight: "bold", fontSize: "17px" }}>Market</p>
@@ -224,6 +309,17 @@ function Dashboard({ brand, routes }) {
                       <div>
                         <p style={{ fontWeight: "bold", fontSize: "17px" }}>Odds</p>
                         {arb && arb.odds.split(",").map((odd) => <p key={odd}>{odd}</p>)}
+                      </div>
+                      <div>
+                        <p style={{ fontWeight: "bold", fontSize: "17px" }}>Go to</p>
+                        {arb &&
+                          arb.bookmakersLink.split(",").map((bookmaker) => (
+                            <p key={bookmaker} style={{ display: "block" }}>
+                              <a href={`https://en.surebet.com${bookmaker}`} target="_blank">
+                                <i className="fa-solid fa-up-right-from-square"></i>
+                              </a>
+                            </p>
+                          ))}
                       </div>
                     </div>
                   </div>
