@@ -61,7 +61,7 @@ function Footer({ company, links }) {
         px={1.5}
       >
         &copy; {new Date().getFullYear()} 
-        <Link href={href} target="_blank">
+        <Link href="https://arbsking.com/" target="_blank">
           <SoftTypography variant="button" fontWeight="medium">
             &nbsp;ArbsKing&nbsp;
           </SoftTypography>
