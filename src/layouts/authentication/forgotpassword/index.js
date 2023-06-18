@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 
 const ForgotPassword = () => {
-  const [email, setEmail] = useState("franklinchinedu61@gmail.com");
+  const [email, setEmail] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
   const [loading, setLoading] = useState(false);

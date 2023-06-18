@@ -325,7 +325,7 @@ function Dashboard({ brand, routes }) {
                         {arb &&
                           arb.bookmakersLink.split(",").map((bookmaker) => (
                             <p key={bookmaker} style={{ display: "block" }}>
-                              <a href={`https://en.surebet.com${bookmaker}`.trim()} target="_blank">
+                              <a href={`${bookmaker}`} target="_blank">
                                 <i className="fa-solid fa-up-right-from-square"></i>
                               </a>
                             </p>

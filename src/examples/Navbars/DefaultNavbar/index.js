@@ -113,10 +113,10 @@ function DefaultNavbar({ transparent, light, action }) {
         
         <ul className={isNavOpen ? `navLinks navOpen`: `navLinks navClose`} >
           <li>
-            <a href="/authentication/sign-up">Sign Up</a>
+            <a href="/dashboard/authentication/sign-up">Sign Up</a>
           </li>
           <li>
-            <a href="/authentication/sign-in">Sign In</a>
+            <a href="/dashboard/authentication/sign-in">Sign In</a>
           </li>
         </ul>
       </SoftBox>
