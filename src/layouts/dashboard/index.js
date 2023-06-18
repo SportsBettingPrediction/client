@@ -84,7 +84,7 @@ function Dashboard({ brand, routes }) {
       setIsLoading(false);
     }
     if (response.status === 401) {
-      setArbsInvalid("");
+      setArbsInvalid("You do not have an active subscription");
       setArbs(null);
     }
 
@@ -124,6 +124,11 @@ function Dashboard({ brand, routes }) {
       setArbsInvalid("");
       setArbs(null);
     }
+    
+    if(response.status === 404){
+      setArbsInvalid("No available Nigerian to Nigerian bookmakers opportunities at the moment.");
+      setArbs(null);
+    }
 
     if (response.ok) {
       const data = await response.json();
@@ -159,6 +164,11 @@ function Dashboard({ brand, routes }) {
     }
     if (response.status === 401) {
       setArbsInvalid("");
+      setArbs(null);
+    }
+
+    if(response.status === 404){
+      setArbsInvalid("No available Nigerian to Foreign bookmakers opportunities at the moment.");
       setArbs(null);
     }
 
@@ -251,7 +261,7 @@ function Dashboard({ brand, routes }) {
           </select> */}
           </div>
           {arbs === null ? (
-            <p className="noSubMsg">You do not have an active subscription</p>
+            <p className="noSubMsg">{arbsInvalid}</p>
           ) : (
             <>
               {arbs &&
@@ -315,7 +325,7 @@ function Dashboard({ brand, routes }) {
                         {arb &&
                           arb.bookmakersLink.split(",").map((bookmaker) => (
                             <p key={bookmaker} style={{ display: "block" }}>
-                              <a href={`https://en.surebet.com${bookmaker}`} target="_blank">
+                              <a href={`https://en.surebet.com${bookmaker}`.trim()} target="_blank">
                                 <i className="fa-solid fa-up-right-from-square"></i>
                               </a>
                             </p>
