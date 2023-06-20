@@ -71,7 +71,9 @@ function DashboardNavbar({ absolute, light, isMini }) {
   const route = useLocation().pathname.split("/").slice(1);
   const navigate = useNavigate();
   const [userBalance, setUserBalance] = useState("");
-  const [loading, setLoading] = useState(false)
+  const [notification, setNotification] = useState(false);
+  const [showNotification, setShowNotification] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const { user } = useAuth();
   const { setUser } = useAuth();
@@ -81,7 +83,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
 
   useEffect(() => {
     if (!loggedInUser) {
-      navigate("/authentication/sign-in");
+      navigate("/dashboard/authentication/sign-in");
     }
 
     getUserBalance();
@@ -112,32 +114,26 @@ function DashboardNavbar({ absolute, light, isMini }) {
   }, [dispatch, fixedNavbar]);
 
   async function getUserBalance() {
-    setLoading(true)
+    setLoading(true);
     const response = await fetch(
       "https://sportbetpredict.onrender.com/api/account/user/sub-status",
       {
         method: "GET",
         headers: {
-          "Content-Type": "application/json",
           Authorization: `Bearer ${loggedInUser.token}`,
         },
       }
     );
-    if(response){
-      setLoading(false)
+    if (response) {
+      setLoading(false);
     }
     const data = await response.json();
-    console.log("User balance status => ",data);
+    console.log("User balance status => ", data);
     setUserBalance(data.userBalance);
-    if(data.jwtStatus !== "Not Expired"){
-      navigate("/dashboard/authentication/sign-in")
+    setNotification(data.notification)
+    if (data.jwtStatus !== "Not Expired") {
+      navigate("/dashboard/authentication/sign-in");
     }
-    // if(data.message === "You must be logged in to perform that action!"){
-    //   // navigate("/authentication/sign-in")
-    //   console.log("/authentication/sign-in")
-    // }
-    // setSubScriptionInfo(data);
-    // setSubScriptionStatus(data.subStatus);
   }
 
   const handleMiniSidenav = () => setMiniSidenav(dispatch, !miniSidenav);
@@ -151,6 +147,23 @@ function DashboardNavbar({ absolute, light, isMini }) {
     localStorage.clear();
     return navigate("/dashboard/authentication/sign-in");
   };
+
+  async function checkNotification(){
+    setShowNotification(true)
+    setNotification(!notification)
+    const response = await fetch("https://sportbetpredict.onrender.com/api/account/change/notification",
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${loggedInUser.token}`,
+        },
+      })
+    const data = await response.json()
+    setTimeout(()=> {
+      setShowNotification(false)
+    },3000)
+    console.log(data)
+  }
 
   // Render the notifications menu
   const renderMenu = () => (
@@ -209,19 +222,39 @@ function DashboardNavbar({ absolute, light, isMini }) {
               sx={(theme) => navbarRow(theme, { isMini })}
             >
               <div className="userAndBalance">
-                <i className="fa-solid fa-user fs-3"></i>
+                {showNotification && <p className="notification-alert">You might have a new opportunity in your favourite bookmaker</p>}
+                {notification && <i class="fa-regular fa-bell fa-shake" onClick={checkNotification}></i> }
+                
+                {!notification &&<i class="fa-regular fa-bell"></i>}
+                {/* <i className="fa-solid fa-user fs-3"></i> */}
                 <div>
-                  <p className="white-text">Available Balance</p>
+                  {/* <p className="white-text">Available Balance</p> */}
                   <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                    <p style={{ backgroundColor:"#1AC888", color:"#fff", padding:"3px 5px", borderRadius:"3px" }}>${userBalance && userBalance}</p>
-                    {loading ? <i class="fa-solid fa-spinner fa-spin"></i> : <i className="fa-solid fa-arrow-rotate-right" style={{ cursor:"pointer" }} onClick={() => getUserBalance()}></i> }
+                    <p
+                      style={{
+                        backgroundColor: "#1AC888",
+                        color: "#fff",
+                        padding: "3px 5px",
+                        borderRadius: "3px",
+                      }}
+                    >
+                      ${userBalance && userBalance}
+                    </p>
+                    {loading ? (
+                      <i class="fa-solid fa-spinner fa-spin"></i>
+                    ) : (
+                      <i
+                        className="fa-solid fa-arrow-rotate-right"
+                        style={{ cursor: "pointer" }}
+                        onClick={() => getUserBalance()}
+                      ></i>
+                    )}
                   </div>
                 </div>
               </div>
             </SoftBox>
-            
+
             <SoftBox color={light ? "white" : "inherit"}>
-              
               <IconButton
                 size="large"
                 color="inherit"
@@ -232,7 +265,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
                   {miniSidenav ? "menu_open" : "menu"}
                 </Icon>
               </IconButton>
-              
+
               {renderMenu()}
             </SoftBox>
           </SoftBox>

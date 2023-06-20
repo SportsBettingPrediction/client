@@ -32,7 +32,7 @@ function DefaultNavbarLink({ icon, name, route, light }) {
       component={Link}
       to={route}
       mx={1}
-      p={1}
+      p={0}
       display="flex"
       alignItems="center"
       sx={{ cursor: "pointer", userSelect: "none" }}

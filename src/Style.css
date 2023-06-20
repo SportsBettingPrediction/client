@@ -56,7 +56,7 @@ select {
 }
 
 #root > div > header > div > div.MuiBox-root.css-1oamlbf > div.MuiBox-root.css-1b1knv > button > span{
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 10px rgba(113, 113, 113, 0.4);
   font-size: 30px !important;
 }
 
@@ -72,8 +72,19 @@ select {
   gap: 20px;
 }
 
+.fa-shake{
+  background-color: #344767;
+  padding: 8px;
+  border-radius: 50px;
+  color: #fff;
+}
+
 .userAndBalance p{
   margin: 0;
+}
+
+.userAndBalance i{
+  font-size: 18px;
 }
 
 .matchCard{
@@ -879,7 +890,18 @@ select::-ms-expand {
 @media screen and (max-width:1052px) {
   .bookmakersContainer{
     grid-template-columns: repeat(3, 1fr);
-  }  
+  }
+
+  .notification-alert{
+    position: absolute;
+    background-color: #344767;
+    color: #fff;
+    z-index:999;
+    padding: 7px;
+    border-radius: 5px;
+    font-size: 12px;
+    top: 50px;
+  }
 }
 
 @media screen and (max-width:992px) {
@@ -932,6 +954,10 @@ select::-ms-expand {
 
   .subModal{
     width: 70%;
+  }
+
+  .notification-alert{
+    top: 97px;
   }
 }
 
@@ -1025,7 +1051,7 @@ select::-ms-expand {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 1rem 0 3rem;
+    margin: 2rem 0 3rem;
     gap: 1rem;
   }
 
@@ -1045,7 +1071,23 @@ select::-ms-expand {
     font-weight: bold;
   }
 
-  /* .opportunity-and-percent */
+  .css-m6bmkn-MuiPaper-root-MuiAppBar-root .MuiToolbar-root{
+    gap: 0px;
+    padding: 0 !important;
+    border-bottom: 1px solid rgba(176, 176, 176, 0.223);
+  }
+
+  .css-p1u9s4, .css-z8q62l{
+    padding-top: 0 !important;
+  }
+
+  .MuiBox-root .css-1ohcek5{
+    display: none;
+  }
+
+  .notification-alert{
+    top: 50px;
+  }
 }
 
 @media screen and (max-width: 400px) {
