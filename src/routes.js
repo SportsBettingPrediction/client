@@ -129,6 +129,17 @@ const routes = [
     noCollapse: true,
     protected: true,
   },
+  
+  // {
+  //   type: "collapse",
+  //   name: "How to Use",
+  //   key: "profile",
+  //   route: "https://www.google.com",
+  //   icon: <CustomerSupport size="12px" />,
+  //   component: <Profile />,
+  //   noCollapse: true,
+  //   protected: true,
+  // },
 
   {
     type: "collapse",

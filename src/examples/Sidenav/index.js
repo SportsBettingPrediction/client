@@ -151,30 +151,11 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
             width={!brandName && "100%"}
             sx={(theme) => sidenavLogoLabel(theme, { miniSidenav })}
           >
-            {/* <SoftTypography variant="button" fontWeight="medium">
-              <h4>Arbsking</h4>
-            </SoftTypography> */}
           </SoftBox>
         </SoftBox>
       </SoftBox>
       <Divider />
       <List>{renderRoutes}</List>
-      {/* <SoftBox pt={2} my={2} mx={2} mt="auto">
-        <SidenavCard />
-        <SoftBox mt={2}>
-          <SoftButton
-            component="a"
-            href="https://appseed.us/product/soft-ui-dashboard-pro/full-stack/"
-            target="_blank"
-            rel="noreferrer"
-            variant="gradient"
-            color={color}
-            fullWidth
-          >
-            upgrade to pro
-          </SoftButton>
-        </SoftBox>
-      </SoftBox> */}
     </SidenavRoot>
   );
 }

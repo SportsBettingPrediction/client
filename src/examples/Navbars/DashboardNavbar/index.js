@@ -222,7 +222,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
               sx={(theme) => navbarRow(theme, { isMini })}
             >
               <div className="userAndBalance">
-                {showNotification && <p className="notification-alert">You might have a new opportunity in your favourite bookmaker</p>}
+                {showNotification && <p className="notification-alert">Please refresh to view the latest opportunities</p>}
                 {notification && <i class="fa-regular fa-bell fa-shake" onClick={checkNotification}></i> }
                 
                 {!notification &&<i class="fa-regular fa-bell"></i>}

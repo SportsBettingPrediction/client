@@ -223,6 +223,9 @@ function Payment({ brand, routes }) {
                 <li>
                   From our available plans below, you can now purchase any plan of your choice.
                 </li>
+                <li>
+                  Our mode of payments is BUSD, USDT (BEP-20).
+                </li>
               </ul>
 
               <div className="qrCodeAndAddress">
