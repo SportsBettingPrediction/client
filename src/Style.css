@@ -806,7 +806,7 @@ select::-ms-expand {
 .select {
   position: relative;
   display: flex;
-  width: 20rem;
+  width: 16rem;
   height: 3em;
   line-height: 3;
   background: #000;
@@ -872,6 +872,10 @@ select::-ms-expand {
   color: #fff;
 }
 
+.opportunity-and-percent{
+  display: none;
+}
+
 @media screen and (max-width:1052px) {
   .bookmakersContainer{
     grid-template-columns: repeat(3, 1fr);
@@ -926,6 +930,9 @@ select::-ms-expand {
     width: 12%;
   }
 
+  .subModal{
+    width: 70%;
+  }
 }
 
 @media screen and (max-width: 678px) {
@@ -1007,12 +1014,51 @@ select::-ms-expand {
     gap: 15px;
     margin: 30px 0;
     flex-direction: column;
+    /* padding: 0 9rem; */
   }
+
+  .desktop-dashboard-view{
+    display: none;
+  }
+
+  .opportunity-and-percent{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1rem 0 3rem;
+    gap: 1rem;
+  }
+
+  .opportunity-and-percent div{
+    padding: 20px;
+    box-shadow: 0rem 1.25rem 1.6875rem 0rem rgba(0, 0, 0, 0.2);
+    background-color: #fff;
+    color: #344767;
+    border-radius: 10px;
+    text-align: center;
+    width: 50%;
+  }
+
+  .opportunity-and-percent div p{
+    padding: 0 !important;
+    margin: 0 !important;
+    font-weight: bold;
+  }
+
+  /* .opportunity-and-percent */
 }
 
 @media screen and (max-width: 400px) {
   .bookmakersContainer{
     grid-template-columns: repeat(1, 1fr);
+  }
+
+  .arbs p, .clubCard p{
+    font-size: 10px !important;
+  }
+
+  .betPatform{
+    margin: 0 !important;
   }
 }
 

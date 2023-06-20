@@ -197,7 +197,6 @@ function Dashboard({ brand, routes }) {
     }
   }
 
-
   async function getMyFavouriteBookMakersOpportunities() {
     setIsLoading(true);
     const response = await fetch(
@@ -210,7 +209,7 @@ function Dashboard({ brand, routes }) {
       }
     );
     if (response) {
-      console.log(response)
+      console.log(response);
       setIsLoading(false);
     }
     if (response.status === 401) {
@@ -244,7 +243,6 @@ function Dashboard({ brand, routes }) {
     }
   }
 
-  
   // getOpportunities()
 
   function filterBetCompany(e) {
@@ -273,7 +271,7 @@ function Dashboard({ brand, routes }) {
       <DashboardNavbar />
       <div className="dasboardContainer">
         <SoftBox py={3}>
-          <SoftBox mb={3}>
+          <SoftBox mb={3} className="desktop-dashboard-view">
             <Grid container spacing={3}>
               <Grid item xs={12} sm={6} xl={4}>
                 <MiniStatisticsCard
@@ -298,6 +296,20 @@ function Dashboard({ brand, routes }) {
               </Grid>
             </Grid>
           </SoftBox>
+          <div className="opportunity-and-percent">
+            <div>
+              <h6>Opp.</h6>
+              <p>46</p>
+            </div>
+            <div>
+              <h6>Total%</h6>
+              <p>319.5%</p>
+            </div>
+            <div>
+              <h6>Avg%</h6>
+              <p>6.95</p>
+            </div>
+          </div>
           <div className="loadingGif">{isLoading && <img src={LoadingGif} />}</div>
 
           <div className="dashboardFilters">
