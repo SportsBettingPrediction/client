@@ -58,6 +58,7 @@ function Dashboard({ brand, routes }) {
   const [arbsAvg, setArbsAvg] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [bookmarkers, setBookmarkers] = useState();
+  const [selectedCompany, setSelectedCompany] = useState("");
   const { size } = typography;
   const { chart, items } = reportsBarChartData;
 
@@ -124,8 +125,8 @@ function Dashboard({ brand, routes }) {
       setArbsInvalid("");
       setArbs(null);
     }
-    
-    if(response.status === 404){
+
+    if (response.status === 404) {
       setArbsInvalid("No available Nigerian to Nigerian bookmakers opportunities at the moment.");
       setArbs(null);
     }
@@ -153,12 +154,15 @@ function Dashboard({ brand, routes }) {
 
   async function getNigerianForeignOpportunities() {
     setIsLoading(true);
-    const response = await fetch("https://sportbetpredict.onrender.com/api/account/arbs/nigerian-foreign", {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${loggedInUser.token}`,
-      },
-    });
+    const response = await fetch(
+      "https://sportbetpredict.onrender.com/api/account/arbs/nigerian-foreign",
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${loggedInUser.token}`,
+        },
+      }
+    );
     if (response) {
       setIsLoading(false);
     }
@@ -167,7 +171,7 @@ function Dashboard({ brand, routes }) {
       setArbs(null);
     }
 
-    if(response.status === 404){
+    if (response.status === 404) {
       setArbsInvalid("No available Nigerian to Foreign bookmakers opportunities at the moment.");
       setArbs(null);
     }
@@ -193,21 +197,71 @@ function Dashboard({ brand, routes }) {
     }
   }
 
-  const [selectedCompany, setSelectedCompany] = useState("");
+
+  async function getMyFavouriteBookMakersOpportunities() {
+    setIsLoading(true);
+    const response = await fetch(
+      "https://sportbetpredict.onrender.com/api/account/arbs/favourite-bookmakers",
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${loggedInUser.token}`,
+        },
+      }
+    );
+    if (response) {
+      console.log(response)
+      setIsLoading(false);
+    }
+    if (response.status === 401) {
+      setArbsInvalid("");
+      setArbs(null);
+    }
+
+    if (response.status === 404) {
+      setArbsInvalid("No available opportunities for my favourite bookmakers at the moment.");
+      setArbs(null);
+    }
+
+    if (response.ok) {
+      const data = await response.json();
+      console.log(data);
+      setArbs(data);
+      data.arbs.map((bookmaker) => {
+        setBookmarkers(bookmaker.bookmakers.split(","));
+      });
+      // Field to retrieve and sum
+      const field = "profit";
+
+      // Calculate the sum
+      const sum = data.arbs.reduce(
+        (accumulator, currentValue) => accumulator + currentValue[field],
+        0
+      );
+      setArbsTotal(sum);
+
+      setArbsAvg(sum / data.arbs.length);
+    }
+  }
+
+  
   // getOpportunities()
 
   function filterBetCompany(e) {
     setSelectedCompany(e.target.value);
-    console.log(selectedCompany)
+    console.log(selectedCompany);
     if (e.target.value === "nigerian-nigerian") {
-      getNigerianOpportunities()
-      } else if (e.target.value === "all") {
-        getOpportunities();
-      }else if(e.target.value === "nigerian-foreign"){
-        console.log("ni-fr")
-        getNigerianForeignOpportunities()
-      }
+      getNigerianOpportunities();
+    } else if (e.target.value === "all") {
+      getOpportunities();
+    } else if (e.target.value === "nigerian-foreign") {
+      console.log("ni-fr");
+      getNigerianForeignOpportunities();
+    } else if (e.target.value === "favouriteBookMakers") {
+      console.log("ni-fr");
+      getMyFavouriteBookMakersOpportunities();
     }
+  }
 
   function openArbCalculator() {
     navigate("/arbitragecalculator");
@@ -246,20 +300,25 @@ function Dashboard({ brand, routes }) {
           </SoftBox>
           <div className="loadingGif">{isLoading && <img src={LoadingGif} />}</div>
 
-          <div className="select">
-            <select name="languages" id="bet_company" onChange={filterBetCompany}>
-              <option value="all">All</option>
-              <option value="nigerian-nigerian">Nigerian - Nigerian</option>
-              <option value="nigerian-foreign">Nigerian - Foreign</option>
-            </select>
+          <div className="dashboardFilters">
+            <div className="select">
+              <select name="languages" id="bet_company" onChange={filterBetCompany}>
+                <option value="all">All</option>
+                <option value="nigerian-nigerian">Nigerian - Nigerian</option>
+                <option value="nigerian-foreign">Nigerian - Foreign</option>
+                <option value="favouriteBookMakers">My Favourite BookMakers</option>
+              </select>
+            </div>
 
-            {/* <select name="languages" id="percentFilter">
-            <option value="golang">-- Percentage Profit --</option>
-            <option value="javascript">10%</option>
-            <option value="php">20%</option>
-            <option value="java">30%</option>
-          </select> */}
+            {/* <div className="select">
+              <select name="languages" id="bet_company" onChange={filterBetCompany}>
+                <option value="all">All</option>
+                <option value="nigerian-nigerian">Nigerian - Nigerian</option>
+                <option value="nigerian-foreign">Nigerian - Foreign</option>
+              </select>
+            </div> */}
           </div>
+
           {arbs === null ? (
             <p className="noSubMsg">{arbsInvalid}</p>
           ) : (

@@ -39,6 +39,7 @@ import SignUp from "layouts/authentication/sign-up";
 import ReferalSignUp from "layouts/authentication/sign-up-referal";
 import Dashboard from "layouts/dashboard";
 import Overview from "layouts/profile";
+import Bookmakers from "layouts/bookmakers";
 import Billing from "layouts/billing";
 import RTL from "layouts/rtl";
 import ForgotPassword from "layouts/authentication/forgotpassword";
@@ -59,6 +60,7 @@ export default function App() {
         <Route path="/" element={<Dashboard brand={brand} routes={routes} />} />
         <Route path="/dashboard" element={<Dashboard brand={brand} routes={routes} />} />
         <Route path="/dashboard/profile" element={<Overview brand={brand} routes={routes} />} />
+        <Route path="/dashboard/bookmakers" element={<Bookmakers brand={brand} routes={routes} />} />
         <Route path="/dashboard/arbitragecalculator" element={<RTL brand={brand} routes={routes} />} />
       </Routes>
     </ThemeProvider>

@@ -339,7 +339,7 @@ select {
   flex-direction: column;
   gap: 10px;
   align-items: flex-start;
-  padding-bottom: 20px;
+  /* padding-bottom: 20px; */
 }
 
 .changePasswordButton{
@@ -635,7 +635,7 @@ select {
   padding: 5px 10px;
 }
 
-.resetPasswordBtn, .passwordResetDiv button, .registrationSuccessMessage button, .emailConfirmationDiv a{
+.resetPasswordBtn, .passwordResetDiv button, .registrationSuccessMessage button, .emailConfirmationDiv a, .chooseBookMakers{
   all: unset;
   background: linear-gradient(to right, #21BBFE, #217EFE);
   color: #fff;
@@ -756,6 +756,10 @@ select {
 .bookmakeer-and-link{
   display: flex;
   align-items: center;
+}
+
+.arbitrageCalculator, .dasboardContainer, .paymentContainer, .profileContainer{
+  margin-bottom: 5.5rem;
 }
 
 @media screen and (max-width:992px) {
@@ -921,15 +925,25 @@ select {
 select::-ms-expand {
   display: none;
 }
+
+/* .dashboardFilters{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5rem;
+  margin: 3rem 0;
+} */
+
 .select {
   position: relative;
   display: flex;
-  width: 20em;
+  width: 20rem;
   height: 3em;
   line-height: 3;
   background: #000;
   overflow: hidden;
   border-radius: .25em;
+  /* margin-left: 3em; */
 }
 .select::after {
   content: '\25BC';
@@ -944,4 +958,24 @@ select::-ms-expand {
 }
 .select:hover::after {
   color: #fff;
+}
+
+.verified{
+  display: none;
+}
+
+.bookmakersContainer{
+  margin: 3rem 0 2rem;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+}
+
+.chooseBookMakers, .favouriteBookMakers{
+  margin-bottom: 5rem;
+}
+
+.book-maker-box{
+  display: flex;
+  gap: 3px;
 }

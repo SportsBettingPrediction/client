@@ -47,6 +47,7 @@ function Overview({ brand, routes }) {
   const [newpassword, setNewPassword] = useState("");
   const [msg, setMsg] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
+  const [hoverState, setHoverState] = useState(false);
 
   // console.log();
 
@@ -93,6 +94,10 @@ function Overview({ brand, routes }) {
     }
   }
 
+  function toggleVerified() {
+    setHoverState(true);
+  }
+
   return (
     <DashboardLayout>
       {/* <div style={{ color: "#fff !important" }}>
@@ -108,10 +113,18 @@ function Overview({ brand, routes }) {
               <i className="fa-solid fa-user"></i>
               <p>
                 {loggedInUser && loggedInUser.userDetails.firstname}{" "}
-                {!loggedInUser.userDetails.referralAgent && (
-                  <i class="fa-solid fa-circle-check" style={{ marginLeft: "5px" }}>
-                    {/* <span class="tooltiptext">Tooltip text</span> */}
-                  </i>
+                {loggedInUser && loggedInUser.userDetails.referralAgent && (
+                  <>
+                    <i
+                      class="fa-solid fa-circle-check"
+                      onMouseEnter={() => setHoverState(true)}
+                      onMouseLeave={() => setHoverState(false)}
+                      style={{ marginLeft: "5px" }}
+                    ></i>
+                    {hoverState && (
+                      <span style={{ fontWeight: "normal" }}>Verified Referal Agent</span>
+                    )}
+                  </>
                 )}
               </p>
             </div>
@@ -142,56 +155,69 @@ function Overview({ brand, routes }) {
           </div>
         </div>
 
-        <div className="userSingleInfo">
-          <p>Password</p>
-          <div className="iconAndDetail">
-            <i className="fa-solid fa-key"></i>
-            <p>**********</p>
+        <div className="userDoubleInfo">
+          <div className="userSingleInfo">
+            <p>Password</p>
+            <div className="iconAndDetail">
+              <i className="fa-solid fa-key"></i>
+              <p>**********</p>
+            </div>
+            <div className="changePasswordTab">
+              <button
+                onClick={() => setShowPasswordTab(!showPasswordTab)}
+                className="changePasswordButton"
+              >
+                {!showPasswordTab ? (
+                  <>Change Password</>
+                ) : (
+                  <>
+                    <i className="fa-solid fa-xmark"></i>
+                  </>
+                )}
+              </button>
+              <div>
+                {msg && <p className="msg">{msg}</p>}
+                {successMsg && <p className="successMsg">{successMsg}</p>}
+                {showPasswordTab && (
+                  <>
+                    <input
+                      type="password"
+                      placeholder="Old password"
+                      value={oldpassword}
+                      onChange={(e) => setOldPassword(e.target.value)}
+                      required
+                    />
+                    <input
+                      type="password"
+                      placeholder="New password"
+                      value={newpassword}
+                      onChange={(e) => setNewPassword(e.target.value)}
+                      required
+                    />
+                    <br />
+                    {!loading ? (
+                      <button type="button" className="submitButton" onClick={changePassword}>
+                        Submit
+                      </button>
+                    ) : (
+                      <button type="button" disabled className="buttonload">
+                        <i className="fa fa-spinner fa-spin"></i>
+                        <p style={{ margin: 0 }}>Submit</p>
+                      </button>
+                    )}
+                  </>
+                )}
+              </div>
+            </div>
           </div>
-          <div className="changePasswordTab">
-            <button
-              onClick={() => setShowPasswordTab(!showPasswordTab)}
-              className="changePasswordButton"
-            >
-              {!showPasswordTab ? (
-                <>Change Password</>
+          <div className="userSingleInfo">
+            <p>Referral Link</p>
+            <div className="iconAndDetail">
+              <i className="fa-solid fa-link"></i>
+              {loggedInUser && loggedInUser.userDetails.referralAgent ? (
+                <p>{loggedInUser.userDetails.referrralLink}</p>
               ) : (
-                <>
-                  <i className="fa-solid fa-xmark"></i>
-                </>
-              )}
-            </button>
-            <div>
-              {msg && <p className="msg">{msg}</p>}
-              {successMsg && <p className="successMsg">{successMsg}</p>}
-              {showPasswordTab && (
-                <>
-                  <input
-                    type="password"
-                    placeholder="Old password"
-                    value={oldpassword}
-                    onChange={(e) => setOldPassword(e.target.value)}
-                    required
-                  />
-                  <input
-                    type="password"
-                    placeholder="New password"
-                    value={newpassword}
-                    onChange={(e) => setNewPassword(e.target.value)}
-                    required
-                  />
-                  <br />
-                  {!loading ? (
-                    <button type="button" className="submitButton" onClick={changePassword}>
-                      Submit
-                    </button>
-                  ) : (
-                    <button type="button" disabled className="buttonload">
-                      <i className="fa fa-spinner fa-spin"></i>
-                      <p style={{ margin: 0 }}>Submit</p>
-                    </button>
-                  )}
-                </>
+                <p>You are not yet qualified to be a referral agent</p>
               )}
             </div>
           </div>

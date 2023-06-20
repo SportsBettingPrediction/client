@@ -92,7 +92,7 @@ const routes = [
     name: "Make Payments",
     key: "Payments",
     route: "/dashboard/payments",
-    icon: <Cube size="12px" />,
+    icon: <CreditCard size="12px" />,
     component: <VirtualReality />,
     noCollapse: true,
     protected: true,
@@ -110,6 +110,17 @@ const routes = [
 
   {
     type: "collapse",
+    name: "BookMakers",
+    key: "profile",
+    route: "/dashboard/bookmakers",
+    icon: <Document size="12px" />,
+    component: <Profile />,
+    noCollapse: true,
+    protected: true,
+  },
+
+  {
+    type: "collapse",
     name: "Profile",
     key: "profile",
     route: "/dashboard/profile",
@@ -118,6 +129,7 @@ const routes = [
     noCollapse: true,
     protected: true,
   },
+
   {
     type: "collapse",
     name: "Logout",

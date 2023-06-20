@@ -143,7 +143,6 @@ function Payment({ brand, routes }) {
                 <Grid item xs={12} lg={6}>
                   <Grid item xs={12}>
                     <div className="subscription">
-                      {/* {loading && } */}
                       <img src={shieldImage} className="shieldImage" />
                       <div className="subscriptionText">
                         <h2>Active Subscription</h2>

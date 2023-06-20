@@ -1,6 +1,7 @@
 {
   "name": "soft-ui-dashboard-react",
   "homepage": "https://arbsking.com/dashboard",
+  "engines": { "node": "18.x" },
   "version": "4.0.0",
   "author": "Creative Tim",
   "license": "SEE LICENSE IN <https://www.creative-tim.com/license>",
