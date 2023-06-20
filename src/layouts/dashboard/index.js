@@ -357,7 +357,7 @@ function Dashboard({ brand, routes }) {
                       </div>
                     </div>
                     <div className="arbs">
-                      <div className="text-dark" style={{ paddingBottom: "5rem" }}>
+                      <div className="text-dark" style={{ paddingBottom: "1rem" }}>
                         <p style={{ fontWeight: "bold", fontSize: "17px" }}>Book Maker</p>
                         {arb &&
                           arb.bookmakers.split(",").map((bookmaker) => (

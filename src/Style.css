@@ -762,137 +762,6 @@ select {
   margin-bottom: 5.5rem;
 }
 
-@media screen and (max-width:992px) {
-  .arbitrageCalculator, .dasboardContainer, .paymentContainer, .profileContainer{
-    margin-bottom: 5.5rem;
-  }
-}
-
-@media screen and (max-width: 940px) {
-  .singleBet,  .betInput div{
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    text-align: start;
-  }
-
-  .singleBet input, .betInput input{
-    width: 100%;
-  }
-
-  .singleBet p{
-    width: 100%;
-  }
-
-  .stakeP{
-    display: none;
-  }
-
-  .logoTag{
-    width: 10%;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .lowerArbitrageCalculator{
-    flex-direction: column;
-    margin-top: 1rem;
-  }
-
-  .lowerArbitrageCalculator .controls{
-    margin-bottom: 1rem;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-  }
-
-  .logoTag{
-    width: 12%;
-  }
-
-}
-
-@media screen and (max-width: 678px) {
-  .changePasswordTab{
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .registrationSuccessMessage, .passwordResetDiv, .emailConfirmationDiv{
-    width: 90%;
-  }
-  
-}
-
-.navControls{
-  display: none;
-}
-
-@media screen and (max-width: 576px) {
-  .userDoubleInfo{
-    flex-direction: column;
-  }
-
-  .dropDowns{
-    flex-direction: column;
-  }
-
-  .arbitrageCalculator, .dasboardContainer, .paymentContainer, .profileContainer{
-    margin-bottom: 5.5rem;
-  }
-  .makePayment{
-    padding: 3rem 1rem;
-  }
-
-  .navLinks{
-    box-shadow: 0rem .5rem .5rem 0rem rgba(0, 0, 0, 0.1);
-    flex-direction: column;
-    position: fixed;
-    text-align: center;
-    width: 100%;
-    top: 97px;
-    border-radius: 50px;
-    gap: 10px;
-    z-index: 2;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    height: 0;
-    overflow: hidden;
-    transition: .5s;
-  }
-
-  .navLinks li:nth-of-type(1){
-    margin: 10px 0 0;
-  }
-  
-  .navLinks li:nth-of-type(2){
-    margin: 0 0 10px;
-  }
-
-  .navControls{
-    display: block;
-    cursor: pointer;
-    font-size: 18px;
-  }
-
-  .navControls button:nth-of-type(2){
-    display: none;
-  }  
-  
-  .navOpen{
-    height: 80px;
-    transition: .5s;
-  }
-}
-
-
-
-
-
-@media screen and (max-width: 400px) {
-
-}
-
 .gridImage{
   filter: invert(20%) sepia(34%) saturate(6050%) hue-rotate(350deg) brightness(85%) contrast(99%);
 }
@@ -979,3 +848,171 @@ select::-ms-expand {
   display: flex;
   gap: 3px;
 }
+
+.bookMakerPageHeader{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 2rem 0 1rem;
+}
+
+.bookMakerPageHeader input{
+  all: unset;
+  padding: 3px 9px;
+  border: 1px solid #344767;
+}
+
+.searchInput{
+  display: flex;
+}
+
+.searchInput i{
+  background-color: #67748e;
+  padding: 10px;
+  color: #fff;
+}
+
+@media screen and (max-width:1052px) {
+  .bookmakersContainer{
+    grid-template-columns: repeat(3, 1fr);
+  }  
+}
+
+@media screen and (max-width:992px) {
+  .arbitrageCalculator, .dasboardContainer, .paymentContainer, .profileContainer{
+    margin-bottom: 5.5rem;
+  }
+}
+
+@media screen and (max-width: 940px) {
+  .singleBet,  .betInput div{
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    text-align: start;
+  }
+
+  .singleBet input, .betInput input{
+    width: 100%;
+  }
+
+  .singleBet p{
+    width: 100%;
+  }
+
+  .stakeP{
+    display: none;
+  }
+
+  .logoTag{
+    width: 10%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .lowerArbitrageCalculator{
+    flex-direction: column;
+    margin-top: 1rem;
+  }
+
+  .lowerArbitrageCalculator .controls{
+    margin-bottom: 1rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .logoTag{
+    width: 12%;
+  }
+
+}
+
+@media screen and (max-width: 678px) {
+  .changePasswordTab{
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .registrationSuccessMessage, .passwordResetDiv, .emailConfirmationDiv{
+    width: 90%;
+  }
+
+  .bookmakersContainer{
+      grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.navControls{
+  display: none;
+}
+
+@media screen and (max-width: 576px) {
+  .userDoubleInfo{
+    flex-direction: column;
+  }
+
+  .dropDowns{
+    flex-direction: column;
+  }
+
+  .arbitrageCalculator, .dasboardContainer, .paymentContainer, .profileContainer{
+    margin-bottom: 5.5rem;
+  }
+  .makePayment{
+    padding: 3rem 1rem;
+  }
+
+  .navLinks{
+    box-shadow: 0rem .5rem .5rem 0rem rgba(0, 0, 0, 0.1);
+    flex-direction: column;
+    position: fixed;
+    text-align: center;
+    width: 100%;
+    top: 97px;
+    border-radius: 50px;
+    gap: 10px;
+    z-index: 2;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 0;
+    overflow: hidden;
+    transition: .5s;
+  }
+
+  .navLinks li:nth-of-type(1){
+    margin: 10px 0 0;
+  }
+  
+  .navLinks li:nth-of-type(2){
+    margin: 0 0 10px;
+  }
+
+  .navControls{
+    display: block;
+    cursor: pointer;
+    font-size: 18px;
+  }
+
+  .navControls button:nth-of-type(2){
+    display: none;
+  }  
+  
+  .navOpen{
+    height: 80px;
+    transition: .5s;
+  }
+
+  .bookMakerPageHeader{
+    gap: 15px;
+    margin: 30px 0;
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .bookmakersContainer{
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+

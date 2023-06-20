@@ -100,7 +100,68 @@ function Overview({ brand, routes }) {
     "SportyBet",
   ]);
 
+  const bookMakersFilterArray = [
+    "18Bet",
+    "1Win",
+    "22Bet",
+    "3et",
+    "888sport",
+    "Betano",
+    "Betano (NG)",
+    "Betboro",
+    "Betsafe",
+    "Betsson",
+    "Betsson (ES)",
+    "BetVictor",
+    "Betfirst (BE)",
+    "BlueChip",
+    "Bodog (EN)",
+    "Bodog (EU)",
+    "Bwin",
+    "Cashpoint",
+    "CloudBet",
+    "CoolBet",
+    "Coral",
+    "Dafabet (Dafa Sports)",
+    "Dafabet (OW)",
+    "EfBet",
+    "FavBet",
+    "Germania (HR)",
+    "GGBet",
+    "Holland Casino",
+    "iForBet",
+    " Jacks",
+    "KTO",
+    "Marathon",
+    "Matchbook",
+    "MelBet",
+    "Mozzart",
+    "Olimp",
+    "Parmatch",
+    "Parimatch (CY)",
+    "Rollbit",
+    "SboBet",
+    "Sbobet (eSport IM)",
+    "Stake",
+    "Suprabets",
+    "TempoBet",
+    "TitanBet",
+    "William Hill",
+    "Winmasters",
+    "WWin",
+    "Zenit",
+    "1xBet",
+    "BetKing",
+    "Bet9ja",
+    "BetPawa",
+    "Betbonanza",
+    "MerryBet",
+    "NairaBet",
+    "SportyBet",
+  ];
+
   const [favouriteBookMakers, setFavouriteBookMakers] = useState([]);
+  const [searchWord, setSearchWord] = useState("");
 
   useEffect(() => {
     if (!loggedInUser) {
@@ -149,7 +210,7 @@ function Overview({ brand, routes }) {
         setTimeout(() => {
           setSuccessMsg(false);
         }, 3000);
-        getFavouriteBookMakers()
+        getFavouriteBookMakers();
       }
       console.log(data);
     }
@@ -192,14 +253,30 @@ function Overview({ brand, routes }) {
           <p>Favourite bookmakers added sucessfully.</p>
         </div>
       )}
-      <h6 style={{ marginTop:"2.5rem" }}>Select Favourite Bookmakers</h6>
-      <div className="bookmakersContainer" style={{ marginTop:"1rem" }}>
-        {bookMakersArray.map((bookmaker) => (
-          <div className="book-maker-box">
-            <input type="checkbox" value={bookmaker} onChange={handleCheckboxChange} />
-            <label for={bookmaker}> {bookmaker} </label>
-          </div>
-        ))}
+      <div className="bookMakerPageHeader">
+        <h6>Select Favourite Bookmakers</h6>
+        <div className="searchInput">
+          <input
+            type="search"
+            placeholder="Filter Bookmakers"
+            onChange={(e) => setSearchWord(e.target.value.toLocaleLowerCase())}
+          />
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
+      </div>
+      <div className="bookmakersContainer" style={{ marginTop: "1rem" }}>
+        {bookMakersArray
+          .filter((bookmaker) => {
+            if (bookmaker === "") return bookmaker;
+            else if (bookmaker.toLocaleLowerCase().includes(searchWord.toLocaleLowerCase()))
+              return bookmaker;
+          })
+          .map((bookmaker) => (
+            <div className="book-maker-box">
+              <input type="checkbox" value={bookmaker} onChange={handleCheckboxChange} />
+              <label for={bookmaker}> {bookmaker} </label>
+            </div>
+          ))}
       </div>
       {!loading ? (
         <button className="chooseBookMakers" onClick={chooseBookMakers}>
