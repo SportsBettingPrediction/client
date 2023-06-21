@@ -99,7 +99,7 @@ select {
 .matchCard{
   box-shadow: 0rem 1.25rem 1.6875rem 0rem rgba(0, 0, 0, 0.05);
   margin-top: 30px;
-
+  position: relative;
 }
 
 .clubCard{
@@ -904,6 +904,28 @@ input[type="checkbox"]{
   margin-top: 3rem;
 }
 
+.teamAndLeague{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.league{
+  font-size: 12px;
+}
+
+.marketInfo{
+  position: absolute;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0rem .5rem 3.5rem 0rem rgba(0, 0, 0, 0.1);
+  top: 50%;
+  transform: translateX(-50%);
+  left: 50%;
+}
+
 @media screen and (max-width:1052px) {
   .bookmakersContainer{
     grid-template-columns: repeat(3, 1fr);
@@ -1111,6 +1133,10 @@ input[type="checkbox"]{
 
   header{
     margin-bottom: 20px;
+  }
+
+  .league{
+    font-size: 10px;
   }
 }
 

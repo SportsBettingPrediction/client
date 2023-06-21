@@ -48,6 +48,7 @@ function Overview({ brand, routes }) {
   const [msg, setMsg] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
   const [hoverState, setHoverState] = useState(false);
+  const [copyICon, setCopyIcon] = useState(true);
 
   // console.log();
 
@@ -96,6 +97,14 @@ function Overview({ brand, routes }) {
 
   function toggleVerified() {
     setHoverState(true);
+  }
+
+  function copyToClipboard() {
+    navigator.clipboard.writeText(loggedInUser.userDetails.referrralLink);
+    setCopyIcon(!copyICon);
+    setTimeout(() => {
+      setCopyIcon(copyICon);
+    }, 5000);
   }
 
   return (
@@ -211,13 +220,49 @@ function Overview({ brand, routes }) {
             </div>
           </div>
           <div className="userSingleInfo">
-            <p>Referral Link</p>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+              <p>Referral Link</p>
+              {loggedInUser && loggedInUser.userDetails.referralAgent ? (
+                <>
+                  {copyICon ? (
+                    <i
+                      class="fa-regular fa-copy"
+                      onClick={copyToClipboard}
+                      style={{
+                        cursor: "pointer",
+                        padding: "7px",
+                        borderRadius: "50px",
+                        color: "#fff",
+                        backgroundColor: "#344767",
+                        fontSize: "12px",
+                      }}
+                    ></i>
+                  ) : (
+                    <div>
+                      <i
+                        className="fa-solid fa-check"
+                        style={{
+                          cursor: "pointer",
+                          padding: "7px",
+                          borderRadius: "50px",
+                          color: "#fff",
+                          backgroundColor: "#344767",
+                          fontSize: "12px",
+                        }}
+                      ></i>
+                    </div>
+                  )}
+                </>
+              ) : (
+                ""
+              )}
+            </div>
             <div className="iconAndDetail">
               <i className="fa-solid fa-link"></i>
               {loggedInUser && loggedInUser.userDetails.referralAgent ? (
                 <p>{loggedInUser.userDetails.referrralLink}</p>
               ) : (
-                <p>You are not yet qualified to be a referral agent</p>
+                <p>You are not yet qualified to be a referral agent, purchase a sub to be one</p>
               )}
             </div>
           </div>

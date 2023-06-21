@@ -57,8 +57,10 @@ function Dashboard({ brand, routes }) {
   const [arbsTotal, setArbsTotal] = useState("");
   const [arbsAvg, setArbsAvg] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [marketInfo, setMarketInfo] = useState(false);
   const [bookmarkers, setBookmarkers] = useState();
   const [selectedCompany, setSelectedCompany] = useState("");
+  const [selectedItemId, setSelectedItemId] = useState(null);
   const { size } = typography;
   const { chart, items } = reportsBarChartData;
 
@@ -243,8 +245,6 @@ function Dashboard({ brand, routes }) {
     }
   }
 
-  // getOpportunities()
-
   function filterBetCompany(e) {
     setSelectedCompany(e.target.value);
     console.log(selectedCompany);
@@ -263,6 +263,12 @@ function Dashboard({ brand, routes }) {
 
   function openArbCalculator() {
     navigate("/arbitragecalculator");
+  }
+
+  function clickedMarketInfo(itemId) {
+    console.log(marketInfo);
+    setMarketInfo(!marketInfo);
+    setSelectedItemId(itemId === selectedItemId ? null : itemId);
   }
 
   return (
@@ -321,14 +327,6 @@ function Dashboard({ brand, routes }) {
                 <option value="favouriteBookMakers">My Favourite BookMakers</option>
               </select>
             </div>
-
-            {/* <div className="select">
-              <select name="languages" id="bet_company" onChange={filterBetCompany}>
-                <option value="all">All</option>
-                <option value="nigerian-nigerian">Nigerian - Nigerian</option>
-                <option value="nigerian-foreign">Nigerian - Foreign</option>
-              </select>
-            </div> */}
           </div>
 
           {arbs === null ? (
@@ -343,33 +341,39 @@ function Dashboard({ brand, routes }) {
                         <i className="fa-regular fa-clock"></i>
                         <p>{arb.matchTime}</p>
                       </div>
-                      <div className="clubLogoAndBetCompany">
-                        <div className="singleClub">
-                          {/* <img src={mancityLogo} /> */}
-                          <i className="fa-regular fa-futbol fs-5"></i>
-                          <p>{arb.teams.split(" – ").map((team) => team.trim())[0]}</p>
+
+                      <div className="teamAndLeague">
+                        <div className="clubLogoAndBetCompany">
+                          <div className="singleClub">
+                            <i className="fa-regular fa-futbol fs-5"></i>
+                            <p style={{ fontWeight: "bold" }}>
+                              {arb.teams.split(" – ").map((team) => team.trim())[0]}
+                            </p>
+                          </div>
+                          <div className="betPatform mx-4">
+                            <p>Vs</p>
+                          </div>
+                          <div className="singleClub">
+                            <i className="fa-regular fa-futbol fs-5"></i>
+                            <p style={{ fontWeight: "bold" }}>
+                              {arb.teams.split(" – ").map((team) => team.trim())[1]}
+                            </p>
+                          </div>
                         </div>
-                        <div className="betPatform mx-4">
-                          <p>Vs</p>
-                        </div>
-                        <div className="singleClub">
-                          {/* <img src={mancityLogo} /> */}
-                          <i className="fa-regular fa-futbol fs-5"></i>
-                          <p>{arb.teams.split(" – ").map((team) => team.trim())[1]}</p>
-                        </div>
+                        <small className="league">{arb.league}</small>
                       </div>
+
                       <div>
                         <p>{arb.profit}%</p>
                       </div>
                       <div>
                         <Link to="/dashboard/arbitragecalculator" state={{ value: arb.odds }}>
-                          {/* {console.log(arb.odds.split(","))} */}
                           <i className="fa-solid fa-calculator" onClick={openArbCalculator}></i>
                         </Link>
                       </div>
                     </div>
                     <div className="arbs">
-                      <div className="text-dark" style={{ paddingBottom: "1rem" }}>
+                      <div style={{ paddingBottom: "1rem" }}>
                         <p style={{ fontWeight: "bold", fontSize: "17px" }}>Book Maker</p>
                         {arb &&
                           arb.bookmakers.split(",").map((bookmaker) => (
@@ -379,7 +383,22 @@ function Dashboard({ brand, routes }) {
                           ))}
                       </div>
                       <div>
-                        <p style={{ fontWeight: "bold", fontSize: "17px" }}>Market</p>
+                        <p
+                          style={{
+                            fontWeight: "bold",
+                            fontSize: "17px",
+                            display: "flex",
+                            gap: "3px",
+                            alignItems: "center",
+                          }}
+                        >
+                          Market
+                          <i
+                            class="fa-solid fa-circle-info"
+                            style={{ cursor: "pointer" }}
+                            onClick={() => clickedMarketInfo(arb._id)}
+                          ></i>
+                        </p>
                         {arb &&
                           arb.markets.split(",").map((market) => (
                             <p className="text-muted" key={market}>
@@ -387,6 +406,19 @@ function Dashboard({ brand, routes }) {
                             </p>
                           ))}
                       </div>
+
+                      {marketInfo && (
+                        <div className="marketInfo">
+                          {arb &&
+                            arb.marketExplaination
+                              .split(",")
+                              .map(
+                                (market) =>
+                                  arb._id === selectedItemId && <p key={market}>{market}</p>
+                              )}
+                        </div>
+                      )}
+
                       <div>
                         <p style={{ fontWeight: "bold", fontSize: "17px" }}>Odds</p>
                         {arb && arb.odds.split(",").map((odd) => <p key={odd}>{odd}</p>)}
