@@ -55,33 +55,50 @@ function RTL({ brand, routes }) {
   const { chart, items } = reportsBarChartData;
   const [stake, setStake] = useState(0);
   const [totals, setTotals] = useState({ payout: 0, profit: 0, roi: 0 });
-  const [dashboardOdds, setDashboardOdds] = useState()
-  const [checkIfCalculateIsClicked, setCheckIfCalculateIsClicked] = useState(false)
+  const [dashboardOdds, setDashboardOdds] = useState();
+  const [checkIfCalculateIsClicked, setCheckIfCalculateIsClicked] = useState(false);
 
   const location = useLocation();
-  console.log(location.state)
+  console.log(location.state);
 
   const [odds, setOdds] = useState([]);
 
   useEffect(() => {
-    if(location.state === null){
+    if (location.state === null) {
       setOdds([
         { odd: 0, stake: 0, payout: 0 },
         { odd: 0, stake: 0, payout: 0 },
-      ])
-    }else{
-      const oddsArray = location.state.value.split(",").map(str => parseFloat(str.trim()));
+      ]);
+    } else {
+      const oddsArray = location.state.value.split(",").map((str) => parseFloat(str.trim()));
 
-      const obj = {
-        odd1: oddsArray[0],
-        odd2: oddsArray[1]
-      };
-      setOdds([
-        { odd: obj.odd1, stake: 0, payout: 0 },
-        { odd: obj.odd2, stake: 0, payout: 0 },
-      ])
+      if (oddsArray.length === 2) {
+        console.log(oddsArray.length);
+        const obj = {
+          odd1: oddsArray[0],
+          odd2: oddsArray[1],
+        };
+        setOdds([
+          { odd: obj.odd1, stake: 0, payout: 0 },
+          { odd: obj.odd2, stake: 0, payout: 0 },
+        ]);
+        return;
+      } else if (oddsArray.length === 3) {
+        console.log(oddsArray.length);
+        const obj = {
+          odd1: oddsArray[0],
+          odd2: oddsArray[1],
+          odd3: oddsArray[2],
+        };
+        setOdds([
+          { odd: obj.odd1, stake: 0, payout: 0 },
+          { odd: obj.odd2, stake: 0, payout: 0 },
+          { odd: obj.odd3, stake: 0, payout: 0 },
+        ]);
+        return;
+      }
     }
-  },[])
+  }, []);
 
   const handleAddBetDiv = () => {
     if (odds.length === 4) return;
@@ -89,22 +106,22 @@ function RTL({ brand, routes }) {
   };
 
   function calculateTotalArbitrage() {
-    setCheckIfCalculateIsClicked(true)
-    const totalOdds = odds.map(val => 1/val.odd).reduce((x, y) => x + y, 0);
-    const newOdds = odds.map(val=>{
+    setCheckIfCalculateIsClicked(true);
+    const totalOdds = odds.map((val) => 1 / val.odd).reduce((x, y) => x + y, 0);
+    const newOdds = odds.map((val) => {
       const newVal = val;
-      newVal.stake = stake ? stake*Math.abs((1/newVal.odd)/totalOdds) : 0;
+      newVal.stake = stake ? stake * Math.abs(1 / newVal.odd / totalOdds) : 0;
       newVal.payout = newVal.odd * newVal.stake;
       return newVal;
-    })
+    });
 
-    const totalPayout = odds.map(val => val.payout).reduce((x,y) => x+y, 0)
-    const profit = (totalPayout - (odds.length*stake))/odds.length;
-    const roi = (profit/stake) * 100;
+    const totalPayout = odds.map((val) => val.payout).reduce((x, y) => x + y, 0);
+    const profit = (totalPayout - odds.length * stake) / odds.length;
+    const roi = (profit / stake) * 100;
     const payout = totalPayout / odds.length;
-    
-    setOdds(newOdds)
-    setTotals({profit, roi, payout})
+
+    setOdds(newOdds);
+    setTotals({ profit, roi, payout });
   }
 
   function updateOdd(value, index) {
@@ -114,9 +131,9 @@ function RTL({ brand, routes }) {
   }
 
   function resetInputValues() {
-    odds.map((odd, index)=>{
-      document.querySelector("#odd-input-"+index).value = "";
-    })
+    odds.map((odd, index) => {
+      document.querySelector("#odd-input-" + index).value = "";
+    });
     document.querySelector("#stake-input").value = "";
   }
 
@@ -149,15 +166,19 @@ function RTL({ brand, routes }) {
                       id={"odd-input-" + index}
                       placeholder={`Please Enter Bet ${index + 1} Odds`}
                       onChange={(e) => {
-                        const value = Number(isNaN(e.target.value) ? 0 : e.target.value)
-                        updateOdd(value, index)
+                        const value = Number(isNaN(e.target.value) ? 0 : e.target.value);
+                        updateOdd(value, index);
                       }}
                       defaultValue={odd.odd ? odd.odd : ""}
                     />
                   </div>
                 </div>
-                <p className={checkIfCalculateIsClicked ? `calculatedValue`:`unCalculatedValue`}>{odd.stake ? odd.stake : ""}</p>
-                <p className={checkIfCalculateIsClicked ? `calculatedValue`:`unCalculatedValue`}>{odd.payout ? odd.payout : ""}</p>
+                <p className={checkIfCalculateIsClicked ? `calculatedValue` : `unCalculatedValue`}>
+                  {odd.stake ? odd.stake : ""}
+                </p>
+                <p className={checkIfCalculateIsClicked ? `calculatedValue` : `unCalculatedValue`}>
+                  {odd.payout ? odd.payout : ""}
+                </p>
               </div>
             </div>
           ))}
@@ -209,7 +230,7 @@ function RTL({ brand, routes }) {
           </div>
           <div className="finalCalculation">
             <div>
-              Total Payout: <span>₦‎{(totals.payout).toFixed(2) || "0.00"}</span>
+              Total Payout: <span>₦‎{totals.payout.toFixed(2) || "0.00"}</span>
             </div>
             <div>
               Total Profit: <span>₦‎{totals.profit.toFixed(2) || "0.00"}</span>

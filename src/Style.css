@@ -1138,6 +1138,9 @@ input[type="checkbox"]{
   .league{
     font-size: 10px;
   }
+  .css-1y936z7-MuiDrawer-docked .MuiDrawer-paper{
+    z-index: 99999;
+  }
 }
 
 @media screen and (max-width: 400px) {
