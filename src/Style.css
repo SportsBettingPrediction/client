@@ -575,6 +575,19 @@ select {
   margin-top: 5rem;
 }
 
+.how-to-use-arbsking h5{
+  padding: 2.5rem 0 0;
+}
+
+.how-to-use-arbsking img{
+  margin: 3rem 0 1.8rem;
+  width: 100%;
+}
+
+.how-to-use-arbsking img:nth-of-type(1){
+  margin-top: 10px;
+}
+
 @keyframes button-anim {
   from {
     transform: rotate(0);
@@ -585,6 +598,7 @@ select {
 }
 
 @media screen and (max-width:1199px){
+
   .fotter{
     width: 100%;
   }

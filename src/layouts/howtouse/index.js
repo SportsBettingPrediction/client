@@ -82,8 +82,8 @@ function Dashboard({ brand, routes }) {
     <DashboardLayout>
       <Sidenav brand={brand} brandName="Arbsking" routes={routes} />
       <DashboardNavbar />
-      <div className="dasboardContainer">
-        <h5>How to use Arbsking</h5>
+      <div className="dasboardContainer how-to-use-arbsking">
+        <h5 className="text-center mb-5">How to use Arbsking</h5>
         <p>Welcome to <b>ArbsKing</b>.</p> 
         <p>After you have completed your registration process, you will need to deposit then purchase a subscription of your choice in other to start earning.</p>
        <h5>Depositing</h5>
@@ -120,7 +120,7 @@ function Dashboard({ brand, routes }) {
       <p>From the calculator, you’ll have to play <b>#324.05</b> from the first output for the first bookmaker <b>(Betbonanza)</b> and market <b>(over 1.5 2nd team)</b>, and <b>#675.9</b> from the second output for the second bookmaker <b>(Betking)</b> and market <b>(under 1.5 2nd team)</b>.</p>
       <p>Both of these bets will give you <b>10.18%</b> of your bet that is <b>#1101.7</b>. Keep in mind that in arbitrage one of the outcomes has to lose for one to enter, that is <b>over 1.5</b> and <b>under 1.5</b> can’t happen at the same time.</p>
       <h6>Arbitrage Calculator</h6>
-      <img src={howtouseimage3}/>
+      <img src={howtouseimage3} style={{ boxShadow:"0 0 20px #ddd" }}/>
       <p>The arbitrage calculator is provided for you to use and calculate every arbitrage opportunity in other to know what amount to be played on the different market in the opportunity, also to tell the %profit and net profit to be made from that opportunity.</p>
       <p>From the example above, the first odd from an opportunity is <b>2.5</b>, the second is <b>4.0</b>. Assuming you intend to enter <b>#1000</b> for that opportunity, the net profit would be <b>#538</b> because that’s a <b>53.8%</b> opportunity.</p>
       <p>The <b>#615</b> is the amount you’re to play on the first market with the <b>2.5 odds</b>, while the <b>#385</b> is for the second market with the <b>4.0 odds</b>.</p>
