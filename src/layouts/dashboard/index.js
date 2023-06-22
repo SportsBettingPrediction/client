@@ -68,12 +68,25 @@ function Dashboard({ brand, routes }) {
 
   const navigate = useNavigate();
 
+  const socket = new WebSocket("ws://192.168.8.100:4000");
   useEffect(() => {
     if (!loggedInUser) {
       navigate("/dashboard/authentication/sign-in");
     }
-    getOpportunities();
+    // getOpportunitiesTruWebSocket();
+    getOpportunities()
   }, []);
+
+  // function getOpportunitiesTruWebSocket(){
+  //   console.log("first")
+  //   socket.addEventListener("open", () => {
+  //     socket.send(loggedInUser.token);
+  //   });
+    
+  //     socket.addEventListener("message", (event) => {
+  //     console.log("Received message from server:", JSON.parse(event.data));
+  //   });
+  // }
 
   async function getOpportunities() {
     setIsLoading(true);
@@ -262,11 +275,10 @@ function Dashboard({ brand, routes }) {
   }
 
   function openArbCalculator() {
-    navigate("/arbitragecalculator");
+    navigate("/dashboard/arbitragecalculator");
   }
 
   function clickedMarketInfo(itemId) {
-    console.log(marketInfo);
     setMarketInfo(!marketInfo);
     setSelectedItemId(itemId === selectedItemId ? null : itemId);
   }

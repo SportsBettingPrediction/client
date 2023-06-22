@@ -134,7 +134,7 @@ const routes = [
     type: "collapse",
     name: "How to Use",
     key: "profile",
-    route: "https://www.google.com",
+    route: "/dashboard/howtouse",
     icon: <CustomerSupport size="12px" />,
     component: <Profile />,
     noCollapse: true,

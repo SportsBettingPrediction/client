@@ -588,6 +588,9 @@ select {
   .fotter{
     width: 100%;
   }
+  .css-1y936z7-MuiDrawer-docked .MuiDrawer-paper{
+    z-index: 99999;
+  }
 }
 
 .arbs{
@@ -1137,9 +1140,6 @@ input[type="checkbox"]{
 
   .league{
     font-size: 10px;
-  }
-  .css-1y936z7-MuiDrawer-docked .MuiDrawer-paper{
-    z-index: 99999;
   }
 }
 

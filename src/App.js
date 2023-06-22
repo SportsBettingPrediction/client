@@ -45,23 +45,55 @@ import RTL from "layouts/rtl";
 import ForgotPassword from "layouts/authentication/forgotpassword";
 import PasswordResetPage from "layouts/authentication/password-reset-page";
 import EmailConfirmPage from "layouts/authentication/confirm-email";
+import Howtouse from "layouts/howtouse";
 
 export default function App() {
+  const socket = new WebSocket("ws://192.168.8.100:4000");
+  socket.addEventListener("open", () => {
+    // alert("Established");
+    socket.send("Hello from the client!");
+    console.log("WebSocket connection established");
+
+    // Send a message to the server
+  });
+
+  // socket.addEventListener("message", (event) => {
+  //   console.log("Received message from server:", event.data);
+  // });
+
+  socket.addEventListener("notification", (event) => {
+    console.log("Received message from server:", event.data);
+  });
+
+  // socket.addEventListener('close', () => {
+  //   console.log('WebSocket connection closed');
+  // });
+
   return (
     <ThemeProvider theme={themeRTL}>
       <Routes>
         <Route path="/dashboard/authentication/sign-in" element={<SignIn />} />
         <Route path="/dashboard/authentication/sign-up" element={<SignUp />} />
-        <Route path="/dashboard/authentication/sign-up/register-refered/:id" element={<ReferalSignUp />} />
+        <Route
+          path="/dashboard/authentication/sign-up/register-refered/:id"
+          element={<ReferalSignUp />}
+        />
         <Route path="/dashboard/forgotpassword" element={<ForgotPassword />} />
         <Route path="/dashboard/api/reset-password/:id/:token" element={<PasswordResetPage />} />
         <Route path="/dashboard/api/email-confirmation/:id/:token" element={<EmailConfirmPage />} />
         <Route path="/dashboard/payments" element={<Billing brand={brand} routes={routes} />} />
         <Route path="/" element={<Dashboard brand={brand} routes={routes} />} />
         <Route path="/dashboard" element={<Dashboard brand={brand} routes={routes} />} />
+        <Route path="/dashboard/howtouse" element={<Howtouse brand={brand} routes={routes} />} />
         <Route path="/dashboard/profile" element={<Overview brand={brand} routes={routes} />} />
-        <Route path="/dashboard/bookmakers" element={<Bookmakers brand={brand} routes={routes} />} />
-        <Route path="/dashboard/arbitragecalculator" element={<RTL brand={brand} routes={routes} />} />
+        <Route
+          path="/dashboard/bookmakers"
+          element={<Bookmakers brand={brand} routes={routes} />}
+        />
+        <Route
+          path="/dashboard/arbitragecalculator"
+          element={<RTL brand={brand} routes={routes} />}
+        />
       </Routes>
     </ThemeProvider>
   );
